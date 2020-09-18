@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="pt-br, en, es">
+
+<head>
+	<title>Focos de Queimada versus Desmatamentos (PRODES Amazônia)</title>
+	<meta charset="UTF-8">
+	<meta http-equiv='cache-control' content='no-cache'>
+	<meta http-equiv='expires' content='0'>
+	<meta http-equiv='pragma' content='no-cache'>
+	<meta http-equiv="Access-Control-Allow-Origin" content="*">
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Language" content="pt-br, en, es">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=0">
+	<!-- favicon -->
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="img/favicon.ico" type="image/x-icon">
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77404603-3"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'UA-77404603-3');
+	</script>
+	<!-- Bootstrap CSS CDN -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	 crossorigin="anonymous">
+	<!-- Scrollbar Custom CSS -->
+	<link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+	<!-- Font-awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+	 crossorigin="anonymous">
+	<!-- Font Material design google -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="./libs/dc-2.1/dc.min.css" />
+	<link rel="stylesheet" type="text/css" href="" id="stylesheet_dark" />
+	<link rel="stylesheet" type="text/css" href="./css/focuses-of-fires.css" />
+	<link rel="stylesheet" type="text/css" href="./css/focuses-of-fires-print.css" media="print" />
+	<link rel="stylesheet" type="text/css" href="./css/terrabrasilis.css" />
+</head>
+
+<body>
+
+	<div class="wrapper">
+		<!-- Sidebar Holder -->
+		<nav id="sidebar">
+
+			<a href="http://terrabrasilis.dpi.inpe.br">
+				<div class="sidebar-header">
+					<div class="desctxt">
+						<h5><span class="amarelo">Terra</span><span class="verde">Brasilis</span> </h5>
+						<div id="header-menu">Focos de Queimada (Queimadas X PRODES)</div>
+					</div>
+				</div>
+			</a>
+
+			<ul class="list-unstyled components">
+
+				<li class="active">
+					<!-- manter active no primeiro -->
+					<a href="#graficos" data-toggle="collapse" aria-expanded="true">
+						<span id="nv-chart-day">Gráficos - Focos Diários</span></a>
+				</li>
+				<li>
+					<a href="/app/dashboard/fires/legal/amazon/daily/" id="toDailyChart-amz" title="Abrir o painel de focos diários para a Amazônia Legal." aria-expanded="false">
+						<i class="material-icons">insert_chart</i><span id="nv-daily-amz">Amazônia Legal</span></a>
+				</li>
+			</ul>
+
+			<ul class="list-unstyled components">
+
+				<li class="active">
+					<!-- manter active no primeiro -->
+					<a href="#ferramentas" data-toggle="collapse" aria-expanded="true">
+						<span id="tools">Ferramentas</span></a>
+				</li>
+				<li>
+					<a href="#modal-container-download" id="downloadBtn" data-toggle="modal" title="Baixar a tabela de focos de queimadas versus desmatamentos PRODES.">
+						<i class="material-icons">cloud_download</i><span id="txt4">Baixar Dados</span></a>
+				</li>
+
+				<li>
+					<a href="#print_information" id="prepare_print" title="Imprimir esta página utilizando o recurso do navegador."
+					 data-toggle="modal">
+
+						<i class="material-icons">print</i><span id="txt4s">Imprimir Gráficos</span></a>
+				</li>
+
+			</ul>
+			
+		</nav>
+	</div>
+
+	<!-- Menu superior -->
+	<div id="content">
+		<div class="boxtop">
+			<h5><span class="amarelo">Terra</span><span class="verde">Brasilis</span><span id="tituloprint" class="tituloprint">
+					| Focos diários de Queimadas na Amazônia Legal (Queimadas X PRODES).</span></h5>
+		</div>
+		<nav class="navbar navbar-expand-lg materialnav navbar-header">
+			<button class="btn btn-material navbar-btn " type="button" data-toggle="collapse" id="sidebarCollapse" data-target="#navbar"
+			 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+				<i class="material-icons menuicon">menu</i>
+			</button>
+			<a class="navbar-brand" href="http://terrabrasilis.dpi.inpe.br/"><span class="amarelo">Terra</span><span class="verde">Brasilis</span></a>
+			<div class="collapse navbar-collapse justify-content-between">
+				<div class="navbar-nav">
+					<a class="nav-item nav-link" href="#" id="header-panel">| Focos de Queimada (Queimadas X PRODES)</a>
+				</div>
+				<ul id="navigationBarUL" class="navbar-nav navbar-right analises">
+					<li class="nav-item dropdown">
+						<a aria-expanded="true" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdownMenuLink" role="button">
+							<i class="material-icons iconmobile">assignment </i><span id="maps-sup">Mapas</span>
+						</a>
+						<div aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu submenu">
+							<a class="dropdown-item" target="_blank" href="/app/map/deforestation/"><i class="material-icons iconmenu">nature</i><span id="map-des">PRODES (Desmatamento)</span></a>
+							<a class="dropdown-item" target="_blank" href="/app/map/alerts/"><i class="material-icons iconmenu">warning</i><span id="map-war">DETER (Avisos)</span></a>
+						</div>
+					</li>
+					<li class="nav-item dropdown">
+						<a aria-expanded="true" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdownMenuLink" role="button"> 
+							<i class="material-icons iconmobile">assignment </i><span id="analysis-sup">Gráficos</span>
+						</a>
+						<div aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu submenu"> 
+							<a class="dropdown-item" target="_blank" href="/app/dashboard/deforestation/biomes/amazon/increments"><i class="material-icons iconmenu">nature</i><span id="analysis-des">PRODES (Desmatamento)</span></a>
+							<a class="dropdown-item" href="#"><i class="material-icons iconmenu">warning</i><span id="analysis-war">DETER (Avisos)</span></a>
+						</div>
+					</li>
+					<li class="nav-item active">
+							<a class="nav-link" target="_blank" href="http://terrabrasilis.dpi.inpe.br/sobre/#post-1355"><span id="about-menu">Sobre</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#modal-container-contact" data-toggle="modal" id="tt-contactus-menu" title="Envie sugestões ou perguntas para terrabrasilis@inpe.br.">
+							<span id="contactus-menu">Contato</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#modal-container-video" id="goto_video_sup" data-toggle="modal" title="Ver o vídeo introdutório sobre como utilizar este painel.">
+							<i class="material-icons iconmobile">help</i><span id="help-sup">Ajuda</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">
+							<img id="flag-pt-br" alt="Bandeira Brasil" class="bandeira" src="img/br.svg" onclick="Lang.change('pt-br');"
+							 title="Alterar o idioma do painel para Português do Brasil.">
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">
+							<img id="flag-en" alt="Flag USA" class="bandeira" src="img/usa.svg" onclick="Lang.change('en');" title="Change panel language to English.">
+						</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+
+	<div class="container-fluid" id="info_container">
+		<div class="row box">
+			<div class="col-md-12">
+				<div class="text-center">
+					<div id="loading_data_info" style="display:block;"><img src="./img/loading_map.gif" /></div>
+					<div id="warning_data_info" style="display:none;">
+						<h3><span id="txt8">Problema na comunicação com o servidor.<br>Aguarde alguns minutos e recarregue a página.</span></h3>
+					</div>
+					<iframe id="fileload" src="" style="width:1px;height:1px;position:fixed;bottom: 0px;left: 0px;"></iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid" id="panel_container" style="display:none;">
+
+		<div id="charts-panel">
+
+			<div class="row all-charts-title boxtitlepanel">
+
+				<div class="col-md-12">
+					<span id="txt15">Gráfico - Amazônia</span>
+				</div>
+
+				<!-- <div class="col-md-4">
+					<div class="selectradio selectradio_more">
+						<div class="selectradio-success" id="radio-area" title="Ver gráficos com base no somatório de áreas em km².">
+							<input checked="checked" type="radio" name="set_dim" id="radioarea" onclick="graph.setDataDimension('area');"/>
+							<label for="radioarea" id="area_alertas"> Área dos focos (km²)</label>
+						</div>
+						<div class="selectradio-success" id="radio-alerts" title="Ver gráficos com base na contagem do número de focos.">
+							<input type="radio" name="set_dim" id="radioalerts" onclick="graph.setDataDimension('alert');" />
+							<label for="radioalerts" id="num_alerts"> Número de focos</label>
+						</div>
+					</div>
+				</div> -->
+
+			</div>
+
+			<!-- Start the filter bar -->
+			<div class="row box">
+				<div class="col-md-6">
+					<div class="box-grafico text-center">
+						<div class="generalinfo" id="numpolygons" title="Número de focos.">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="box-grafico text-center">
+						<div style="text-align: center;" class="generalinfo" id="custom-classes" title="Painel experimental.">
+							<b>Painel experimental</b><br><b>Focos</b>: (janeiro/2020 - agosto/2020) <b>PRODES</b>: (1988-2019)
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row box">
+				<div class="col-md-12">
+					<div class="box-grafico text-center">
+						<div id="chart-line-by-month" class="all-charts timeline-charts">
+							<div class="all-charts-title boxtitle">
+								<div style="min-width: fit-content;">
+									<span id="title-chart-timeline"></span>
+								</div>
+								<div>
+									<b><span id="txt9" class="filter-info">Intervalo de tempo:</span></b>
+									<span class="filter highlight-time filter-info"></span>
+									<span class="highlight-time filter-info" id="highlight-time"></span>
+									<a href="javascript:graph.lineDistributionByMonth.filterAll();dc.redrawAll();">
+										<span aria-hidden="true" id="txt9a" title="Limpar este filtro.">
+											<i class="material-icons md-icon-16 icongreen">delete</i>
+										</span>
+									</a>
+								</div>
+								<div class="updated">
+									<span id="updated">Atualizado até:</span><span class="updated_date" id="updated_date"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row box p_break p_zoom">
+				<div class="col-md-4">
+					<div class="box-grafico text-center">
+						<div id="chart-hist-top-counties" class="all-charts bar-charts">
+
+							<div style="position:relative;">
+								<div id="title-chart-counties" class="all-charts-title boxtitle"></div>
+								<a href="#modal-container-filtered" role="button" data-toggle="modal" class="search-mun boxsearch">
+									<span aria-hidden="true" id="txt33" title="Procurar um município."><i class="material-icons" style="color:gray">pageview</i></span>
+								</a>
+							</div>
+
+
+							<div class="keep-space">
+								<div class="reset" style="visibility: hidden;">
+									<b><span id="txt11">Filtro:</span></b> <span class="filter"></span>
+									<a href="javascript:SearchEngine.applyCountyFilter();graph.histTopByCounties.filterAll();dc.redrawAll();">
+										<span aria-hidden="true" id="txt11a" title="Limpar este filtro.">
+											<i class="material-icons md-icon-16 icongreen">delete</i>
+										</span>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="box-grafico text-center">
+						<div id="chart-hist-top-ucs" class="all-charts bar-charts">
+							<div id="title-chart-ucs" class="all-charts-title boxtitle"></div>
+							<div class="keep-space">
+								<div class="reset" style="visibility: hidden;">
+									<b><span id="txt13">Filtro:</span></b> <span class="filter"></span>
+									<a href="javascript:graph.histTopByCLs.filterAll();dc.redrawAll();">
+										<span aria-hidden="true" id="txt13a" title="Limpar este filtro.">
+											<i class="material-icons md-icon-16 icongreen">delete</i>
+										</span>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="box-grafico text-center">
+						<div id="chart-ring-by-state" class="all-charts ring-charts">
+							<div id="title-chart-state" class="all-charts-title  boxtitle"></div>
+							<div class="keep-space">
+								<div class="reset" style="display: none;">
+									<b><span id="txt12">Filtro:</span></b> <span class="filter"></span>
+									<a href="javascript:graph.ringTotalizedByState.filterAll();dc.redrawAll();">
+										<span aria-hidden="true" id="txt12a" title="Limpar este filtro.">
+											<i class="material-icons md-icon-16 icongreen">delete</i>
+										</span>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="display_error">
+			<span id="inner_display_error">
+
+			</span>
+		</div>
+		<!--div id="footer_page"></div-->
+
+	</div><!-- Fim do painel de gráficos -->
+
+	<div class="container">
+		<div class="row box">
+			<div class="col-md-12">
+				<div id="footer_print"></div>
+				<!-- modal copied from original DETER-B panel -->
+				<div class="modal fade" id="modal-container-718053" role="dialog" aria-labelledby="areaXclass" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+									×
+								</button>
+								<h4 class="modal-title" id="areaXclass">
+									<span id="txt16">Informações para download</span>
+								</h4>
+							</div>
+							<div class="modal-body">
+
+								<span id="txt17">Baixar os dados incluindo a componente geográfica.</span>
+								<div class="dwn-tool">
+									<span id="txt22">Selecione o formato do arquivo:</span>&nbsp;
+									<select id="download-option" class="form-control">
+										<option value="SHAPE-ZIP">Shapefile (ZIP)</option>
+										<option value="csv">CSV</option>
+										<option value="KML">KML</option>
+									</select>
+									<br />
+									<a href="#" id="download-filter">
+										<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt18">Respeitando
+											os filtros definidos neste painel de consulta.</span><strong>*</strong></a>
+									<br />
+									<a href="#" id="download-all">
+										<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt19">Sem filtros,
+											arquivo completo.</span></a>
+									<br /><br />
+									<div class="alert alert-warning">
+										<strong>*</strong>&nbsp;<span id="txt20">Ao atribuir qualquer um dos filtros por Classe, Estado, Município ou
+											Áreas de Proteção e <strong>não</strong> atribuir filtro temporal, <strong>toda a extensão temporal</strong>
+											será considerada e não apenas a extensão exibida no painel.</span>
+									</div>
+								</div>
+								<br />
+								<span id="txt23">Baixar os dados sem a componente geográfica, apenas tabela de atributos, em formato CSV.</span>
+								<div class="dwn-tool">
+									<a href="#" id="download-csv-daily-x">
+										<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt24">Com filtros.</span><strong>*</strong>
+									</a>
+									<br />
+									<a href="#" id="download-csv-daily-all-x">
+										<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt25">Sem filtros.</span><strong>*</strong>
+									</a>
+									<br /><br />
+									<div class="alert alert-warning">
+										<strong>*</strong>&nbsp;<span id="txt3">Apenas para o intervalo de tempo exibido no painel (365 dias).</span>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									<span id="txt21">Fechar</span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- modal window with counties filterd items -->
+				<div id="modal-search"></div>
+				<!-- modal window for General informations -->
+				<div class="modal fade" id="modal-container-general-info" role="dialog" aria-labelledby="general-info" aria-hidden="true">
+					<div class="modal-dialog general-info">
+						<div class="modal-content">
+							<div class="modal-header">
+
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+									×
+								</button>
+								<h4 class="modal-title" id="general-info">
+									<span id="txt2a">Informações gerais</span>
+								</h4>
+							</div>
+							<div class="modal-body">
+								<div class="alert alert-info">
+									<span id="txt2b">Texto de aviso sobre os dados</span>
+								</div>
+							</div>
+							<div class="modal-footer">
+
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									<span id="txt2c">Fechar</span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- end modal -->
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal print -->
+	<div class="modal fade" id="print_information">
+		<div class="modal-dialog">
+			<div class="modal-content modalinf">
+				<div class="modal-header fechar">
+					<h5 class="modal-title boxtitletable"> <span id="txt4p">Imprimir Gráficos</span></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+				</div>
+				<!-- / modal-header -->
+				<div class="modal-body ">
+					<div class="alert alert-success" role="alert"> <span id="txt30">
+
+							A impressão deste documento utiliza os recursos do navegador e pode apresentar diferenças entre eles.<br />
+							A impressão acomoda bem os gráficos quando as configurações são as seguintes:<br />
+							&nbsp;&nbsp;&nbsp;- A orientação do papel é do tipo paisagem;<br />
+							&nbsp;&nbsp;&nbsp;- O tamanho de papel é A4;<br />
+							&nbsp;&nbsp;&nbsp;- E margens padrão do navegador.<br />
+						</span>
+					</div>
+
+				</div>
+
+				<!-- / modal-body -->
+				<div class="modal-footer">
+					<div class="checkbox pull-right">
+						<label>
+							<button type="button" class="btn btngreen" data-dismiss="modal" id="print_page" style="color: #fff;">
+								<span id="txt1ea">Fechar</span>
+							</button>
+						</label>
+					</div>
+					<!--/ checkbox -->
+				</div>
+				<!--/ modal-footer -->
+			</div>
+			<!-- / modal-content -->
+		</div>
+		<!--/ modal-dialog -->
+	</div>
+	<!-- / modal -->
+
+
+	<!-- Modal Download-->
+	<div class="modal fade" id="modal-container-download">
+		<div class="modal-dialog">
+			<div class="modal-content modalinf">
+				<div class="modal-header fechar">
+					<h5 class="modal-title boxtitletable"><span id="txt26">Download de dados</span></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+				</div>
+				<!-- / modal-header -->
+				<div class="modal-body ">
+					<h5 class="modal-title boxtitletable"><span id="txt26a">Baixar a tabela com os focos de queimada em formato CSV.</span></h5>
+					<div class="dwn-tool">
+						<div class="alert alert-success alert-labeled">
+							<div class="alert-labeled-row">
+								<span class="alert-label alert-label-left alert-labelled-cell">
+									<i class="material-icons">save_alt</i>
+								</span>
+								<p class="alert-body alert-body-right alert-labelled-cell">
+									<a href="#" id="download-csv-daily">
+										<span id="txt27" class="alerttitle">Com filtros.</span>
+									</a>
+								</p>
+							</div>
+						</div>
+
+						<div class="alert alert-success alert-labeled">
+							<div class="alert-labeled-row">
+								<span class="alert-label alert-label-left alert-labelled-cell">
+									<i class="material-icons">save_alt</i>
+								</span>
+								<p class="alert-body alert-body-right alert-labelled-cell">
+									<a href="#" id="download-csv-daily-all">
+										<span id="txt28" class="alerttitle">Sem filtros.</span>
+									</a>
+								</p>
+							</div>
+						</div>
+
+						<h5 class="modal-title boxtitletable"><span id="txt26b">Baixar o arquivo completo dos focos de queimada em formato Shapefile.</span></h5>
+						<div class="alert alert-success alert-labeled">
+							<div class="alert-labeled-row">
+								<span id="download-shp-icon" class="alert-label alert-label-left alert-labelled-cell">
+									<i class="material-icons">save_alt</i>
+								</span>
+								<p class="alert-body alert-body-right alert-labelled-cell">
+									<a href="#" id="download-shp">
+										<span id="txt28b" class="alerttitle">Shapefile.</span>
+									</a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- / modal-body -->
+				<div class="modal-footer">
+					<div class="checkbox pull-right">
+						<label>
+							<button type="button" class="btn btngreen" data-dismiss="modal">
+								<span id="txt29">Fechar</span>
+							</button>
+						</label>
+					</div>
+					<!--/ checkbox -->
+				</div>
+				<!--/ modal-footer -->
+			</div>
+			<!-- / modal-content -->
+		</div>
+		<!--/ modal-dialog -->
+	</div>
+	<!-- / modal -->
+
+
+	<!-- modal window with an introductory video of this panel -->
+	<div class="modal fade" id="modal-container-video">
+		<div class="modal-dialog">
+			<div class="modal-content modalinf">
+				<div class="modal-header fechar">
+					<h5 class="modal-title boxtitletable"> <span id="txt1c">Informações de ajuda para uso do painel</span></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+				</div>
+				<!-- / modal-header -->
+				<div class="modal-body ">
+					<div class="alert alert-success" role="alert">
+						<span id="txt1d">Veja o vídeo introdutório que mostra a interação de um usuário com as ferramentas do painel.</span>
+					</div>
+					<div class="embed-video">
+						<video style="width: 100%" controls>
+							<!-- <source src="movies/dashboard-in-action.mp4" type="video/mp4"> -->
+							<!--track src="movies/subtitles/dashboard-in-action_pt_br.vtt" kind="subtitles" srclang="pt-BR" label="Portuguese" default>
+							<track src="movies/subtitles/dashboard-in-action_en.vtt" kind="subtitles" srclang="en" label="English">
+							<track src="movies/subtitles/dashboard-in-action_es.vtt" kind="subtitles" srclang="es" label="Spanish"-->
+							Seu navegador não suporta a tag de vídeo.
+						</video>
+					</div>
+				</div>
+
+				<!-- / modal-body -->
+				<div class="modal-footer">
+					<div class="checkbox pull-right">
+						<label>
+							<button type="button" class="btn btngreen" data-dismiss="modal">
+								<span id="txt1e">Fechar</span>
+							</button>
+						</label>
+					</div>
+					<!--/ checkbox -->
+				</div>
+				<!--/ modal-footer -->
+			</div>
+			<!-- / modal-content -->
+		</div>
+		<!--/ modal-dialog -->
+	</div>
+	<!-- / modal -->
+
+	<!-- modal window with login warning panel -->
+	<div class="modal fade" id="modal-container-warning">
+		<div class="modal-dialog">
+			<div class="modal-content modalinf">
+				<div class="modal-header fechar">
+					<h5 class="modal-title boxtitletable"> <span id="txt14g">Aviso</span></h5>
+					<!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button> -->
+				</div>
+				<!-- / modal-header -->
+				<div class="modal-body ">
+					<div class="alert alert-warning" role="alert">
+						<span id="txt14h">O nome de usuário ou senha está incorreto. Verifique se CAPS LOCK está ativado. Se você receber essa mensagem novamente, entre em contato com o administrador do sistema para garantir que você tenha permissão para logar no portal.</span>
+					</div>
+				</div>
+				<!-- / modal-body -->
+				<div class="modal-footer">
+					<div class="checkbox pull-right">
+						<label>
+							<button type="button" class="btn btngreen" data-dismiss="modal">
+								<span id="txt1i">Fechar</span>
+							</button>
+						</label>
+					</div>
+					<!--/ checkbox -->
+				</div>
+				<!--/ modal-footer -->
+			</div>
+			<!-- / modal-content -->
+		</div>
+		<!--/ modal-dialog -->
+	</div>
+	<!-- / modal -->
+
+	<!-- modal window to display the email contact -->
+	<div class="modal fade" id="modal-container-contact">
+		<div class="modal-dialog">
+			<div class="modal-content modalinf">
+				<div class="modal-header fechar">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+				</div>
+				<!-- / modal-header -->
+				<div class="modal-body">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title"><span id="tt-contactus">Envie sugestões ou perguntas para:</span></h5>
+							<p class="card-text"><a href="mailto:terrabrasilis@inpe.br">terrabrasilis@inpe.br</a></p>
+						</div>
+					</div>
+				</div>
+				<!--/ modal-footer -->
+			</div>
+			<!-- / modal-content -->
+		</div>
+		<!--/ modal-dialog -->
+	</div>
+	<!-- / modal -->
+
+	<!-- modal window to first notice -->
+	<div class="modal fade" id="firstNotice">
+		<div class="modal-dialog firstnotice">
+			<div class="modal-content modalinf">
+				<div class="modal-header fechar">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+				</div>
+				<!-- / modal-header -->
+				<div class="modal-body ">
+					<div id="carouselExampleIndicators" class="carousel slide sobre" data-ride="carousel">
+						<div class="carousel-inner">
+							<div class="carousel-item active">
+								<img class="d-block w-100" src="img/slider7.jpg" alt="Primeiro slide">
+								<h1 class="titulo"><span id="about-modal">Sobre </span><span class="amarelo">Terra</span><span class="verde">Brasillis</span></h1>
+									<p class="descricaoslide" id="description-modal">O TerraBrasilis é uma plataforma desenvolvida pelo INPE para organização, acesso e uso através de um portal web dos dados geográficos produzidos pelos seus programas de monitoramento ambiental.</p>
+							</div>
+						</div>
+						<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="sr-only">Previous</span>
+						</a>
+						<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="sr-only">Next</span>
+						</a>
+					</div>
+				</div>
+				<!-- / modal-body -->
+				<div class="modal-footer">
+					<div class="checkbox pull-right">
+						<label>
+							<input id="notice" class="modal-check" name="modal-check" type="checkbox"><span class="textoc" id="option-modal">Não mostrar novamente.</span>
+						</label>
+					</div>
+					<!--/ checkbox -->
+				</div>
+				<!--/ modal-footer -->
+			</div>
+			<!-- / modal-content -->
+		</div>
+		<!--/ modal-dialog -->
+	</div>
+	<!-- / modal -->
+
+	<div id="display_loading"><span id="inner_display_loading"></span></div>
+
+	<!--Footer-->
+	<footer class="footer">
+		<p><a href="http://terrabrasilis.dpi.inpe.br"> TerraBrasilis</a>&nbsp;<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Licença Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a></p>
+		<div class="version_style" id="version"></div>
+	</footer>
+	<!--/.Footer-->
+
+	<!-- already minified -->
+	<script type="text/javascript" src="./libs/d3/v3/d3.min.js"></script>
+	<script type="text/javascript" src="./libs/d3/d3js.pt-br.js"></script>
+	<script type="text/javascript" src="./libs/crossfilter/crossfilter.min.js"></script>
+	<script type="text/javascript" src="./libs/dc-2.1/dc.min.js"></script>
+	<script type="text/javascript" src="./libs/mousetrap/mousetrap.min.js"></script>
+	<script type="text/javascript" src="./libs/filesaver/FileSaver.min.js"></script>
+
+	<!-- jQuery CDN -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	 crossorigin="anonymous"></script>
+	<!-- Popper.JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+	 crossorigin="anonymous"></script>
+	<!-- Bootstrap Js CDN -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+	 crossorigin="anonymous"></script>
+	<!-- jQuery Custom Scroller CDN -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+	<!-- worked to minify / using to minify: https://www.minifier.org/ -->
+	<script type="text/javascript" src="./js/svg-to-image.min.js"></script>
+	<script type="text/javascript" src="./js/terrabrasilis-start.js"></script>
+	<script type="text/javascript" src="./js/focuses-of-fires-translation.js"></script>
+	<script type="text/javascript" src="./js/focuses-of-fires-change-lang.js"></script>
+	<script type="text/javascript" src="./js/focuses-of-fires.js"></script>
+	<script type="text/javascript" src="./js/mun-search-engine.js"></script>
+	<script type="text/javascript" src="./js/easy-cookie.js"></script>
+	<script type="text/javascript" src="./js/downloadSHP.js"></script>
+	<!-- <script type="text/javascript" src="http://terrabrasilis.dpi.inpe.br/oauth-api/getoauthjs"></script> -->
+	<script type="text/javascript">
+		$("#notice").click(function () {
+			EasyCookie.create("firstNotice", "Not show modal again", 30);
+		});
+		/**
+		* Show the main TerraBrasilis modal
+		*/
+		let cookieFirstNotice = EasyCookie.read("firstNotice");
+		if (cookieFirstNotice === null) {
+			$('#firstNotice').modal('show');
+		}
+	</script>
+
+</body>
+
+</html>
