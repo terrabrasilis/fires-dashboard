@@ -1,6 +1,7 @@
 var graph={
 		
 	jsonData:[],
+	totalRows:0,
 	alerts:{},
 	config:{},
 	selectedFilters:{},
@@ -95,6 +96,7 @@ var graph={
 	    	console.log(error);
 	    	return false;
 		}else{
+			graph.totalRows = data.length;
 			graph.jsonData = data;
 			graph.normalizeData();
 			return true;
@@ -233,7 +235,10 @@ var graph={
 		},
 		
 		numberByUnit:function(num) {
-			return ((graph.config.defaultDataDimension=='area')?(num.toFixed(2)):(num.toFixed(0)));
+			let percent=(num*100/graph.totalRows).toFixed(1)+"%";
+			// return ((graph.config.defaultDataDimension=='area')?(num.toFixed(2)):(num.toFixed(0)));
+			let nf=localeBR.numberFormat(',')
+			return nf(num.toFixed(0)) + " ("+percent+")";
 		},
 
 		onResize:function(event) {
@@ -250,7 +255,7 @@ var graph={
 		dc.renderAll();
 	},
 	normalizeData:function() {
-		// /var numberFormat = d3.format('.4f');
+		//var numberFormat = d3.format('.4f');
 		var json=[];
 		// normalize/parse data
 		this.jsonData.forEach(function(d) {
@@ -340,14 +345,16 @@ var graph={
 		// use format integer see: http://koaning.s3-website-us-west-2.amazonaws.com/html/d3format.html
 		this.totalizedAlertsInfoBox.formatNumber(localeBR.numberFormat(','));
 		this.totalizedAlertsInfoBox.valueAccessor(function(d) {
-			return d.n ? d.n : 0;
+			if(!d.n) return 0;
+			//let percent=(d.n*100/graph.totalRows).toFixed(1)+"%";
+			return d.n;
 		})
-	      .html({
+		.html({
 			one:htmlBox+"<span>"+Translation[Lang.language].num_alerts+"</span><br/><div class='numberinf'>%number</div></span>",
 			some:htmlBox+"<span>"+Translation[Lang.language].num_alerts+"</span><br/><div class='numberinf'>%number</div></span>",
 			none:htmlBox+"<span>"+Translation[Lang.language].num_alerts+"</span><br/><div class='numberinf'>0</div></span>"
-	      })
-	      .group(totalAlertsGroup);
+		})
+		.group(totalAlertsGroup);
 		
 		this.buildCharts(dimensions, groups);
 	},
@@ -441,14 +448,14 @@ var graph={
 		graph.utils.setTitle('counties', Translation[Lang.language].title_top_county);
 		
 		this.histTopByCounties
-	        .height(graph.defaultHeight)
-		    .dimension(dimensions["county"])
-		    .group(this.utils.removeLittlestValues(groups["county"]))
-		    .elasticX(true)
-		    .ordering(function(d) {return d.county;})
+			.height(graph.defaultHeight)
+			.dimension(dimensions["county"])
+			.group(this.utils.removeLittlestValues(groups["county"]))
+			.elasticX(true)
+			.ordering(function(d) {return d.county;})
 			.controlsUseVisibility(true)
 			.ordinalColors([(graph.cssDefault)?(graph.barTop10Color):(graph.darkBarTop10Color)]);
-		    //.ordinalColors(["#FF4500","#FF8C00","#FFA500","#FFD700","#FFFF00","#BA55D3","#9932CC","#8A2BE2","#3182BD","#6BAED6"]);
+			//.ordinalColors(["#FF4500","#FF8C00","#FFA500","#FFD700","#FFFF00","#BA55D3","#9932CC","#8A2BE2","#3182BD","#6BAED6"]);
 
 		this.histTopByCounties
 			.on('preRender', function(chart) {
@@ -484,10 +491,10 @@ var graph={
 		.tickFormat(function(d) {return d;});
 
 		this.histTopByCounties.data(function (group) {
-				var fakeGroup=[];
-				fakeGroup.push({key:Translation[Lang.language].without,value:0});
-				return (group.all().length>0)?(group.top(10)):(fakeGroup);
-			});
+			var fakeGroup=[];
+			fakeGroup.push({key:Translation[Lang.language].without,value:0});
+			return (group.all().length>0)?(group.top(10)):(fakeGroup);
+		});
 		this.histTopByCounties.title(function(d) {return d.key + ': ' + graph.utils.numberByUnit(d.value) + graph.utils.wildcardExchange(" %unit%");});
 		this.histTopByCounties.label(function(d) {return d.key + ': ' + graph.utils.numberByUnit(d.value) + graph.utils.wildcardExchange(" %unit%");});
 
@@ -496,9 +503,9 @@ var graph={
 		
 		this.ringTotalizedByState
 			.height(graph.defaultHeight)
-	        .innerRadius(10)
+			.innerRadius(10)
 			.externalRadiusPadding(30)
-	        .dimension(dimensions["uf"])
+			.dimension(dimensions["uf"])
 			.group(this.utils.removeLittlestValues(groups["uf"]))
 			.ordering(dc.pluck('key'))
 			.ordinalColors((graph.cssDefault)?(graph.pallet):(graph.darkPallet))
@@ -604,10 +611,10 @@ var graph={
 			
 		this.histTopByCLs.xAxis().tickFormat(function(d) {return d;});
 		this.histTopByCLs.data(function (group) {
-				var fakeGroup=[];
-				fakeGroup.push({key:Translation[Lang.language].without,value:0});
-				return (group.all().length>0)?(group.top(10)):(fakeGroup);
-			});
+			var fakeGroup=[];
+			fakeGroup.push({key:Translation[Lang.language].without,value:0});
+			return (group.all().length>0)?(group.top(10)):(fakeGroup);
+		});
 		this.histTopByCLs.title(function(d) {return d.key + ': ' + graph.utils.numberByUnit(d.value) + graph.utils.wildcardExchange(" %unit%");});
 		this.histTopByCLs.label(function(d) {return d.key + ': ' + graph.utils.numberByUnit(d.value) + graph.utils.wildcardExchange(" %unit%");});
 
