@@ -303,15 +303,13 @@ var graph={
 		    totalAlertsGroup = alerts.groupAll().reduce(
 		        function (p, v) {
 		            ++p.n;
-		            //p.tot += v.k;
 		            return p;
 		        },
 		        function (p, v) {
 		            --p.n;
-		            //p.tot -= v.k;
 		            return p;
 		        },
-		        function () { return {n:0/*,tot:0*/}; }
+		        function () { return {n:0}; }
 		    );
 		
 		var groups=[];
@@ -329,7 +327,7 @@ var graph={
 			groups["cl"] = dimensions["cl"].group().reduceSum(function(d) {return (d.cl!='null')?(1):(0);});
 		}
 
-		var htmlBox="<div class='icon-left'><i class='fa fa-leaf fa-2x' aria-hidden='true'></i></div><span class='number-display'>";
+		var htmlBox="<div class='icon-left'><i class='fa fa-fire fa-2x hackicon' aria-hidden='true'></i></div><span class='number-display'>";
 		
 		// this.totalizedAreaInfoBox.formatNumber(localeBR.numberFormat(',1f'));
 		// this.totalizedAreaInfoBox.valueAccessor(function(d) {return d.n ? d.tot.toFixed(2) : 0;})
@@ -342,13 +340,8 @@ var graph={
 		
 
 		// build totalized Alerts box
-		// use format integer see: http://koaning.s3-website-us-west-2.amazonaws.com/html/d3format.html
 		this.totalizedAlertsInfoBox.formatNumber(localeBR.numberFormat(','));
-		this.totalizedAlertsInfoBox.valueAccessor(function(d) {
-			if(!d.n) return 0;
-			//let percent=(d.n*100/graph.totalRows).toFixed(1)+"%";
-			return d.n;
-		})
+		this.totalizedAlertsInfoBox.valueAccessor(function(d) {return (d.n)?(d.n):(0);})
 		.html({
 			one:htmlBox+"<span>"+Translation[Lang.language].num_alerts+"</span><br/><div class='numberinf'>%number</div></span>",
 			some:htmlBox+"<span>"+Translation[Lang.language].num_alerts+"</span><br/><div class='numberinf'>%number</div></span>",

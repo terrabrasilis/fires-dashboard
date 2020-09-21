@@ -217,3 +217,8 @@ div .dc-chart {
 	font-size: 12px;
 	color: #333;
 }
+.hackicon{
+	color: #d72626 !important;
+	padding-bottom: 2px;
+	border-bottom: 4px solid #d72626;
+}
