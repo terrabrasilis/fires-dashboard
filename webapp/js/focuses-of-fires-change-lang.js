@@ -22,9 +22,7 @@ var Lang={
 			this.language=l;
 		}
 		this.apply();
-		AuthenticationTranslation.changeLanguage(l);
-		//graph.translateClassNames();
-		graph.resetFilters();
+		//graph.resetFilters();
 		graph.build();
 	},
 	setInLocalStorage:function() {
@@ -51,6 +49,7 @@ var Lang={
 	apply:function() {
 		this.setInLocalStorage();
 		this.highlightFlag();
+		this.changeDisclaimerFromFile();
 		var obj=Translation[this.language];
 		for (var property in obj) {
 		    if (obj.hasOwnProperty(property)) {
@@ -64,6 +63,12 @@ var Lang={
 		    	}
 		    }
 		}
+	},
+	changeDisclaimerFromFile:function(){
+		let file="./data/disclaimer-"+this.language+".txt";
+		$.ajax({url: file, success: function(result){
+			$("#disclaimer_content").html(result);
+		}});
 	},
 	languages:['pt-br','en'] //,'es']
 };

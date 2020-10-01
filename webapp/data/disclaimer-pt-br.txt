@@ -1,0 +1,31 @@
+Sobre estas informações:
+
+O objetivo deste dashboard é analisar os focos de calor detectatos
+por satélite pelo projeto Queimadas em relação aos dados de 
+desmatameto gerados pelos projetos PRODES e DETER, visando associar
+os focos às áreas de desmatamento recente, desmatamento consolidado ou
+áreas de floresta primária.
+
+Para isso são considerados:
+
+1) Focos: Coordenadas geográficas dos focos de queima em vegetação extraídos
+do satélite referência - AQUA/MODIS passagem da tarde - obtidos em
+<a href="http://www.inpe.br/queimadas">www.inpe.br/queimadas</a>;
+
+2) Desmatamento consolidado: base de dados PRODES agregando todo desmatamento 
+já mapeado até o ano de 2017;
+
+3) Desmatamento recente: base de dados PRODES agregando o desmatamento 
+do ano de 2018 e 2019 e adicionando os dados de desmtamentto do DETER entre
+01 de agosto 2019 e último mes corrente;
+
+4) Floresta: máscara de floresta do PRODES referenre ao ano de 2019.
+
+Obs: As caracteristicas do satélite referência utilizado na detecção focos de
+calor, indicam uma imprecisão na localização espacial das coordenadas
+geográficas de aproximadamente 1 km.
+
+Assim, para compensar esse desvio, sobre a base de dados dos itens 2 e 3, foram
+acrescidos um buffer externo de 500 metros. Ou seja, um foco contabilizado como
+sendo em desmatamento recente ou consolidado, pode ter sido detectado no interior
+da área desmatada ou até 500 metros do seu entorno.
