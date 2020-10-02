@@ -6,19 +6,21 @@
 @import "http://fonts.googleapis.com/css?family=Roboto:300,400,500,700";
 
 body {
-    font-family: 'Roboto', sans-serif !important;
-    background: #fafafa;
+  font-family: 'Roboto', sans-serif !important;
+  background: #fafafa;
 	/*overflow: hidden;*/
 	background-color: #eee;
 }
 
-
 p {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.1em;
-    font-weight: 300;
-    line-height: 1.7em;
-    color: #999;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1em;
+  font-weight: 300;
+  line-height: 1.7em;
+  color: #999;
+}
+p b{
+  font-weight: 900;
 }
 
 a, a:hover, a:focus {
@@ -118,7 +120,7 @@ a, a:hover, a:focus {
   padding-top: 1em;
 }
 .number-display span {font-size: 1vw;}
-.generalinfo i {color: #00796b; font-size: 24px !important; margin:10px;}
+/* .generalinfo i {color: #00796b; font-size: 24px !important; margin:10px;} */
 .number-display .numberinf {line-height: 20px; font-weight: bold;}
 .icon-left {float: left; padding-left: 5px;}
 .generalinfo_disable{ background-color: #f0f0f0; }
@@ -178,8 +180,14 @@ a, a:hover, a:focus {
   padding-left: 20px;
 }
 #custom-classes{
-  padding: unset;
-  padding-top: 20px;
+  padding-top: 0;
+  padding-left: 10px;
+  text-align: start;
+}
+#datasource{
+  margin-left: -10px;
+  text-align: center;
+  display: block;
 }
 
 #chart-by-mun {font-size: 12px;}

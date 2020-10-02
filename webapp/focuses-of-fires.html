@@ -51,7 +51,7 @@
 				<div class="sidebar-header">
 					<div class="desctxt">
 						<h5><span class="amarelo">Terra</span><span class="verde">Brasilis</span> </h5>
-						<div id="header-menu">Focos de Queimada (Queimadas X PRODES)</div>
+						<div id="header-menu">Focos de Queimada (Queimadas X PRODES X CAR)</div>
 					</div>
 				</div>
 			</a>
@@ -64,8 +64,8 @@
 						<span id="nv-chart-day">Gráficos - Focos Mensais</span></a>
 				</li>
 				<li>
-					<a href="/app/dashboard/fires/legal/amazon/daily/" id="toDailyChart-amz" title="Abrir o painel de focos mensais para a Amazônia Legal." aria-expanded="false">
-						<i class="material-icons">insert_chart</i><span id="nv-daily-amz">Focos na Amazônia Legal</span></a>
+					<a class="enable_menu" href="/app/dashboard/fires/legal/amazon/aggregated/" id="toAggregatedChart-amz" title="Abrir o painel de focos mensais para a Amazônia Legal." aria-expanded="false">
+						<i class="material-icons">insert_chart</i><span id="nv-aggregated-amz">Focos na Amazônia Legal</span></a>
 				</li>
 			</ul>
 
@@ -90,7 +90,7 @@
 				<li>
 					<a href="#modal-container-general-info" id="general-info-title" title="Informações importantes sobre os dados de entrada e o processo de geração destas estatísticas."
 					 data-toggle="modal">
-						<i class="material-icons">info</i><span id="general-info-label">Informações importantes</span></a>
+						<i class="material-icons">info</i><span id="general-info-label">Sobre estas Informações</span></a>
 				</li>
 
 			</ul>
@@ -112,7 +112,7 @@
 			<a class="navbar-brand" href="http://terrabrasilis.dpi.inpe.br/"><span class="amarelo">Terra</span><span class="verde">Brasilis</span></a>
 			<div class="collapse navbar-collapse justify-content-between">
 				<div class="navbar-nav">
-					<a class="nav-item nav-link" href="#" id="header-panel">| Focos de Queimada (Queimadas X PRODES)</a>
+					<a class="nav-item nav-link" href="#" id="header-panel">| Focos de Queimada (Queimadas X PRODES X CAR)</a>
 				</div>
 				<ul id="navigationBarUL" class="navbar-nav navbar-right analises">
 					<li class="nav-item dropdown">
@@ -130,7 +130,8 @@
 						</a>
 						<div aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu submenu"> 
 							<a class="dropdown-item" target="_blank" href="/app/dashboard/deforestation/biomes/amazon/increments"><i class="material-icons iconmenu">nature</i><span id="analysis-des">PRODES (Desmatamento)</span></a>
-							<a class="dropdown-item" href="#"><i class="material-icons iconmenu">warning</i><span id="analysis-war">DETER (Avisos)</span></a>
+							<a class="dropdown-item" target="_blank" href="/app/dashboard/alerts/legal/amazon/daily/"><i class="material-icons iconmenu">warning</i><span id="analysis-war">DETER (Avisos)</span></a>
+							<a class="dropdown-item" href="#"><i class="material-icons iconmenu">local_fire_department</i><span id="analysis-fire">Focos (Queimada)</span></a>
 						</div>
 					</li>
 					<li class="nav-item active">
@@ -183,7 +184,7 @@
 			<div class="row all-charts-title boxtitlepanel">
 
 				<div class="col-md-9">
-					<span id="txt15">Gráfico - Amazônia</span>
+					<span id="title-chart-main">Gráfico - Amazônia</span>
 				</div>
 
 				<div class="col-md-3">
@@ -211,9 +212,12 @@
 				</div>
 				<div class="col-md-6">
 					<div class="box-grafico text-center">
-						<div style="text-align: center;" class="generalinfo" id="custom-classes" title="Painel experimental.">
-							<b>Painel experimental</b><br><b>Focos</b>: (janeiro/2020 - agosto/2020) <b>PRODES</b>: (1988-2019)
-						</div>
+						<a href="#modal-container-general-info" data-toggle="modal">
+							<div class="generalinfo" id="custom-classes">
+								<span id="datasource"><b>Dados de entrada</b></span><i class="material-icons position-icon">info</i>
+								<span id="display-general-info">Entenda quais dados utilizamos e os detalhes sobre o processo de produção destas análises clicando nesta caixa.</span>
+							</div>
+						</a>
 					</div>
 				</div>
 			</div>
@@ -229,7 +233,7 @@
 								</div>
 								<div>
 									<b><span id="txt9" class="filter-info">Intervalo de tempo:</span></b>
-									<span class="filter highlight-time filter-info"></span>
+									<span class="filter highlight-time filter-info" style="display: none;"></span>
 									<span class="highlight-time filter-info" id="highlight-time"></span>
 									<a href="javascript:graph.barMonthFiresByClass.filterAll();dc.redrawAll();">
 										<span aria-hidden="true" id="txt9a" title="Limpar este filtro.">
@@ -250,7 +254,7 @@
 				<div class="col-md-6">
 					<div class="box-grafico text-center">
 						<div id="chart-hist-top-cls" class="all-charts bar-charts">
-							<div id="title-chart-ucs" class="all-charts-title boxtitle"></div>
+							<div id="title-chart-cls" class="all-charts-title boxtitle"></div>
 							<div class="keep-space">
 								<div class="reset" style="visibility: hidden;">
 									<b><span id="txt13">Filtro:</span></b> <span class="filter"></span>
@@ -352,11 +356,7 @@
 				</div>
 				<!-- / modal-header -->
 				<div class="modal-body ">
-					<div class="dwn-tool">
-						<pre id="disclaimer_content">Um texto com informações gerais sobre os dados</pre>
-					</div>
-					<a target="_blank" href="http://queimadas.dgi.inpe.br/queimadas/portal/informacoes/perguntas-frequentes#p15">
-						http://queimadas.dgi.inpe.br/queimadas/portal/informacoes/perguntas-frequentes#p15</a>
+						<div id="disclaimer_content">Um texto com informações gerais sobre os dados</div>
 				</div>
 				<!-- / modal-body -->
 				<div class="modal-footer">

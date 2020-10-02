@@ -6,31 +6,24 @@ var graph={
 	config:{},
 	selectedFilters:{},
 	ctlFirstLoading:false,
-	cssDefault:true,
 	
 	totalizedFocusesInfoBox:undefined,// totalized focuses info box
 	barMonthFiresByClass: null,
 	ringTotalizedByState:undefined,
 	histTopByCLs:undefined,
 	
-	histogramColor: ["#0000FF","#57B4F0"],
-	darkHistogramColor: ["#ffd700","#fc9700"],
-	pallet: ["#FF0000","#FF6A00","#FF8C00","#FFA500","#FFD700","#FFFF00","#DA70D6","#BA55D3","#7B68EE"],
-	darkPallet: ["#FF0000","#FF6A00","#FF8C00","#FFA500","#FFD700","#FFFF00","#DA70D6","#BA55D3","#7B68EE"],
+	palletBarChart: ["#ffff00","#ffd76d","#d39b59","#ffa500"],
+	palletPieChart: ["#ffff00","#ffd76d","#d39b59","#ffa500","#fc755f","#ff5e00","#a75145","#8f1727","#b9310f"],
 	barTop10Color: "#b8b8b8",
-	darkBarTop10Color: "#232323",
 
 	/**
 	 * Load configuration file before loading data.
 	 */
 	setConfigurations: function(conf) {
 		if(conf) {
-			graph.pallet=conf.pallet?conf.pallet:graph.pallet;
-			graph.darkPallet=conf.darkPallet?conf.darkPallet:graph.darkPallet;
-			graph.histogramColor=conf.histogramColor?conf.histogramColor:graph.histogramColor;
-			graph.darkHistogramColor=conf.darkHistogramColor?conf.darkHistogramColor:graph.darkHistogramColor;
+			graph.palletBarChart=conf.palletBarChart?conf.palletBarChart:graph.palletBarChart;
+			graph.palletPieChart=conf.palletPieChart?conf.palletPieChart:graph.palletPieChart;
 			graph.barTop10Color=conf.barTop10Color?conf.barTop10Color:graph.barTop10Color;
-			graph.darkBarTop10Color=conf.darkBarTop10Color?conf.darkBarTop10Color:graph.darkBarTop10Color;
 			graph.defaultHeight=conf.defaultHeight?conf.defaultHeight:graph.utils.getDefaultHeight();
 		}else{
 			console.log("Didn't load config file. Using default options.");
@@ -129,15 +122,14 @@ var graph={
 		this.bydata=d;
 		this.restart();
 	},
-	
-	// resetFilters:function() {
-	// 	graph.barMonthFiresByClass.filterAll();
-	// 	graph.ringTotalizedByState.filterAll();
-	// 	graph.histTopByCLs.filterAll();
-	// 	SearchEngine.applyCountyFilter();
-	// },
 
 	utils:{
+
+		downloadCSV:function(data, suffix /*file name suffix*/){
+			let my_cvs = d3.dsv(";", "text/csv");
+			var blob = new Blob([my_cvs.format(data)], {type: "text/csv;charset=utf-8"});
+			saveAs(blob, ( (suffix)?(suffix):("") )+downloadCtrl.getProject()+'-month-'+downloadCtrl.getDownloadTime()+'.csv');
+		},
 
 		setStateAnimateIcon: function(id, enable, error) {
 			document.getElementById(id).style.display='';
@@ -183,17 +175,15 @@ var graph={
 		},
 		
 		wildcardExchange:function(str) {
-			var dim=Translation[Lang.language].num_focus;
-			var unit=Translation[Lang.language].unit_focus;
-			str=str.replace(/%dim%/gi,function(x){return (x=='%Dim%'?dim.charAt(0).toUpperCase()+dim.slice(1):dim);});
-			str=str.replace(/%unit%/gi,function(x){return (x=='%Unit%'?unit.charAt(0).toUpperCase()+unit.slice(1):unit);});
+			var dim=graph.bydata;
+			str=str.replace( /%dim%/gi,function(x){ return dim.toUpperCase(); } );
 			return str;
 		},
 		
-		numberByUnit:function(num,displayPercent=true) {
+		numberByUnit:function(num,displayPercent) {
 			let percent=(num*100/graph.totalFocusesGroup.value().n).toFixed(1)+"%";
 			let nf=localeBR.numberFormat(',')
-			return "\n"+nf(num.toFixed(0)) +" "+ graph.utils.wildcardExchange(" %unit%")+ ((displayPercent)?("\n("+percent+")"):(""));
+			return "\n"+nf(num.toFixed(0)) +" "+ Translation[Lang.language].unit_focus + ((displayPercent)?("\n("+percent+")"):(""));
 		},
 
 		onResize:function(event) {
@@ -263,7 +253,7 @@ var graph={
 				},
 				function () { return {n:0}; }
 		);
-		var htmlBox="<div class='icon-left'><i class='fa fa-fire fa-2x hackicon' aria-hidden='true'></i></div><span class='number-display'>";
+		var htmlBox="<div class='icon-left'><i class='material-icons iconmenu hackicon'>local_fire_department</i></div><span class='number-display'>";
 
 		// build totalized Alerts box
 		this.totalizedFocusesInfoBox.formatNumber(localeBR.numberFormat(','));
@@ -279,10 +269,17 @@ var graph={
 	},
 	
 	buildCharts:function(dimensions,groups) {
+
+		// to adjust title text for current dimention (prodes or car)
+		graph.utils.setTitle('main',Translation[Lang.language].title_chart_main);
 		
 		/**
 		 * Starting the bar chart of the classes by months.
 		 */
+		let maxDate = new Date(dimensions["ts"].top(1)[0].ts),
+		minDate = new Date(dimensions["ts"].bottom(1)[0].ts);
+		let dateFormat = localeBR.timeFormat('%Y/%m');
+
 		let auxClt=[],auxT=[];
 		groups["clt"].all().forEach(function(y){
 			auxClt.push(+y.key);
@@ -319,10 +316,10 @@ var graph={
 				for(obj in d.value){
 					if(d.value[obj]>0) {
 						t += obj +
-						" ("+localeBR.numberFormat(',1f')( parseFloat( d.value[obj].toFixed(2) ) ) + " " + Translation[Lang.language].unit_focus + ")\n";
+						" - "+localeBR.numberFormat(',1f')( parseFloat( d.value[obj].toFixed(2) ) ) + " " + Translation[Lang.language].unit_focus + "\n";
 					}
 				}
-				return d.key + "\n" + t;
+				return Translation[Lang.language].yyyymm +": "+ d.key + "\n" + t;
 			})
 			.label(function(d) {
 				var t=parseFloat(((d.y+d.y0)/1000).toFixed(1));
@@ -333,7 +330,7 @@ var graph={
 			.dimension(dimensions["my"])
 			.group(groups["clt"], clList[0], sel_stack(clList[0]))
 			.renderLabel(true)
-			.ordinalColors((graph.cssDefault)?(graph.pallet):(graph.darkPallet))
+			.ordinalColors(graph.palletBarChart)
 			.margins({top: 30, right: 30, bottom: 60, left: 65})
 			.legend(dc.legend().x(50).y(1).itemHeight(13).gap(7).horizontal(1).legendWidth(480).autoItemWidth(true));
 
@@ -358,9 +355,19 @@ var graph={
 		
 		this.barMonthFiresByClass
 			.on("renderlet.a",function (chart) {
-				// rotate x-axis labels
-				chart.selectAll('g.x text')
-					.attr('transform', 'translate(-15,7) rotate(315)');
+				// rotate x-axis labels 
+				// chart.selectAll('g.x text')
+				// 	.attr('transform', 'translate(-10,10) rotate(315)');
+				if(!chart.hasFilter()){
+					$('#txt9a').css('display','none');
+					$('#highlight-time').css('display','');
+					$('#txt9').html(Translation[Lang.language].allTime);
+					$('#highlight-time').html(" " + dateFormat(minDate) + " - " + dateFormat(maxDate) );
+				}else{
+					$('#txt9a').css('display','');
+					$('#highlight-time').css('display','none');
+					$('#txt9').html(Translation[Lang.language].txt9);
+				}
 			});
 		// end of bar chart by classes
 
@@ -374,7 +381,7 @@ var graph={
 			.dimension(dimensions["uf"])
 			.group(this.utils.removeLittlestValues(groups["uf"]))
 			.ordering(dc.pluck('value'))
-			.ordinalColors((graph.cssDefault)?(graph.pallet):(graph.darkPallet))
+			.ordinalColors(graph.palletPieChart)
 			.legend(dc.legend().x(20).y(10).itemHeight(13).gap(7).horizontal(0).legendWidth(50).itemWidth(35));
 		
 		this.ringTotalizedByState
@@ -412,8 +419,8 @@ var graph={
 			});
 		}
 		
-		// build top areas or focuses by ucs
-		graph.utils.setTitle('ucs', Translation[Lang.language].title_top_uc);
+		// build top count of focuses by classes
+		graph.utils.setTitle('cls', Translation[Lang.language].title_top_cls);
 
 		this.histTopByCLs
 			.height(graph.defaultHeight)
@@ -423,7 +430,7 @@ var graph={
 			.ordering(function(d) { return d.cl; })
 			.controlsUseVisibility(true)
 			.fixedBarHeight(false)
-			.ordinalColors([(graph.cssDefault)?(graph.barTop10Color):(graph.darkBarTop10Color)]);
+			.ordinalColors([graph.barTop10Color]);
 			//.ordinalColors(["#FF4500","#FF8C00","#FFA500","#FFD700","#FFFF00","#BA55D3","#9932CC","#8A2BE2","#3182BD","#6BAED6"]);
 
 		this.histTopByCLs
@@ -474,51 +481,34 @@ var graph={
 		// build download data
 		d3.select('#download-csv-daily-all')
 	    .on('click', function() {
-	    	graph.utils.download=function(data) {
-		        var blob = new Blob([d3.csv.format(data)], {type: "text/csv;charset=utf-8"});
-		        saveAs(blob, downloadCtrl.getProject()+'-month-'+downloadCtrl.getDownloadTime()+'.csv');
-	    	};
 	    	window.setTimeout(function() {
 	    		var data=[];
 		    	graph.jsonData.forEach(function(d) {
 		    		var o={};
-		    		var dt = new Date(d.timestamp);
-		    		o.viewDate = dt.toLocaleDateString();
-		    		//o.mes = dt.getMonth()+1;
-		    		//o.ano = dt.getFullYear();
-		    		//o.totalAlertas = d.k;
-				    o.areaMunKm = parseFloat(d.areaKm.toFixed(4));
-			    	o.areaUcKm = parseFloat(d.areaUcKm.toFixed(4));
-				    o.cl = ((d.cl!='null')?(d.cl):(''));
+		    		o.date = d.my;
+				    o.class = d.cl;
+			    	o.focuses = d.t;
 				    o.uf = d.uf;
-				    o.municipio = d.county;
 				    data.push(o);
 				});
-		    	graph.utils.download(data);
+		    	graph.utils.downloadCSV(data,'all_');
 	    	}, 200);
 		});
 		
 		d3.select('#download-csv-daily')
 	    .on('click', function() {
-	    	graph.utils.download=function(data) {
-		        var blob = new Blob([d3.csv.format(data)], {type: "text/csv;charset=utf-8"});
-		        saveAs(blob, downloadCtrl.getProject()+'-daily-'+downloadCtrl.getDownloadTime()+'.csv');
-	    	};
 	    	window.setTimeout(function() {
 	    		var data=[];
 	    		var filteredData=graph.utils.dimensions["uf"].top(Infinity);
 	    		filteredData.forEach(function(d) {
 		    		var o={};
-		    		var dt = new Date(d.timestamp);
-		    		o.viewDate = dt.toLocaleDateString();
-				    o.areaMunKm = parseFloat(d.areaKm.toFixed(4));
-			    	o.areaUcKm = parseFloat(d.areaUcKm.toFixed(4));
-				    o.cl = ((d.cl!='null')?(d.cl):(''));
+		    		o.date = d.my;
+				    o.class = d.cl;
+			    	o.focuses = d.t;
 				    o.uf = d.uf;
-				    o.municipio = d.county;
 				    data.push(o);
 				});
-		    	graph.utils.download(data);
+		    	graph.utils.downloadCSV(data);
 	    	}, 200);
 	    });
 		

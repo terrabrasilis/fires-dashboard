@@ -1,31 +1,58 @@
-Sobre estas informações:
-
+<p>
 O objetivo deste dashboard é analisar os focos de calor detectatos
-por satélite pelo projeto Queimadas em relação aos dados de 
-desmatameto gerados pelos projetos PRODES e DETER, visando associar
+por satélite pelo projeto Queimadas sobre dois aspectos: <b>1)</b> Queimadas x PRODES e <b>2)</b> Queimadas x CAR.
+<br>
+<small>As informações serão atualizadas mensalmente.</small>
+</p>
+<p>
+<b>1)</b> Em relação aos dados de desmatameto gerados pelos projetos PRODES e DETER, visando associar
 os focos às áreas de desmatamento recente, desmatamento consolidado ou
 áreas de floresta primária.
+</p>
 
-Para isso são considerados:
+<div class="paragraph">
+  <p>
+  <b>Para isso são considerados:</b>
+  <br>
+  <b>1.1)</b> Focos: Coordenadas geográficas dos focos de queima em vegetação extraídos do satélite 
+  referência - AQUA/MODIS passagem da tarde - obtidos em <a class="general-info-links" href="http://www.inpe.br/queimadas">Portal Queimadas-INPE</a>;
+  </p><p>
+  <b>1.2)</b> Desmatamento consolidado: base de dados PRODES agregando todo desmatamento 
+  já mapeado até o ano de 2017;
+  </p><p>
+  <b>1.3)</b> Desmatamento recente: base de dados PRODES agregando o desmatamento 
+  do ano de 2018 e 2019 e adicionando os dados de desmtamentto do DETER entre
+  01 de agosto 2019 e último mes corrente;
+  </p><p>
+  <b>1.4)</b> Floresta: máscara de floresta do PRODES referenre ao ano de 2019.
+  </p><p>
+  <b>Obs1:</b> As caracteristicas do satelite referência utilizado na detecção focos de calor, 
+  indicam uma imprecisão na localização espacial das coordenadas geográficas de 
+  aprox. 1 km (<a class="general-info-links" href="http://queimadas.dgi.inpe.br/queimadas/portal/informacoes/perguntas-frequentes#p15">FAQ Queimadas</a>).
+  Assim, para compensar esse desvio, sobre a base de dados dos itens 2 e 3, foram acrescidos um 
+  buffer externo de 500 metros. Ou seja, um foco contabilizado como sendo em desmatamento recente 
+  ou consolidado, pode ter sido detectado no interior da área desmatada ou até 500 metros do seu entorno.
+  </p>
+</div>
 
-1) Focos: Coordenadas geográficas dos focos de queima em vegetação extraídos
-do satélite referência - AQUA/MODIS passagem da tarde - obtidos em
-<a href="http://www.inpe.br/queimadas">www.inpe.br/queimadas</a>;
+<p>
+<b>2)</b> Em relação aos imóveis inseridos no Cadastro Ambiental Rural (CAR/SFB), visando associar
+os focos ao tamanho das proriedades rurais estratificadas em Grande, Media e Pequena.
+</p>
 
-2) Desmatamento consolidado: base de dados PRODES agregando todo desmatamento 
-já mapeado até o ano de 2017;
-
-3) Desmatamento recente: base de dados PRODES agregando o desmatamento 
-do ano de 2018 e 2019 e adicionando os dados de desmtamentto do DETER entre
-01 de agosto 2019 e último mes corrente;
-
-4) Floresta: máscara de floresta do PRODES referenre ao ano de 2019.
-
-Obs: As caracteristicas do satélite referência utilizado na detecção focos de
-calor, indicam uma imprecisão na localização espacial das coordenadas
-geográficas de aproximadamente 1 km.
-
-Assim, para compensar esse desvio, sobre a base de dados dos itens 2 e 3, foram
-acrescidos um buffer externo de 500 metros. Ou seja, um foco contabilizado como
-sendo em desmatamento recente ou consolidado, pode ter sido detectado no interior
-da área desmatada ou até 500 metros do seu entorno.
+<div class="paragraph">
+  <p>
+  <b>Para isso são considerados:</b>
+  <br>
+  <b>2.1)</b> Focos: Coordenadas geográficas dos focos de queima em vegetação extraídos do satélite 
+  referência - AQUA/MODIS passagem da tarde - obtidos em <a class="general-info-links" href="http://www.inpe.br/queimadas">Portal Queimadas-INPE</a>;
+  </p><p>
+  <b>2.2)</b> Tres camadas do CAR, separadas em: Pequena (menor que 4 módulos fiscais), Média (entre 4 e 15 módulos fiscais) e 
+  Grande (maior que 15 módulos fiscais). Considerando uma versão "limpa" dos imoveis do CAR, clipados pelo limite do bioma Amazônia, 
+  eliminados de erros topológicos, com remoção de geometrias/atributos duplicados, 
+  de geometrias inválidas e de registros cancelados.
+  </p><p>
+  <b>Obs2:</b> Para estas tres camadas, também foram observados um buffer externo de 500 metros, visando
+  compensar a imprecisão do foco (Obs1).
+  </p>
+</div>
