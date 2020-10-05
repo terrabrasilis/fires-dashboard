@@ -33,6 +33,10 @@ COPY environment/config/nginx.conf /etc/nginx/nginx.conf
 COPY environment/config/403.html /usr/share/nginx/html/403.html
 
 COPY webapp/ /usr/share/nginx/html/
+RUN mkdir /data \
+&& mv /usr/share/nginx/html/data/* /data/ \
+&& rm -rf /usr/share/nginx/html/data \
+&& ln -s /data /usr/share/nginx/html/data
 
 ARG INDEX_FILE=focuses-of-fires
 ENV INDEX_FILE_NAME=$INDEX_FILE
@@ -41,7 +45,8 @@ RUN mv /usr/share/nginx/html/$INDEX_FILE_NAME.html /usr/share/nginx/html/index.h
 
 EXPOSE 80 443
 
-ENTRYPOINT ["nginx"]
+VOLUME [ "/data" ]
 
+ENTRYPOINT ["nginx"]
 # Extras parameters for entrypoint
 CMD ["-g", "daemon off;"]

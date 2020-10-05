@@ -10,31 +10,13 @@ To load data with more efficience we generate this JSON files using automated ta
 To build image for this dockerfile use this command:
 
 ```bash
-docker build -t terrabrasilis/dashboard-server:alpha -f environment/Dockerfile .
+docker build -t terrabrasilis/focuses-of-fires-dashboard:<version> -f environment/Dockerfile .
+# or use the docker-build.sh script
+./docker-build.sh
 ```
 
 To run without compose and without shell terminal use this command:
 
 ```bash
-docker run -d --rm -p 80:80 --name terrabrasilis_dashboard_experimental terrabrasilis/dashboard-server:alpha
+docker run -d --rm -p 80:80 -v /data:/data --name terrabrasilis_dashboard_experimental terrabrasilis/focuses-of-fires-dashboard:<version>
 ```
-
-## Run using compose
-
-Are two ways for run this service using docker-compose.
-
-### To run in atached mode
-
-```bash
-docker-compose -f environment/docker-compose.yml up
-```
-
-### To run in detached mode
-
-```bash
-docker-compose -f environment/docker-compose.yml up -d
-```
-
-## Run in your stack
-
-For run as a service into a docker stack use the docker-stack.yaml
