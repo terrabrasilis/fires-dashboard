@@ -41,6 +41,7 @@ mantido pelo Serviço Florestal Brasileiro:
 </p>
 
 <div class="paragraph">
+  <p>
   <b>2.1)</b> Focos: coordenadas geográficas dos focos de queimada em
   vegetação extraídos do satélite referência - AQUA/MODIS
   passagem da tarde - obtidos em <a class="general-info-links" href="http://www.inpe.br/queimadas">Portal Queimadas-INPE</a>;

@@ -35,11 +35,12 @@ maintained by the Brazilian Forest Service:
 </p>
 
 <div class = "paragraph">
-  <b> 2.1) </b> Focuses: geographical coordinates of focuses of fire in
+  <p>
+  <b>2.1)</b> Focuses: geographical coordinates of focuses of fire in
   vegetation extracted from the reference satellite - AQUA / MODIS
   afternoon pass - obtained at <a class="general-info-links" href="http://www.inpe.br/queimadas"> Portal Queimadas-INPE </a>;
-  </p> <p>
-  <b> 2.2) </b> The CAR's rural real estate base was cut by the limit of the Amazon biome, corrected for topological errors, removal of geometry or duplicate attributes,
+  </p><p>
+  <b>2.2)</b> The CAR's rural real estate base was cut by the limit of the Amazon biome, corrected for topological errors, removal of geometry or duplicate attributes,
   removal of invalid geometries and canceled registrations.
   Based on this processing, CAR's rural real estate were classified into three types:
   small, less than 4 fiscal modules; average lasting between 4 and 15 fiscal modules;
