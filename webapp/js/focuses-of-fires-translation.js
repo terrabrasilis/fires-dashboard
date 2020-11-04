@@ -82,7 +82,7 @@ var Translation={
 		'unit_focus':'focos',
 		'yyyymm':'Ano/mês',
 
-		'deforestation':'Focos de desmatamento',
+		'bydata': 'Desmatamento',
 		'by_car':'Por CAR',
 		'by_prodes': 'Por Desmatamentos',
 		'updated':'Atualizado até:',
@@ -222,7 +222,7 @@ var Translation={
 		'unit_focus':'focuses',
 		'yyyymm':'Year/month',
 
-		'deforestation': 'Deforestation focuses',
+		'bydata': 'Deforestation',
 		'by_car': 'By CAR',
 		'by_prodes': 'By Deforestation',
 		'updated':'Updated until:',

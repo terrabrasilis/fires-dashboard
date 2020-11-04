@@ -175,8 +175,8 @@ var graph={
 		},
 		
 		wildcardExchange:function(str) {
-			var dim=graph.bydata;
-			str=str.replace( /%dim%/gi,function(x){ return dim.toUpperCase(); } );
+			var dim=(graph.bydata=='prodes')?(Translation[Lang.language].bydata):(graph.bydata.toUpperCase());
+			str=str.replace( /%dim%/gi,function(x){ return dim; } );
 			return str;
 		},
 		
