@@ -2,7 +2,7 @@
 <html lang="pt-br, en, es">
 
 <head>
-	<title>Focos de Queimada versus Desmatamentos (PRODES Amazônia)</title>
+	<title>Focos de Queimada versus Desmatamentos (Bioma Amazônia)</title>
 	<meta charset="UTF-8">
 	<meta http-equiv='cache-control' content='no-cache'>
 	<meta http-equiv='expires' content='0'>
@@ -51,7 +51,7 @@
 				<div class="sidebar-header">
 					<div class="desctxt">
 						<h5><span class="amarelo">Terra</span><span class="verde">Brasilis</span> </h5>
-						<div id="header-menu">Focos de Queimada (Queimadas X PRODES X CAR)</div>
+						<div id="header-menu">Focos de Queimada (Queimadas X Desmatamentos X CAR)</div>
 					</div>
 				</div>
 			</a>
@@ -64,8 +64,8 @@
 						<span id="nv-chart-day">Gráficos - Focos Mensais</span></a>
 				</li>
 				<li>
-					<a class="enable_menu" href="/app/dashboard/fires/legal/amazon/aggregated/" id="toAggregatedChart-amz" title="Abrir o painel de focos mensais para a Amazônia Legal." aria-expanded="false">
-						<i class="material-icons">insert_chart</i><span id="nv-aggregated-amz">Focos na Amazônia Legal</span></a>
+					<a class="enable_menu" href="/app/dashboard/fires/legal/amazon/aggregated/" id="toAggregatedChart-amz" title="Abrir o painel de focos mensais para o Bioma Amazônia." aria-expanded="false">
+						<i class="material-icons">insert_chart</i><span id="nv-aggregated-amz">Focos no Bioma Amazônia</span></a>
 				</li>
 			</ul>
 
@@ -77,7 +77,7 @@
 						<span id="tools">Ferramentas</span></a>
 				</li>
 				<li>
-					<a href="#modal-container-download" id="downloadBtn" data-toggle="modal" title="Baixar a tabela de focos de queimadas versus desmatamentos PRODES.">
+					<a href="#modal-container-download" id="downloadBtn" data-toggle="modal" title="Baixar a tabela de focos de queimadas versus desmatamentos.">
 						<i class="material-icons">cloud_download</i><span id="txt4">Baixar Dados</span></a>
 				</li>
 
@@ -102,7 +102,7 @@
 	<div id="content">
 		<div class="boxtop">
 			<h5><span class="amarelo">Terra</span><span class="verde">Brasilis</span><span id="tituloprint" class="tituloprint">
-					| Focos diários de Queimadas na Amazônia Legal (Queimadas X PRODES).</span></h5>
+					| Focos diários de Queimadas no bioma Amazônia (Queimadas X Desmatamentos).</span></h5>
 		</div>
 		<nav class="navbar navbar-expand-lg materialnav navbar-header">
 			<button class="btn btn-material navbar-btn " type="button" data-toggle="collapse" id="sidebarCollapse" data-target="#navbar"
@@ -112,7 +112,7 @@
 			<a class="navbar-brand" href="http://terrabrasilis.dpi.inpe.br/"><span class="amarelo">Terra</span><span class="verde">Brasilis</span></a>
 			<div class="collapse navbar-collapse justify-content-between">
 				<div class="navbar-nav">
-					<a class="nav-item nav-link" href="#" id="header-panel">| Focos de Queimada (Queimadas X PRODES X CAR)</a>
+					<a class="nav-item nav-link" href="#" id="header-panel">| Focos de Queimada (Queimadas X Desmatamentos X CAR)</a>
 				</div>
 				<ul id="navigationBarUL" class="navbar-nav navbar-right analises">
 					<li class="nav-item dropdown">
@@ -183,15 +183,15 @@
 
 			<div class="row all-charts-title boxtitlepanel">
 
-				<div class="col-md-9">
+				<div class="col-md-8">
 					<span id="title-chart-main">Gráfico - Amazônia</span>
 				</div>
 
-				<div class="col-md-3">
+				<div class="col-md-4">
 					<div class="selectradio selectradio_more">
-						<div class="selectradio-success" id="radio-prodes" title="Ver gráficos com base na contagem do número de focos em desmatamentos PRODES.">
+						<div class="selectradio-success" id="radio-prodes" title="Ver gráficos com base na contagem do número de focos em desmatamentos.">
 							<input checked="checked" type="radio" name="set_dim" id="radioprodes" onclick="graph.setDataDimension('prodes');"/>
-							<label for="radioprodes" id="by_prodes"> PRODES</label>
+							<label for="radioprodes" id="by_prodes"> Desmatamento</label>
 						</div>
 						<div class="selectradio-success" id="radio-alerts" title="Ver gráficos com base na contagem do número de focos em imóveis CAR.">
 							<input type="radio" name="set_dim" id="radiocar" onclick="graph.setDataDimension('car');" />
