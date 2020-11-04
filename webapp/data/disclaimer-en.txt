@@ -1,6 +1,6 @@
 <p>
 The purpose of this panel is to analyze the focuses of fire in vegetation detected
-by the Queimadas project in two ways: <b> 1) </b> Queimadas x PRODES and <b> 2) </b> Queimadas x CAR.
+by the Queimadas project in two ways: <b> 1) </b> Queimadas x Deforestations and <b> 2) </b> Queimadas x CAR.
 <br>
 <small> The information will be updated monthly. </small>
 </p>

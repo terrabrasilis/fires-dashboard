@@ -1,6 +1,6 @@
 <p>
 O objetivo deste painel é analisar os focos de queimada em vegetação detectados
-por satélite pelo projeto Queimadas sobre dois aspectos: <b>1)</b> Queimadas x PRODES e <b>2)</b> Queimadas x CAR.
+por satélite pelo projeto Queimadas sobre dois aspectos: <b>1)</b> Queimadas x Desmatamentos e <b>2)</b> Queimadas x CAR.
 <br>
 <small>As informações serão atualizadas mensalmente.</small>
 </p>
