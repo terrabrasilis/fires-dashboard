@@ -6,7 +6,7 @@
 VERSION=$(cat webapp/PROJECT_VERSION | grep -oP '(?<="version": ")[^"]*')
 export VERSION
 # build all images
-docker build -t terrabrasilis/focuses-of-fires-dashboard:v$VERSION --build-arg VERSION=$VERSION --build-arg INDEX_FILE=focuses-of-fires -f environment/Dockerfile .
+docker build --no-cache -t terrabrasilis/focuses-of-fires-dashboard:v$VERSION --build-arg VERSION=$VERSION --build-arg INDEX_FILE=focuses-of-fires -f environment/Dockerfile .
 
 # send to dockerhub
 docker login
