@@ -78,7 +78,9 @@ var Translation={
 		/* Texts inside javascript. */
 		'areas': 'área',
 		'notice': 'focos',
-		'num_focus':'número de focos',
+		'num_focus':'Número de focos',
+		'percent':'(corresponde a 100% para efeito de cálculo das frações)',
+		'numpolygons':'Número total de focos (filtros mudam este valor)',
 		'unit_focus':'focos',
 		'yyyymm':'Ano/mês',
 
@@ -213,12 +215,14 @@ var Translation={
 		'prepare_print':'Print this page using the browser resources.',
 		'change_style':'Exchange the presentation style dark/clear.',
 		'radio-prodes':'See the charts based on sum of number of focuses on deforestations.',
-		'radio-car':'See the charts based on sum of number of focuses on propriety by CAR.',
+		'radio-car':'See the charts based on sum of number of focuses in rural properties of the CAR.',
 		'print_page':'Print this page using the browser resources.',
 		/* Texts inside javascript. */
 		'areas':'area',
 		'notice':'alert',
-		'num_focus':'number of focuses',
+		'num_focus':'Number of focuses',
+		'percent':'(corresponds to 100% for the purpose of calculating fractions)',
+		'numpolygons':'Total number of focuses (filters change this value)',
 		'unit_focus':'focuses',
 		'yyyymm':'Year/month',
 

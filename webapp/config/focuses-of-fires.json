@@ -1,6 +1,8 @@
 {
-	"palletBarChart": ["#ffff00","#ffd76d","#6adb3e","#ca9df0"],
-	"palletPieChart": ["#ffccee","#ff88d7","#ff46c1","#fd4482","#ff0055","#ff7b00","#ffa500","#ffd76d","#ffff00"],
+	"palletBarChartProdes": ["#c7f8e3","#9bf8d0","#49d398","#238b45"],
+	"palletBarChartCar": ["#feebe2","#fbb4b9","#f768a1","#ae017e"],
+	"palletPieChartProdes": ["#00441b", "#006d2c", "#238b45", "#41ae76", "#66c2a4", "#99d8c9", "#ccece6", "#dff7ed", "#e6fded"],
+	"palletPieChartCar": ["#49006a", "#7a0177", "#ae017e", "#dd3497", "#f768a1", "#fa9fb5", "#fcc5c0", "#fde0dd", "#fff7f3"],
 	"barTop10Color": "#bde397",
 	"defaultHeight": 400
 }

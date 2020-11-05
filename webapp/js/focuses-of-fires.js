@@ -12,9 +12,9 @@ var graph={
 	ringTotalizedByState:undefined,
 	histTopByCLs:undefined,
 	
-	palletBarChartProdes: ['#ffffb2','#fecc5c','#fd8d3c','#e31a1c'],
-	palletBarChartCar: ['#feebe2','#fbb4b9','#f768a1','#ae017e'],
-	palletPieChartProdes: ["#800026", "#bd0026", "#e31a1c", "#fc4e2a", "#fd8d3c", "#feb24c", "#fed976", "#ffeda0", "#ffffcc"],
+	palletBarChartProdes: ["#c7f8e3","#9bf8d0","#49d398","#238b45"],
+	palletBarChartCar: ["#feebe2","#fbb4b9","#f768a1","#ae017e"],
+	palletPieChartProdes: ["#00441b", "#006d2c", "#238b45", "#41ae76", "#66c2a4", "#99d8c9", "#ccece6", "#dff7ed", "#e6fded"],
 	palletPieChartCar: ["#49006a", "#7a0177", "#ae017e", "#dd3497", "#f768a1", "#fa9fb5", "#fcc5c0", "#fde0dd", "#fff7f3"],
 	barTop10Color: "#b8b8b8",
 
@@ -263,8 +263,8 @@ var graph={
 		this.totalizedFocusesInfoBox.formatNumber(localeBR.numberFormat(','));
 		this.totalizedFocusesInfoBox.valueAccessor(function(d) {return (d.n)?(d.n):(0);})
 		.html({
-			one:htmlBox+"<span>"+Translation[Lang.language].num_focus+" (100%)</span><br/><div class='numberinf'>%number</div></span>",
-			some:htmlBox+"<span>"+Translation[Lang.language].num_focus+" (100%)</span><br/><div class='numberinf'>%number</div></span>",
+			one:htmlBox+"<span>"+Translation[Lang.language].num_focus+" "+Translation[Lang.language].percent+"</span><br/><div class='numberinf'>%number</div></span>",
+			some:htmlBox+"<span>"+Translation[Lang.language].num_focus+" "+Translation[Lang.language].percent+"</span><br/><div class='numberinf'>%number</div></span>",
 			none:htmlBox+"<span>"+Translation[Lang.language].num_focus+"</span><br/><div class='numberinf'>0</div></span>"
 		})
 		.group(this.totalFocusesGroup);
