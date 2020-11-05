@@ -12,8 +12,10 @@ var graph={
 	ringTotalizedByState:undefined,
 	histTopByCLs:undefined,
 	
-	palletBarChart: ["#ffff00","#ffd76d","#d39b59","#ffa500"],
-	palletPieChart: ["#ffff00","#ffd76d","#d39b59","#ffa500","#fc755f","#ff5e00","#a75145","#8f1727","#b9310f"],
+	palletBarChartProdes: ['#ffffb2','#fecc5c','#fd8d3c','#e31a1c'],
+	palletBarChartCar: ['#feebe2','#fbb4b9','#f768a1','#ae017e'],
+	palletPieChartProdes: ["#800026", "#bd0026", "#e31a1c", "#fc4e2a", "#fd8d3c", "#feb24c", "#fed976", "#ffeda0", "#ffffcc"],
+	palletPieChartCar: ["#49006a", "#7a0177", "#ae017e", "#dd3497", "#f768a1", "#fa9fb5", "#fcc5c0", "#fde0dd", "#fff7f3"],
 	barTop10Color: "#b8b8b8",
 
 	/**
@@ -21,8 +23,10 @@ var graph={
 	 */
 	setConfigurations: function(conf) {
 		if(conf) {
-			graph.palletBarChart=conf.palletBarChart?conf.palletBarChart:graph.palletBarChart;
-			graph.palletPieChart=conf.palletPieChart?conf.palletPieChart:graph.palletPieChart;
+			graph.palletBarChartProdes=conf.palletBarChartProdes?conf.palletBarChartProdes:graph.palletBarChartProdes;
+			graph.palletPieChartProdes=conf.palletPieChartProdes?conf.palletPieChartProdes:graph.palletPieChartProdes;
+			graph.palletBarChartCar=conf.palletBarChartCar?conf.palletBarChartCar:graph.palletBarChartCar;
+			graph.palletPieChartCar=conf.palletPieChartCar?conf.palletPieChartCar:graph.palletPieChartCar;
 			graph.barTop10Color=conf.barTop10Color?conf.barTop10Color:graph.barTop10Color;
 			graph.defaultHeight=conf.defaultHeight?conf.defaultHeight:graph.utils.getDefaultHeight();
 		}else{
@@ -330,7 +334,7 @@ var graph={
 			.dimension(dimensions["my"])
 			.group(groups["clt"], clList[0], sel_stack(clList[0]))
 			.renderLabel(true)
-			.ordinalColors(graph.palletBarChart)
+			.ordinalColors((graph.bydata=='prodes')?(graph.palletBarChartProdes):(graph.palletBarChartCar))
 			.margins({top: 30, right: 30, bottom: 60, left: 65})
 			.legend(dc.legend().x(50).y(1).itemHeight(13).gap(7).horizontal(1).legendWidth(480).autoItemWidth(true));
 
@@ -381,7 +385,7 @@ var graph={
 			.dimension(dimensions["uf"])
 			.group(this.utils.removeLittlestValues(groups["uf"]))
 			.ordering(dc.pluck('value'))
-			.ordinalColors(graph.palletPieChart)
+			.ordinalColors((graph.bydata=='prodes')?(graph.palletPieChartProdes):(graph.palletPieChartCar))
 			.legend(dc.legend().x(20).y(10).itemHeight(13).gap(7).horizontal(0).legendWidth(50).itemWidth(35));
 		
 		this.ringTotalizedByState
