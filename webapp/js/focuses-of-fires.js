@@ -1,6 +1,6 @@
 var graph={
 		
-	jsonData:[],
+	data:[],
 	totalRows:0,
 	bydata:"prodes",// default on UI
 	config:{},
@@ -81,7 +81,7 @@ var graph={
 	    	return false;
 		}else{
 			graph.totalRows = data.length;
-			graph.jsonData = data;
+			graph.data = data;
 			graph.normalizeData();
 			return true;
 		}
@@ -206,7 +206,7 @@ var graph={
 	normalizeData:function() {
 		var json=[];
 		// normalize/parse data
-		this.jsonData.forEach(function(d) {
+		this.data.forEach(function(d) {
 			// "properties":{"y":2020,"m":9,"c":"Desmatamento Consolidado","e":"ACRE","t":722}}
 			let mm=(+d.properties.m<10)?("0"+d.properties.m):(d.properties.m);
 			var o={uf:d.properties.e,cl:d.properties.c,my:d.properties.y+"/"+mm,t:d.properties.t};
@@ -215,7 +215,7 @@ var graph={
 			json.push(o);
 		});
 		
-		this.jsonData=json;
+		this.data=json;
 		delete json;
 	},
 	
@@ -223,7 +223,7 @@ var graph={
 		
 		let dimensions=[];
 		// set crossfilter
-		let focuses = crossfilter(this.jsonData);
+		let focuses = crossfilter(this.data);
 		dimensions["my"] = focuses.dimension(function(d) {return d.my;});// month/year
 		dimensions["ts"] = focuses.dimension(function(d) {return +d.ts;});// timestamp
 		dimensions["uf"] = focuses.dimension(function(d) {return d.uf;});
@@ -487,7 +487,7 @@ var graph={
 	    .on('click', function() {
 	    	window.setTimeout(function() {
 	    		var data=[];
-		    	graph.jsonData.forEach(function(d) {
+		    	graph.data.forEach(function(d) {
 		    		var o={};
 		    		o.date = d.my;
 				    o.class = d.cl;
@@ -544,7 +544,14 @@ var graph={
 	},
 	restart() {
 		graph.startLoadData();
-	}
+	},
+	resetFilters: function() {
+		if(!graph.data) return;
+		graph.utils.dimensions["my"].filterAll();
+		graph.utils.dimensions["ts"].filterAll();
+		graph.utils.dimensions["uf"].filterAll();
+		graph.utils.dimensions["cl"].filterAll();
+	},
 	
 };
 
@@ -552,4 +559,8 @@ window.onload=function(){
 	graph.configurePrintKeys();
 	Lang.init();
 	graph.startLoadData();
+	Authentication.init(Lang.language, function(){
+		graph.resetFilters();
+		graph.restart();
+	});
 };
