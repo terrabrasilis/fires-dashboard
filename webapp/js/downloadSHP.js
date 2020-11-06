@@ -17,7 +17,7 @@ let downloadCtrl={
 	inferProjectByURI() {
 		var URL=document.location.href;
 		if(URL.includes("fires")){
-			this.project="focuses-of-fires";
+			this.project="active-fires";
 		}
 	}
 };

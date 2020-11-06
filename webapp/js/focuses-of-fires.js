@@ -129,6 +129,20 @@ var graph={
 
 	utils:{
 
+		mappingClassNames: function(cl) {
+			if(graph.config.dataConfig.legendOriginal===undefined || !graph.config.dataConfig.legendOriginal[graph.bydata]) {
+				return cl;
+			}
+			var l = graph.config.dataConfig.legendOriginal[graph.bydata].length;
+			for (var i = 0; i < l; i++) {
+				if(graph.config.dataConfig.legendOriginal[graph.bydata][i]===cl) {
+					cl=graph.config.dataConfig.legendOverlay[graph.bydata][Lang.language][i];
+					break;
+				}
+			}
+			return cl;
+		},
+
 		downloadCSV:function(data, suffix /*file name suffix*/){
 			let my_cvs = d3.dsv(";", "text/csv");
 			var blob = new Blob([my_cvs.format(data)], {type: "text/csv;charset=utf-8"});
@@ -319,7 +333,7 @@ var graph={
 				var t="";
 				for(obj in d.value){
 					if(d.value[obj]>0) {
-						t += obj +
+						t += graph.utils.mappingClassNames(obj) +
 						" - "+localeBR.numberFormat(',1f')( parseFloat( d.value[obj].toFixed(2) ) ) + " " + Translation[Lang.language].unit_focus + "\n";
 					}
 				}
@@ -336,7 +350,14 @@ var graph={
 			.renderLabel(true)
 			.ordinalColors((graph.bydata=='prodes')?(graph.palletBarChartProdes):(graph.palletBarChartCar))
 			.margins({top: 30, right: 30, bottom: 60, left: 65})
-			.legend(dc.legend().x(50).y(1).itemHeight(13).gap(7).horizontal(1).legendWidth(480).autoItemWidth(true));
+			.legend(dc.legend().x(50).y(1).itemHeight(13).gap(7).horizontal(1).legendWidth(480).autoItemWidth(true)
+				.legendText(
+					function(d) {
+						var t=graph.utils.mappingClassNames(d.name);
+						return (d.name!='empty')?(t):(Translation[Lang.language].without);
+					}
+				)
+			);
 
 		delete clList[0];
 		clList.forEach(function(uf){
@@ -443,30 +464,6 @@ var graph={
 				chart.xAxis().ticks((chart.width()<graph.config.minWidth)?(4):(7));
 			});
 
-		// this.histTopByCLs
-		// 	.on('preRedraw', function (chart) {
-		// 		if(chart.data().length > 5){
-		// 			chart.fixedBarHeight(false);
-		// 		}else{
-		// 			chart.fixedBarHeight( parseInt((chart.effectiveHeight()*0.7)/10) );
-		// 		}
-		// 	});
-
-		this.histTopByCLs
-			.on("renderlet.a",function (chart) {
-				var texts=chart.selectAll('g.row text');
-				var rankMun=function() {
-					var allTop=groups["cl"].top(Infinity);
-					var ar={};
-					allTop.forEach(function(k,i){ar["\""+k.key+"\""]=(i+1);});
-					return ar;
-				};
-				texts[0].forEach(function(t){
-					var p=(rankMun()["\""+t.innerHTML.split(":")[0]+"\""])?(rankMun()["\""+t.innerHTML.split(":")[0]+"\""]+'º - '):('');
-					t.innerHTML=p+t.innerHTML;
-				});
-			});
-			
 		this.histTopByCLs.xAxis().tickFormat(function(d) {return d;});
 		this.histTopByCLs.data(function (group) {
 			var fakeGroup=[];
@@ -475,11 +472,11 @@ var graph={
 		});
 		this.histTopByCLs.title(function(d) {
 			let displayPercent=!graph.histTopByCLs.hasFilter();
-			return d.key + ': ' + graph.utils.numberByUnit(d.value,displayPercent);
+			return graph.utils.mappingClassNames(d.key) + ': ' + graph.utils.numberByUnit(d.value,displayPercent);
 		});
 		this.histTopByCLs.label(function(d) {
 			let displayPercent=!graph.histTopByCLs.hasFilter();
-			return d.key + ': ' + graph.utils.numberByUnit(d.value,displayPercent);
+			return graph.utils.mappingClassNames(d.key) + ': ' + graph.utils.numberByUnit(d.value,displayPercent);
 		});
 
 		// build download data
