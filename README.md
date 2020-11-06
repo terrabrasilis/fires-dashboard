@@ -9,4 +9,4 @@ Including dockerized environment to run it into our swarm cluster.
 ## Online resource
 
 Link to online instance:
-http://terrabrasilis.dpi.inpe.br/app/dashboard/fires/legal/amazon/daily/
+http://terrabrasilis.dpi.inpe.br/app/dashboard/fires/legal/amazon/aggregated/
