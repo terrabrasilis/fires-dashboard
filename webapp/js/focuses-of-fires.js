@@ -14,9 +14,8 @@ var graph={
 	
 	palletBarChartProdes: ["#c7f8e3","#9bf8d0","#49d398","#238b45"],
 	palletBarChartCar: ["#feebe2","#fbb4b9","#f768a1","#ae017e"],
-	palletPieChartProdes: ["#00441b", "#006d2c", "#238b45", "#41ae76", "#66c2a4", "#99d8c9", "#ccece6", "#dff7ed", "#e6fded"],
-	palletPieChartCar: ["#49006a", "#7a0177", "#ae017e", "#dd3497", "#f768a1", "#fa9fb5", "#fcc5c0", "#fde0dd", "#fff7f3"],
-	barTop10Color: "#b8b8b8",
+	palletPieChartProdes: ["#fbb4ae","#b3cde3","#ccebc5","#decbe4","#fed9a6","#ffffcc","#e5d8bd","#fddaec","#f2f2f2"],
+	palletPieChartCar: ["#fbb4ae","#b3cde3","#ccebc5","#decbe4","#fed9a6","#ffffcc","#e5d8bd","#fddaec","#f2f2f2"],
 
 	/**
 	 * Load configuration file before loading data.
@@ -27,7 +26,6 @@ var graph={
 			graph.palletPieChartProdes=conf.palletPieChartProdes?conf.palletPieChartProdes:graph.palletPieChartProdes;
 			graph.palletBarChartCar=conf.palletBarChartCar?conf.palletBarChartCar:graph.palletBarChartCar;
 			graph.palletPieChartCar=conf.palletPieChartCar?conf.palletPieChartCar:graph.palletPieChartCar;
-			graph.barTop10Color=conf.barTop10Color?conf.barTop10Color:graph.barTop10Color;
 			graph.defaultHeight=conf.defaultHeight?conf.defaultHeight:graph.utils.getDefaultHeight();
 		}else{
 			console.log("Didn't load config file. Using default options.");
@@ -221,7 +219,6 @@ var graph={
 		var json=[];
 		// normalize/parse data
 		this.data.forEach(function(d) {
-			// "properties":{"y":2020,"m":9,"c":"Desmatamento Consolidado","e":"ACRE","t":722}}
 			let mm=(+d.properties.m<10)?("0"+d.properties.m):(d.properties.m);
 			var o={uf:d.properties.e,cl:d.properties.c,my:d.properties.y+"/"+mm,t:d.properties.t};
 			var auxDate = new Date(d.properties.y+'-'+ mm + '-01T04:00:00.000Z');
@@ -455,8 +452,7 @@ var graph={
 			.ordering(function(d) { return d.cl; })
 			.controlsUseVisibility(true)
 			.fixedBarHeight(false)
-			.ordinalColors([graph.barTop10Color]);
-			//.ordinalColors(["#FF4500","#FF8C00","#FFA500","#FFD700","#FFFF00","#BA55D3","#9932CC","#8A2BE2","#3182BD","#6BAED6"]);
+			.ordinalColors((graph.bydata=='prodes')?(graph.palletBarChartProdes):(graph.palletBarChartCar));
 
 		this.histTopByCLs
 			.on('preRender', function(chart) {
