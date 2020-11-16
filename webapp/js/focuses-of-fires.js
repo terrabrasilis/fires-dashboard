@@ -17,6 +17,16 @@ var graph={
 	palletPieChartProdes: ["#fbb4ae","#b3cde3","#ccebc5","#decbe4","#fed9a6","#ffffcc","#e5d8bd","#fddaec","#f2f2f2"],
 	palletPieChartCar: ["#fbb4ae","#b3cde3","#ccebc5","#decbe4","#fed9a6","#ffffcc","#e5d8bd","#fddaec","#f2f2f2"],
 
+	getOrdinalColorsClasses: function() {
+		let c=[];
+		let cls=graph.config.dataConfig.legendOriginal[graph.bydata];
+		let cor=(graph.bydata=='prodes')?(graph.palletBarChartProdes):(graph.palletBarChartCar);
+		for(let i=0;i<cls.length;i++) {
+			c.push({key:cls[i],color:cor[i]});
+		}
+		return c;
+	},
+
 	/**
 	 * Load configuration file before loading data.
 	 */
@@ -295,11 +305,7 @@ var graph={
 		minDate = new Date(dimensions["ts"].bottom(1)[0].ts);
 		let dateFormat = localeBR.timeFormat('%Y/%m');
 
-		let auxClt=[],auxT=[];
-		groups["clt"].all().forEach(function(y){
-			auxClt.push(+y.key);
-			auxT.push(y.value);
-		});
+		let	barColors = this.getOrdinalColorsClasses();
 
 		function sel_stack(i) {
 			return function(d) {
@@ -307,13 +313,14 @@ var graph={
 			};
 		}
 
-		var cls=dimensions["cl"].group().all(),clList=[];
+		var cls=graph.config.dataConfig.legendOriginal[graph.bydata],clList=[];
 		cls.forEach(function(d){
-			clList.push(d.key);
+			clList.push(d);
 		});
+		
 
 		var my=dimensions["my"].group().all();
-		
+
 		this.barMonthFiresByClass
 			.height(graph.defaultHeight*0.8)
 			.x(d3.scale.ordinal())
@@ -357,11 +364,11 @@ var graph={
 			);
 
 		delete clList[0];
-		clList.forEach(function(uf){
-			graph.barMonthFiresByClass.stack(groups["clt"], ''+uf, sel_stack(uf));
+		clList.forEach(function(clsName){
+			graph.barMonthFiresByClass.stack(groups["clt"], ''+clsName, sel_stack(clsName));
 		});
 
-		this.barMonthFiresByClass.xAxis().ticks(auxClt.length);
+		this.barMonthFiresByClass.xAxis().ticks(groups["clt"].all().length);
 		this.barMonthFiresByClass.xAxis().tickFormat(function(d) {
 			return d+"";
 		});
@@ -377,9 +384,6 @@ var graph={
 		
 		this.barMonthFiresByClass
 			.on("renderlet.a",function (chart) {
-				// rotate x-axis labels 
-				// chart.selectAll('g.x text')
-				// 	.attr('transform', 'translate(-10,10) rotate(315)');
 				if(!chart.hasFilter()){
 					$('#txt9a').css('display','none');
 					$('#highlight-time').css('display','');
@@ -391,6 +395,17 @@ var graph={
 					$('#txt9').html(Translation[Lang.language].txt9);
 				}
 			});
+
+		// this.barMonthFiresByClass.colorAccessor(function(d) {
+		// 	return "#0000FF";
+		// 	// var i=0,l=barColors.length;
+		// 	// while(i<l){
+		// 	// 	if(barColors[i].key==this.layer){
+		// 	// 		return barColors[i].color;
+		// 	// 	}
+		// 	// 	i++;
+		// 	// }
+		// });
 		// end of bar chart by classes
 
 		// build graph areas or focuses by state
@@ -444,15 +459,19 @@ var graph={
 		// build top count of focuses by classes
 		graph.utils.setTitle('cls', Translation[Lang.language].title_top_cls);
 
+		// TODO: Analise isso e remova a gambiarra
+		let topColorProdes=["#9bf8d0","#c7f8e3","#49d398","#238b45"];//graph.palletBarChartProdes
+		let topColorCar=["#f768a1","#ae017e","#feebe2","#fbb4b9"];//graph.palletBarChartCar
+
 		this.histTopByCLs
 			.height(graph.defaultHeight)
 			.dimension(dimensions["cl"])
 			.group(this.utils.removeLittlestValues(groups["cl"]))
 			.elasticX(true)
-			.ordering(function(d) { return d.cl; })
+			.ordering(function(d) {return -d.value;})
 			.controlsUseVisibility(true)
 			.fixedBarHeight(false)
-			.ordinalColors((graph.bydata=='prodes')?(graph.palletBarChartProdes):(graph.palletBarChartCar));
+			.ordinalColors((graph.bydata=='prodes')?(topColorProdes):(topColorCar));
 
 		this.histTopByCLs
 			.on('preRender', function(chart) {
@@ -473,6 +492,12 @@ var graph={
 		this.histTopByCLs.label(function(d) {
 			let displayPercent=!graph.histTopByCLs.hasFilter();
 			return graph.utils.mappingClassNames(d.key) + ': ' + graph.utils.numberByUnit(d.value,displayPercent);
+		});
+		this.histTopByCLs.colorAccessor(function(d) {
+			let cc=barColors.find((aCor)=>{
+				if(aCor.key==d.key) return aCor.color;
+			});
+			return cc.color;
 		});
 
 		// build download data
@@ -552,8 +577,8 @@ window.onload=function(){
 	graph.configurePrintKeys();
 	Lang.init();
 	graph.startLoadData();
-	Authentication.init(Lang.language, function(){
-		graph.resetFilters();
-		graph.restart();
-	});
+	// Authentication.init(Lang.language, function(){
+	// 	graph.resetFilters();
+	// 	graph.restart();
+	// });
 };
