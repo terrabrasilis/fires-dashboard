@@ -110,6 +110,7 @@ var graph={
 				}
 			};
 			d3.json(dataUrl)
+			.header("Authorization", "Bearer "+Authentication.getToken())
 			.get(function(error, root) {
 				if(error && error.status==401) {
 					console.error(error);
@@ -577,8 +578,8 @@ window.onload=function(){
 	graph.configurePrintKeys();
 	Lang.init();
 	graph.startLoadData();
-	// Authentication.init(Lang.language, function(){
-	// 	graph.resetFilters();
-	// 	graph.restart();
-	// });
+	Authentication.init(Lang.language, function(){
+		graph.resetFilters();
+		graph.restart();
+	});
 };
