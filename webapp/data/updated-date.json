@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","totalFeatures":1,"features":[{"type":"Feature","id":"updated_date.fid-f83c6b0_16d28080773_5e8f","geometry":null,"properties":{"updated_date":"2020-12-07"}}],"crs":null}
+{"type":"FeatureCollection","features":[{"type":"Feature","id":"updated_date.fid-1bc4198c_17725072c01_-1376","geometry":null,"properties":{"updated_date":"2020-12-31"}}],"totalFeatures":1,"numberMatched":1,"numberReturned":1,"timeStamp":"2021-01-21T13:27:46.434Z","crs":null}
