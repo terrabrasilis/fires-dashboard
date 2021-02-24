@@ -110,7 +110,7 @@ var graph={
 				}
 			};
 			d3.json(dataUrl)
-			.header("Authorization", "Bearer "+Authentication.getToken())
+			.header("Authorization", "Bearer "+( (Authentication)?(Authentication.getToken()):("") ) )
 			.get(function(error, root) {
 				if(error && error.status==401) {
 					console.error(error);
@@ -261,7 +261,10 @@ var graph={
 				p[v.cl] = (p[v.cl] || 0) - v.t;
 				return p;
 			}, function() {
-				return {};
+				if(graph.bydata=="car")
+					return {"Grande": 0, "Media": 0, "Pequena": 0, "Sem CAR": 0};
+				else
+					return {"Desmatamento Consolidado": 0, "Desmatamento Recente": 0, "Floresta": 0, "Outros": 0};
 			}
 		);
 		groups["uf"] = dimensions["uf"].group().reduceSum(function(d) {return +d.t;});
@@ -575,11 +578,14 @@ var graph={
 };
 
 window.onload=function(){
+	if(typeof Authentication=="undefined") Authentication=false;
 	graph.configurePrintKeys();
 	Lang.init();
 	graph.startLoadData();
-	Authentication.init(Lang.language, function(){
-		graph.resetFilters();
-		graph.restart();
-	});
+	if(Authentication){
+		Authentication.init(Lang.language, function(){
+			graph.resetFilters();
+			graph.restart();
+		});
+	}
 };
