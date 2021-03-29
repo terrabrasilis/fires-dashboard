@@ -100,7 +100,7 @@ var graph={
 			graph.displayWaiting();
 			var configDashboard={resizeTimeout:0, minWidth:250, dataConfig:cfg};
 			// var dataUrl = "./data/focuses-of-fires-"+graph.bydata+".json";
-			let dataUrl = downloadCtrl.getFileDeliveryURL()+"/download/"+downloadCtrl.getProject()+"/fof-"+graph.bydata;
+			let dataUrl = downloadCtrl.getFileDeliveryURL()+"/download/"+downloadCtrl.getProject()+"/fof_"+graph.bydata;
 			var afterLoadData=function(json) {
 				Lang.apply();
 				if(!json || !json.features) {
