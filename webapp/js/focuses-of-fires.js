@@ -63,7 +63,6 @@ var graph={
 			this.histTopByCLs = dc.rowChart("#chart-hist-top-cls");
 			
 			graph.build();
-			graph.loadUpdatedDate();
 		}
 	},
 	
@@ -100,13 +99,15 @@ var graph={
 		var afterLoadConfiguration=function(cfg) {
 			graph.displayWaiting();
 			var configDashboard={resizeTimeout:0, minWidth:250, dataConfig:cfg};
-			var dataUrl = "./data/focuses-of-fires-"+graph.bydata+".json";
+			// var dataUrl = "./data/focuses-of-fires-"+graph.bydata+".json";
+			let dataUrl = downloadCtrl.getFileDeliveryURL()+"/download/"+downloadCtrl.getProject()+"/fof-"+graph.bydata;
 			var afterLoadData=function(json) {
 				Lang.apply();
 				if(!json || !json.features) {
 					graph.displayWarning(true);
 				}else{
 					graph.init(configDashboard, json.features);
+					graph.setUpdatedDate(json.updated_date);
 				}
 			};
 			d3.json(dataUrl)
@@ -122,13 +123,9 @@ var graph={
 		d3.json("./config/"+downloadCtrl.getProject()+".json", afterLoadConfiguration);
 	},
 
-	loadUpdatedDate: function() {
-		var url="./data/updated-date.json";
-
-		d3.json(url, (json) => {
-			var dt=new Date(json.features[0].properties.updated_date+'T21:00:00.000Z');
-			d3.select("#updated_date").html(' '+dt.toLocaleDateString());
-		});
+	setUpdatedDate: function(updated_date) {
+		var dt=new Date(updated_date+'T21:00:00.000Z');
+		d3.select("#updated_date").html(' '+dt.toLocaleDateString());
 	},
 	
 	setDataDimension: function(d) {
