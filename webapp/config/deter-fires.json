@@ -15,7 +15,7 @@
 		},
 		"car":{
 			"pt-br":["Grande","Média","Pequena","Minifundio","Sem CAR"],
-			"en":["Large", "Average", "Small", "Minifundio", "Without CAR"]
+			"en":["Large", "Average", "Small", "Smallholdings", "Without CAR"]
 		}
 	}
 }
