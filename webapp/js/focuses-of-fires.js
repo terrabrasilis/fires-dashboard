@@ -259,7 +259,7 @@ var graph={
 				return p;
 			}, function() {
 				if(graph.bydata=="car")
-					return {"Grande": 0, "Media": 0, "Pequena": 0, "Sem CAR": 0};
+					return {"Grande": 0, "Media": 0, "Pequena": 0, "Minifundio": 0, "Sem CAR": 0};
 				else
 					return {"Desmatamento Consolidado": 0, "Desmatamento Recente": 0, "Floresta": 0, "Outros": 0};
 			}

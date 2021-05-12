@@ -6,7 +6,7 @@
 	"defaultHeight": 400,
 	"legendOriginal":{
 		"prodes":["Desmatamento Consolidado","Desmatamento Recente","Floresta","Outros"],
-		"car":["Grande","Media","Pequena","Sem CAR"]
+		"car":["Grande","Media","Pequena","Minifundio","Sem CAR"]
 	},
 	"legendOverlay":{
 		"prodes":{
@@ -14,8 +14,8 @@
 			"en":["Consolidated deforestation","Recent deforestation","Primary forest","Others"]
 		},
 		"car":{
-			"pt-br":["Grande","Média","Pequena","Sem CAR"],
-			"en":["Large", "Average", "Small", "Without CAR"]
+			"pt-br":["Grande","Média","Pequena","Minifundio","Sem CAR"],
+			"en":["Large", "Average", "Small", "Minifundio", "Without CAR"]
 		}
 	}
 }
