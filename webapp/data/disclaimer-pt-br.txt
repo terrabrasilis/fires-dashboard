@@ -49,8 +49,8 @@ mantido pelo Serviço Florestal Brasileiro:
   <b>2.2)</b> A base de imóveis rurais do CAR foi recortada pelo limite do bioma Amazônia,
   corrigida em relação a erros topológicos, remoção de geometrias ou atributos duplicados,
   remoção de geometrias inválidas e dos registros cancelados.
-  A partir desse processamento, os imóveis rurais do CAR foram classificadas em três tipos:
-  pequena menor que 4 módulos fiscais; média com extensão entre 4 e 15 módulos fiscais;
+  A partir desse processamento, os imóveis rurais do CAR foram classificadas em quatro tipos:
+  minifundio até 1 modulo fiscal; pequena entre 1 e 4 módulos fiscais; média com extensão entre 4 e 15 módulos fiscais;
   e grande, as maiores que 15 módulos fiscais.
   <br/>
   Para a base de imóveis rurais do CAR, também foi considerada uma área de influência (buffer externo) de 500 metros,

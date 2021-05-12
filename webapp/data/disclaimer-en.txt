@@ -37,7 +37,7 @@ maintained by the Brazilian Forest Service:
 <div class = "paragraph">
   <p>
   <b>2.1)</b> The CAR's database was limited to the Amazon biome. The properties' geometries were corrected to remove any topological errors, invalid geometries, and duplicated attributes. Canceled registers were also removed.
-  After this preprocessing, CAR's properties were classified into small, with less than 4 fiscal modules; average between 4 and 15 fiscal modules; and large, those with more than 15 fiscal modules;
+  After this preprocessing, CAR's properties were classified into four groups: smallholdings up to 1 fiscal module; small, between 1 and 4 fiscal modules; average between 4 and 15 fiscal modules; and large, those with more than 15 fiscal modules;
   </p>
   <p>
   <b>2.2)</b> Active fire: geographical coordinates of active fires, extracted from images of the reference satellite - AQUA/MODIS afternoon passages - obtained at <a class="general-info-links" href="http://www.inpe.br/queimadas"> Portal Queimadas-INPE </a>;
