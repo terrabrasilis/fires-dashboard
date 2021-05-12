@@ -1,6 +1,6 @@
 {
 	"palletBarChartProdes": ["#c7f8e3","#9bf8d0","#49d398","#238b45"],
-	"palletBarChartCar": ["#feebe2","#fbb4b9","#f768a1","#ae017e"],
+	"palletBarChartCar": ["#feebe2","#fbb4b9","#f768a1","#c51b8a","#7a0177"],
 	"palletPieChartProdes": ["#fbb4ae","#b3cde3","#ccebc5","#decbe4","#fed9a6","#ffffcc","#e5d8bd","#fddaec","#f2f2f2"],
 	"palletPieChartCar": ["#fbb4ae","#b3cde3","#ccebc5","#decbe4","#fed9a6","#ffffcc","#e5d8bd","#fddaec","#f2f2f2"],
 	"defaultHeight": 400,
