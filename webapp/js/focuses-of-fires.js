@@ -3,6 +3,7 @@ var graph={
 	data:[],
 	totalRows:0,
 	bydata:"prodes",// default on UI
+	selectedBiome:"a",// a=Amazônia and c=Cerrado
 	config:{},
 	selectedFilters:{},
 	ctlFirstLoading:false,
@@ -133,6 +134,13 @@ var graph={
 		this.restart();
 	},
 
+	setBiome: function(link,d) {
+		$('[id^=toAggregatedChart]').removeClass('enable_menu')
+		$('#toAggregatedChart-'+link).addClass('enable_menu');
+		this.selectedBiome=d;
+		this.restart();
+	},
+
 	utils:{
 
 		mappingClassNames: function(cl) {
@@ -227,11 +235,13 @@ var graph={
 		var json=[];
 		// normalize/parse data
 		this.data.forEach(function(d) {
-			let mm=(+d.properties.m<10)?("0"+d.properties.m):(d.properties.m);
-			var o={uf:d.properties.e,cl:d.properties.c,my:d.properties.y+"/"+mm,t:d.properties.t};
-			var auxDate = new Date(d.properties.y+'-'+ mm + '-01T04:00:00.000Z');
-			o.ts = auxDate.getTime();
-			json.push(o);
+			if(d.properties.b==graph.selectedBiome) {// filter by selected biome
+				let mm=(+d.properties.m<10)?("0"+d.properties.m):(d.properties.m);
+				var o={uf:d.properties.e,cl:d.properties.c,my:d.properties.y+"/"+mm,t:d.properties.t};
+				var auxDate = new Date(d.properties.y+'-'+ mm + '-01T04:00:00.000Z');
+				o.ts = auxDate.getTime();
+				json.push(o);
+			}
 		});
 		
 		this.data=json;
