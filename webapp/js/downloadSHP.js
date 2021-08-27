@@ -25,7 +25,7 @@ let downloadCtrl={
 	inferProjectByURI() {
 		var URL=document.location.href;
 		if(URL.includes("fires")){
-			this.project="deter-fires";
+			this.project="dashboard-fires";
 		}
 	},
 	
