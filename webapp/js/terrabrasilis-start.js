@@ -47,7 +47,7 @@ $(document).ready(function () {
 $(document).ready(function () {
 
     let versionDiv = $('#version');
-    if(versionDiv.length>0)
+    if(versionDiv.length>0 && document.location.hostname.includes('terrabrasilis'))
     {
         $.getJSON('PROJECT_VERSION', function(data) {
             let version = data.version;
