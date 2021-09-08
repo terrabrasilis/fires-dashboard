@@ -14,7 +14,7 @@ var graph={
 	histTopByCLs:undefined,
 	
 	palletBarChartProdes: ["#c7f8e3","#9bf8d0","#49d398","#238b45"],
-	palletBarChartCar: ["#feebe2","#fbb4b9","#f768a1","#ae017e"],
+	palletBarChartCar: ["#feebe2","#fbb4b9","#f768a1","#c51b8a","#7a0177"],
 	palletPieChartProdes: ["#fbb4ae","#b3cde3","#ccebc5","#decbe4","#fed9a6","#ffffcc","#e5d8bd","#fddaec","#f2f2f2"],
 	palletPieChartCar: ["#fbb4ae","#b3cde3","#ccebc5","#decbe4","#fed9a6","#ffffcc","#e5d8bd","#fddaec","#f2f2f2"],
 
@@ -407,16 +407,6 @@ var graph={
 				}
 			});
 
-		// this.barMonthFiresByClass.colorAccessor(function(d) {
-		// 	return "#0000FF";
-		// 	// var i=0,l=barColors.length;
-		// 	// while(i<l){
-		// 	// 	if(barColors[i].key==this.layer){
-		// 	// 		return barColors[i].color;
-		// 	// 	}
-		// 	// 	i++;
-		// 	// }
-		// });
 		// end of bar chart by classes
 
 		// build graph areas or focuses by state
@@ -470,10 +460,6 @@ var graph={
 		// build top count of focuses by classes
 		graph.utils.setTitle('cls', Translation[Lang.language].title_top_cls);
 
-		// TODO: Analise isso e remova a gambiarra
-		let topColorProdes=["#9bf8d0","#c7f8e3","#49d398","#238b45"];//graph.palletBarChartProdes
-		let topColorCar=["#f768a1","#ae017e","#feebe2","#fbb4b9"];//graph.palletBarChartCar
-
 		this.histTopByCLs
 			.height(graph.defaultHeight)
 			.dimension(dimensions["cl"])
@@ -482,7 +468,7 @@ var graph={
 			.ordering(function(d) {return -d.value;})
 			.controlsUseVisibility(true)
 			.fixedBarHeight(false)
-			.ordinalColors((graph.bydata=='prodes')?(topColorProdes):(topColorCar));
+			.ordinalColors((graph.bydata=='prodes')?(graph.palletBarChartProdes):(graph.palletBarChartCar));
 
 		this.histTopByCLs
 			.on('preRender', function(chart) {
@@ -504,7 +490,7 @@ var graph={
 			let displayPercent=!graph.histTopByCLs.hasFilter();
 			return graph.utils.mappingClassNames(d.key) + ': ' + graph.utils.numberByUnit(d.value,displayPercent);
 		});
-		this.histTopByCLs.colorAccessor(function(d) {
+		this.histTopByCLs.colorCalculator(function(d) {
 			let cc=barColors.find((aCor)=>{
 				if(aCor.key==d.key) return aCor.color;
 			});
