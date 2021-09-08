@@ -7,7 +7,7 @@ por satélite pelo projeto Queimadas sobre dois aspectos: <b>1)</b> Queimadas x 
 <p>
 <b>1)</b>Em relação ao desmatamento, são usados os dados gerados pelos projetos
 PRODES e DETER, para associar os focos de queimada em vegetação às áreas de desmatamento recente,
-desmatamento consolidado ou áreas de floresta primária, conforme descrito a seguir:
+desmatamento consolidado ou áreas de floresta/vegetação primária, conforme descrito a seguir:
 </p>
 
 <div class="paragraph">
@@ -16,13 +16,13 @@ desmatamento consolidado ou áreas de floresta primária, conforme descrito a se
   satélite referência - AQUA/MODIS passagem da tarde - obtidos em <a class="general-info-links" href="http://www.inpe.br/queimadas">Portal Queimadas-INPE</a>;
   </p><p>
   <b>1.2)</b> Desmatamento consolidado: base de dados PRODES agregando todo o desmatamento 
-  já mapeado até o ano de 2017;
+  já mapeado até o ano de 2018;
   </p><p>
   <b>1.3)</b> Desmatamento recente: base de dados PRODES agregando o desmatamento 
-  do ano de 2018 e 2019 e adicionando os dados de desmatamento do DETER entre
-  01 de agosto de 2019 e o último mês para o qual os dados já estejam completos;
+  do ano de 2019 e 2020 e adicionando os dados de desmatamento do DETER entre
+  01 de agosto de 2020 e o último mês para o qual os dados já estejam completos;
   </p><p>
-  <b>1.4)</b> Floresta primária: máscara de floresta do PRODES referente ao ano de 2019.
+  <b>1.4)</b> Floresta/vegetação primária: máscara de floresta/vegetação primária do PRODES referente ao ano de 2020.
   </p><p>
   As características do satélite referência utilizado na detecção de focos de queimada em vegetação,
   indicam uma imprecisão na localização espacial das coordenadas geográficas de aproximadamente 1 km

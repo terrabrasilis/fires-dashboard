@@ -5,18 +5,18 @@ This panel analyzes the active fires detected by the Queimadas project with
 <small> The information will be updated monthly. </small>
 </p>
 <p>
-<b> 1) </b> PRODES and DETER deforestation data are used to associate the active fires with areas of recent deforestation, consolidated deforestation, or primary forest, as follows:
+<b> 1) </b> PRODES and DETER deforestation data are used to associate the active fires with areas of recent deforestation, consolidated deforestation, or primary forest/vegetation, as follows:
 </p>
 
 <div class = "paragraph">
   <p>
-  <b> 1.1) </b> Recent deforestation: deforested areas mapped by PRODES 2018 and 2019 plus DETER's deforestation alerts mapped between August 1, 2019, and the last month for which the data is available;
+  <b> 1.1) </b> Recent deforestation: deforested areas mapped by PRODES 2019 and 2020 plus DETER's deforestation alerts mapped between August 1, 2020, and the last month for which the data is available;
   </p>
   <p>
-  <b> 1.2) </b> Consolidated deforestation: PRODES database aggregating all deforestation already mapped until 2017;
+  <b> 1.2) </b> Consolidated deforestation: PRODES database aggregating all deforestation already mapped until 2018;
   </p>
   <p>
-  <b> 1.3) </b> Primary forest: PRODES forest mask for 2019.
+  <b> 1.3) </b> Primary forest/vegetation: PRODES forest mask for 2020.
   </p>
   <p>
   <b> 1.4) </b> Fire data: geographical coordinates of active fires, extracted from images of the reference satellite - AQUA / MODIS afternoon passages - obtained at <a class="general-info-links" href="http://www.inpe.br/queimadas"> Portal Queimadas-INPE </a>;
