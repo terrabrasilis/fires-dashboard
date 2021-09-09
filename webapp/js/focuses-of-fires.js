@@ -277,6 +277,7 @@ var graph={
 		groups["uf"] = dimensions["uf"].group().reduceSum(function(d) {return +d.t;});
 		groups["cl"] = dimensions["cl"].group().reduceSum(function(d) {return +d.t;});
 
+
 		// totalize box 
 		this.totalFocusesGroup = focuses.groupAll().reduce(
 				function (p, v) {
@@ -329,7 +330,6 @@ var graph={
 			clList.push(d);
 		});
 		
-
 		var my=dimensions["my"].group().all();
 
 		this.barMonthFiresByClass
@@ -364,7 +364,7 @@ var graph={
 			.group(groups["clt"], clList[0], sel_stack(clList[0]))
 			.renderLabel(true)
 			.ordinalColors((graph.bydata=='prodes')?(graph.palletBarChartProdes):(graph.palletBarChartCar))
-			.margins({top: 30, right: 30, bottom: 60, left: 65})
+			.margins({top: 30, right: 30, bottom: 65, left: 65})
 			.legend(dc.legend().x(50).y(1).itemHeight(13).gap(7).horizontal(1).legendWidth(480).autoItemWidth(true)
 				.legendText(
 					function(d) {
@@ -383,7 +383,7 @@ var graph={
 		this.barMonthFiresByClass.xAxis().tickFormat(function(d) {
 			return d+"";
 		});
-		this.barMonthFiresByClass.yAxis().tickFormat(function(d) {
+		this.barMonthFiresByClass.yAxis().ticks(5).tickFormat(function(d) {
 			return localeBR.numberFormat(',1f')(d);
 		});
 
@@ -395,6 +395,9 @@ var graph={
 		
 		this.barMonthFiresByClass
 			.on("renderlet.a",function (chart) {
+				// rotate x-axis labels
+				chart.selectAll('g.x text').attr('transform', 'translate(-20,12) rotate(315)');
+
 				if(!chart.hasFilter()){
 					$('#txt9a').css('display','none');
 					$('#highlight-time').css('display','');
