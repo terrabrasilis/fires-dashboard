@@ -10,10 +10,10 @@ This panel analyzes the active fires detected by the Queimadas project with
 
 <div class = "paragraph">
   <p>
-  <b> 1.1) </b> Recent deforestation: deforested areas mapped by PRODES 2019 and 2020 plus DETER's deforestation alerts mapped between August 1, 2020, and the last month for which the data is available;
+  <b> 1.1) </b> Recent deforestation: deforested areas mapped by PRODES 2018, 2019 and 2020 plus DETER's deforestation alerts mapped between August 1, 2020, and the last month for which the data is available;
   </p>
   <p>
-  <b> 1.2) </b> Consolidated deforestation: PRODES database aggregating all deforestation already mapped until 2018;
+  <b> 1.2) </b> Consolidated deforestation: PRODES database aggregating all deforestation already mapped until 2017;
   </p>
   <p>
   <b> 1.3) </b> Primary forest/vegetation: PRODES forest mask for 2020.
@@ -36,7 +36,7 @@ maintained by the Brazilian Forest Service:
 
 <div class = "paragraph">
   <p>
-  <b>2.1)</b> The CAR's database was limited to the Amazon biome. The properties' geometries were corrected to remove any topological errors, invalid geometries, and duplicated attributes. Canceled registers were also removed.
+  <b>2.1)</b> The CAR rural property database was crossed for the Amazon and Cerrado biomes. Rural property geometries have been fixed to remove any topological errors, invalid geometries, and duplicate attributes. Canceled registrations were also removed.
   After this preprocessing, CAR's properties were classified into four groups: smallholdings up to 1 fiscal module; small, between 1 and 4 fiscal modules; average between 4 and 15 fiscal modules; and large, those with more than 15 fiscal modules;
   </p>
   <p>
