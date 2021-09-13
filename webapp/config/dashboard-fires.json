@@ -10,8 +10,8 @@
 	},
 	"legendOverlay":{
 		"prodes":{
-			"pt-br":["Desmatamento Consolidado","Desmatamento Recente","Floresta/vegetação primária","Outros"],
-			"en":["Consolidated deforestation","Recent deforestation","Primary forest/vegetation","Others"]
+			"pt-br":["Desmatamento Consolidado","Desmatamento Recente","Vegetação primária","Outros"],
+			"en":["Consolidated deforestation","Recent deforestation","Primary vegetation","Others"]
 		},
 		"car":{
 			"pt-br":["Grande","Média","Pequena","Minifundio","Sem CAR"],
