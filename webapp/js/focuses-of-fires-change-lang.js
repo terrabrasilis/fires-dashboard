@@ -2,7 +2,7 @@ var Lang={
 	language:undefined,
 	init:function() {
 		this.language=this.getFromLocalStorage();
-		if(!this.language) {
+		if(!this.language || this.language == "undefined") {
 			this.language='pt-br';
 		}
 	},
