@@ -2,11 +2,11 @@ let downloadCtrl={
 
 	project:null,
 	homologation:"",
-	serviceBaseUrl:"http://terrabrasilis.dpi.inpe.br/file-delivery",
+	serviceBaseUrl:"/file-delivery",
 
 	getFileDeliveryURL() {
 		this.inferHomologationByURI();
-		this.serviceBaseUrl="http://terrabrasilis.dpi.inpe.br/"+this.homologation+"file-delivery";
+		this.serviceBaseUrl="/"+this.homologation+"file-delivery";
 		return this.serviceBaseUrl;
 	},
 	
