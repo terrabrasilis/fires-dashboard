@@ -47,14 +47,16 @@ $(document).ready(function () {
 $(document).ready(function () {
 
     let versionDiv = $('#version');
-    if(versionDiv.length>0 && document.location.hostname.includes('terrabrasilis'))
+    let hn=document.location.hostname;
+    if(versionDiv.length>0)
     {
-        $.getJSON('PROJECT_VERSION', function(data) {
-            let version = data.version;
-            console.log(version);
-            versionDiv.append('ver: '+version);
-        });
-        
+        if(hn.includes('127.')||hn.includes('localhost'))
+            versionDiv.append('ver: IN_DEV_ENV');
+        else
+            $.getJSON('PROJECT_VERSION', function(data) {
+                let version = data.version;
+                versionDiv.append('ver: '+version);
+            });
     }
 });
 
