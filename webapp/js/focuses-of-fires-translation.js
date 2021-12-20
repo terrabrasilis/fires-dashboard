@@ -68,6 +68,7 @@ var Translation={
 		'analysis-fire':'Focos (Queimada)',
 		'map-des':'Desmatamento',
 		'map-war':'DETER (Avisos)',
+		'map-veg':'Vegetation',
 		'goto_video_sup':'Veja o vídeo introdutório que mostra a interação de um usuário com as ferramentas do painel.',
 		'help-sup':'Ajuda',
 		/* titles for HTML entities */
@@ -211,6 +212,7 @@ var Translation={
 		'analysis-fire':'Active fires',
 		'map-des':'Deforestation',
 		'map-war':'DETER (Notices)',
+		'map-veg':'Vegetação',
 		'goto_video_sup':'Watch the introductory video to see how an user interact with dashboard tools.',
 		'help-sup':'Help',
 		/* titles for HTML entities */
