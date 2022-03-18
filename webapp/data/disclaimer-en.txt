@@ -10,21 +10,24 @@ This panel analyzes the active fires detected by the Queimadas project with
 
 <div class = "paragraph">
   <p>
-  <b> 1.1) </b> Recent deforestation: deforested areas mapped by PRODES in 2018, 2019 and 2020 plus DETER deforestation alerts mapped between August 1, 2020 and the last month for which data are available;
+  <b> 1.1) </b> Fire data: geographical coordinates of active fires, extracted from images of the reference satellite - AQUA / MODIS afternoon passages - obtained at <a class="general-info-links" href="http://www.inpe.br/queimadas"> Portal Queimadas-INPE </a>;
   </p>
   <p>
-  <b> 1.2) </b> Consolidated deforestation: PRODES database aggregating all deforestation already mapped until 2017;
+  <b> 1.2) </b> Recent deforestation: deforested areas mapped by PRODES in 2018, 2019 and 2020 plus DETER deforestation alerts mapped between August 1, 2020 and the last month for which data are available;
   </p>
   <p>
-  <b> 1.3) </b> Primary vegetation: PRODES primary vegetation mask for 2020.
+  <b> 1.3) </b> Consolidated deforestation: PRODES database aggregating all deforestation already mapped until 2017;
   </p>
   <p>
-  <b> 1.4) </b> Fire data: geographical coordinates of active fires, extracted from images of the reference satellite - AQUA / MODIS afternoon passages - obtained at <a class="general-info-links" href="http://www.inpe.br/queimadas"> Portal Queimadas-INPE </a>;
-  </p> 
+  <b> 1.4) </b> Primary vegetation: PRODES primary vegetation mask for 2020.
+  </p>
+  <p>
+  <b>1.5)</b> Secondary vegetation: <a class="general-info-links" href="https://www.terraclass.gov.br/">TerraClass</a> secondary vegetation mask for 2020 (only Amazon).
+  </p>
   <p>
   The characteristics of the reference satellite used to detect the active fire indicate an imprecision in the fire coordinates' spatial location at most 1 km 
   (<a class="general-info-links" href="http://queimadas.dgi.inpe.br/queimadas/portal/informacoes/perguntas-frequentes#p15">FAQ Queimadas</a>).
-  To compensate for this possible inaccuracy, for each database polygon in items 1.1 and 1.2, an area of ​​influence (external buffer) of 500 meters is considered. This means that a fire accounted for as recent or consolidated deforestation may have been detected within the deforested area or up to 500 meters from its border.
+  To compensate for this possible inaccuracy, for each database polygon in items 1.2 and 1.3, an area of ​​influence (external buffer) of 500 meters is considered. This means that a fire accounted for as recent or consolidated deforestation may have been detected within the deforested area or up to 500 meters from its border.
   </p>
 </div>
 

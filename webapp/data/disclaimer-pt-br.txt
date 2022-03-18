@@ -24,6 +24,8 @@ desmatamento consolidado ou áreas de vegetação primária, conforme descrito a
   </p><p>
   <b>1.4)</b> Vegetação primária: máscara de vegetação primária do PRODES referente ao ano de 2020.
   </p><p>
+  <b>1.5)</b> Vegetação secundária: máscara de vegetação secundária do <a class="general-info-links" href="https://www.terraclass.gov.br/">TerraClass</a> referente ao ano de 2020 (somente Amazônia).
+  </p><p>
   As características do satélite referência utilizado na detecção de focos de queimada em vegetação,
   indicam uma imprecisão na localização espacial das coordenadas geográficas de aproximadamente 1 km
   (<a class="general-info-links" href="http://queimadas.dgi.inpe.br/queimadas/portal/informacoes/perguntas-frequentes#p15">FAQ Queimadas</a>).
