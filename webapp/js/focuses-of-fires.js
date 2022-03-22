@@ -321,7 +321,7 @@ var graph={
 
 		function sel_stack(i) {
 			return function(d) {
-				return +d.value[i];
+				return ( (!d.value[i])?(0):(+d.value[i]) );
 			};
 		}
 
