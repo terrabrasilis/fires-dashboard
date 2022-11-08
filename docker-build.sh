@@ -6,7 +6,7 @@
 VERSION=$(git describe --tags --abbrev=0)
 export VERSION
 # build all images
-docker build --no-cache -t terrabrasilis/focuses-of-fires-dashboard:$VERSION --build-arg VERSION=$VERSION --build-arg INDEX_FILE=focuses-of-fires -f environment/Dockerfile .
+docker build --no-cache -t terrabrasilis/focuses-of-fires-dashboard:$VERSION --build-arg VERSION=$VERSION -f environment/Dockerfile .
 
 # send to dockerhub
 docker login
