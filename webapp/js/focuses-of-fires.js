@@ -579,10 +579,10 @@ window.onload=function(){
 	Lang.init();
 	graph.startLoadData();
 	if(Authentication){
-		Authentication.serverURL='/oauth-api/';
+		let serverURL=downloadCtrl.inferLocalhost()+'/oauth-api/';
 		Authentication.init(Lang.language, function(){
 			graph.resetFilters();
 			graph.restart();
-		});
+		}, serverURL);
 	}
 };
