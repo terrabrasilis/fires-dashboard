@@ -1,3 +1,9 @@
+<div class="alert alert-warning">
+<p>
+<b>Atenção:</b> Os dados de referência foram alterados em 01 de novembro de 2022, quanto aos períodos e utilização de buffer de 500 metros.
+As alterações foram marcadas em vermelho no texto informativo. A classificação até outubro de 2022 não foi reprocessada.
+</p>
+</div>
 <p>
 O objetivo deste painel é analisar os focos de queimada em vegetação detectados
 por satélite pelo projeto Queimadas sobre dois aspectos: <b>1)</b> Queimadas x Desmatamentos e <b>2)</b> Queimadas x CAR.
@@ -16,11 +22,11 @@ desmatamento consolidado ou áreas de vegetação primária, conforme descrito a
   satélite referência - AQUA/MODIS passagem da tarde - obtidos em <a class="general-info-links" href="http://www.inpe.br/queimadas">Portal Queimadas-INPE</a>;
   </p><p>
   <b>1.2)</b> Desmatamento consolidado: base de dados PRODES agregando todo o desmatamento 
-  já mapeado até o ano de 2017;
+  já mapeado até o ano de <del>2017</del> 2018;
   </p><p>
   <b>1.3)</b> Desmatamento recente: base de dados PRODES agregando o desmatamento 
-  do ano de 2018, 2019 e 2020 e adicionando os dados de desmatamento do DETER entre
-  01 de agosto de 2020 e o último mês para o qual os dados já estejam completos;
+  do ano de <del>2018, 2019 e 2020</del> 2019, 2020 e 2021 e adicionando os dados de desmatamento do DETER entre
+  01 de agosto de <del>2020</del> 2021 e o último mês para o qual os dados já estejam completos;
   </p><p>
   <b>1.4)</b> Vegetação primária: máscara de vegetação primária do PRODES referente ao ano de 2020.
   </p><p>
@@ -29,10 +35,10 @@ desmatamento consolidado ou áreas de vegetação primária, conforme descrito a
   As características do satélite referência utilizado na detecção de focos de queimada em vegetação,
   indicam uma imprecisão na localização espacial das coordenadas geográficas de aproximadamente 1 km
   (<a class="general-info-links" href="http://queimadas.dgi.inpe.br/queimadas/portal/informacoes/perguntas-frequentes#p15">FAQ Queimadas</a>).
-  Para compensar essa possível imprecisão, para cada polígono das base de dados dos itens 1.2 e 1.3 é
+  <del>Para compensar essa possível imprecisão, para cada polígono das base de dados dos itens 1.2 e 1.3 é
   considerada uma área de influência (buffer externo) de 500 metros.
   Ou seja, um foco contabilizado como sendo em desmatamento recente ou consolidado pode ter sido detectado
-  no interior da área desmatada ou até 500 metros do seu entorno.
+  no interior da área desmatada ou até 500 metros do seu entorno.</del>
   </p>
 </div>
 
@@ -55,7 +61,7 @@ mantido pelo Serviço Florestal Brasileiro:
   minifundio até 1 modulo fiscal; pequena entre 1 e 4 módulos fiscais; média com extensão entre 4 e 15 módulos fiscais;
   e grande, as maiores que 15 módulos fiscais.
   <br/>
-  Para a base de imóveis rurais do CAR, também foi considerada uma área de influência (buffer externo) de 500 metros,
+  Para a base de imóveis rurais do CAR, <del>também</del> foi considerada uma área de influência (buffer externo) de 500 metros,
   visando compensar possíveis imprecisões na localização dos focos.
   </p>
 </div>
