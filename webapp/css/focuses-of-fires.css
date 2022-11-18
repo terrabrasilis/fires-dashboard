@@ -230,6 +230,13 @@ div .dc-chart {
 	top: 5px;
 	left: -5px;
 }
-del{
-	color: #d72626;
+sup{
+	color: #202428;
+    font-weight: 500;
+}
+p sup{
+    color: #202428;
+}
+p span{
+	font-weight: bold;
 }
