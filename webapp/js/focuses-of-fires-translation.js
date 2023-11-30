@@ -140,7 +140,9 @@ var Translation={
 		'general-info':'Sobre estas Informações',
 		'general-info-close':'Fechar',
 		'general-info-label':'Sobre estas Informações',
-		'general-info-title':'Informações importantes sobre os dados de entrada e o processo de geração destas estatísticas.'
+		'general-info-title':'Informações importantes sobre os dados de entrada e o processo de geração destas estatísticas.',
+		'historical-info-title':'Registro de alterações nas versões dos dados de entrada e resultados.',
+		'historical-info-label':'Histórico de Alterações'
 	},
 	'en':{
 		/* texts into HTML entities */
@@ -285,5 +287,7 @@ var Translation={
 		'general-info-close':'Close',
 		'general-info-label':'About these Informations',
 		'general-info-title':'Relevant informations about the input data and the process of generating these statistics.',
+		'historical-info-title':'Historical document, only in portuguese, of changes regarding the versions of input and result data.',
+		'historical-info-label':'Change History'
 	}
 };
