@@ -635,8 +635,13 @@
 	<script type="text/javascript" src="./js/focuses-of-fires.min.js"></script>
 	<script type="text/javascript" src="./js/easy-cookie.min.js"></script>
 	<script type="text/javascript" src="./js/downloadSHP.min.js"></script>
-	<script type="text/javascript" src="http://terrabrasilis.dpi.inpe.br/oauth-api/getoauthjs"></script>
+
 	<script type="text/javascript">
+		//Loading oauth-api to dashboard
+		var randomNumber = Math.floor((Math.random() * 1000000) + 1);
+		var oauthURL = $(location).attr('origin') + "/oauth-api/getoauthjs?" + randomNumber;
+		document.writeln("<script type='text/javascript' src='"+oauthURL+"'><\/script>");
+
 		$("#notice").click(function () {
 			EasyCookie.create("firstNotice", "Not show modal again", 30);
 		});
