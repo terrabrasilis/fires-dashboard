@@ -3,7 +3,7 @@ var graph={
 	data:[],
 	totalRows:0,
 	bydata:"prodes",// default on UI
-	selectedBiome:"a",// a=Amazônia and c=Cerrado
+	selectedBiome:"a",// a=Amazônia c=Cerrado p=Pantanal
 	config:{},
 	selectedFilters:{},
 	ctlFirstLoading:false,
