@@ -10,8 +10,8 @@
 	},
 	"legendOverlay":{
 		"prodes":{
-			"pt-br":["Outros","Desmatamento consolidado","Desmatamento recente","Vegetação secundária","Vegetação primária","Não floresta"],
-			"en":["Others","Consolidated deforestation","Recent deforestation","Secondary vegetation","Primary vegetation","Non forest"]
+			"pt-br":["Outros","Desmatamento consolidado","Desmatamento recente","Vegetação secundária","Vegetação primária","Vegetação primária não florestada"],
+			"en":["Others","Consolidated deforestation","Recent deforestation","Secondary vegetation","Primary vegetation","Non-forested primary vegetation"]
 		},
 		"car":{
 			"pt-br":["Grande","Média","Pequena","Minifundio","Sem CAR"],
