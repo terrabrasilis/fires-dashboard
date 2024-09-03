@@ -1,6 +1,9 @@
 <div class="alert alert-warning">
 <p>
 Os dados apresentados neste painel foram alterados em 03 de setembro de 2024.
+
+Dados de Queimadas versus CAR estão sendo finalizados e serão disponibilizados em breve.
+
 </p>
 </div>
 

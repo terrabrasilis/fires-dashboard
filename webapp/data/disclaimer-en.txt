@@ -1,6 +1,8 @@
 <div class="alert alert-warning">
 <p>
 The data presented in this dashboard was last updated on September 3, 2024.
+
+Data on focuses of fire versus CAR are being finalized and will be available soon.
 </p>
 </div>
 </div>
