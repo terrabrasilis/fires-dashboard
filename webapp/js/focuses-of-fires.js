@@ -20,7 +20,7 @@ var graph={
 
 	getOrdinalColorsClasses: function() {
 		let c=[];
-		let cls=graph.config.dataConfig.legendOriginal[graph.bydata];
+		let cls=graph.config.dataConfig.legendOriginal[graph.bydata+'-'+graph.selectedBiome];
 		let cor=(graph.bydata=='prodes')?(graph.palletBarChartProdes):(graph.palletBarChartCar);
 		for(let i=0;i<cls.length;i++) {
 			c.push({key:cls[i],color:cor[i]});
@@ -142,15 +142,14 @@ var graph={
 	},
 
 	utils:{
-
 		mappingClassNames: function(cl) {
-			if(graph.config.dataConfig.legendOriginal===undefined || !graph.config.dataConfig.legendOriginal[graph.bydata]) {
+			if(graph.config.dataConfig.legendOriginal===undefined || !graph.config.dataConfig.legendOriginal[graph.bydata+'-'+graph.selectedBiome]) {
 				return cl;
 			}
-			var l = graph.config.dataConfig.legendOriginal[graph.bydata].length;
+			var l = graph.config.dataConfig.legendOriginal[graph.bydata+'-'+graph.selectedBiome].length;
 			for (var i = 0; i < l; i++) {
-				if(graph.config.dataConfig.legendOriginal[graph.bydata][i]===cl) {
-					cl=graph.config.dataConfig.legendOverlay[graph.bydata][Lang.language][i];
+				if(graph.config.dataConfig.legendOriginal[graph.bydata+'-'+graph.selectedBiome][i]===cl) {
+					cl=graph.config.dataConfig.legendOverlay[graph.bydata+'-'+graph.selectedBiome][Lang.language][i];
 					break;
 				}
 			}
@@ -325,7 +324,7 @@ var graph={
 			};
 		}
 
-		var cls=graph.config.dataConfig.legendOriginal[graph.bydata],clList=[];
+		var cls=graph.config.dataConfig.legendOriginal[graph.bydata+'-'+graph.selectedBiome],clList=[];
 		cls.forEach(function(d){
 			clList.push(d);
 		});

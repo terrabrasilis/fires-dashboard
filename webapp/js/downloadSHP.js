@@ -40,7 +40,7 @@ let downloadCtrl={
 		let orig=document.location.origin;
 		let u="";
 		if(orig.includes('localhost') || orig.includes('127'))
-			u="http://terrabrasilis.dpi.inpe.br";
+			u="https://terrabrasilis.dpi.inpe.br";
 
 		return u;
 	},
