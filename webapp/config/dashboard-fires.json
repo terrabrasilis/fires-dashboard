@@ -7,8 +7,10 @@
 	"legendOriginal":{
 		"prodes-a":["Outros","Desmatamento Consolidado","Desmatamento Recente","Vegetacao Secundaria 2022","Floresta","Nao Floresta"],
 		"prodes-c":["Outros","Desmatamento Consolidado","Desmatamento Recente","Vegetacao Secundaria 2022","Floresta"],
+		"prodes-p":["Outros","Desmatamento Consolidado","Desmatamento Recente","Vegetacao Secundaria 2022","Floresta"],
 		"car-a":["Grande","Media","Pequena","Minifundio","Sem CAR"],
-		"car-c":["Grande","Media","Pequena","Minifundio","Sem CAR"]
+		"car-c":["Grande","Media","Pequena","Minifundio","Sem CAR"],
+		"car-p":["Grande","Media","Pequena","Minifundio","Sem CAR"]
 	},
 	"legendOverlay":{
 		"prodes-a":{
@@ -19,11 +21,19 @@
 			"pt-br":["Outros","Desmatamento consolidado","Desmatamento recente","Vegetação secundária","Vegetação primária"],
 			"en":["Others","Consolidated deforestation","Recent deforestation","Secondary vegetation","Primary vegetation"]
 		},
+		"prodes-p":{
+			"pt-br":["Outros","Desmatamento consolidado","Desmatamento recente","Vegetação secundária","Vegetação primária"],
+			"en":["Others","Consolidated deforestation","Recent deforestation","Secondary vegetation","Primary vegetation"]
+		},
 		"car-a":{
 			"pt-br":["Grande","Média","Pequena","Minifundio","Sem CAR"],
 			"en":["Large", "Average", "Small", "Smallholdings", "Without CAR"]
 		},
 		"car-c":{
+			"pt-br":["Grande","Média","Pequena","Minifundio","Sem CAR"],
+			"en":["Large", "Average", "Small", "Smallholdings", "Without CAR"]
+		},
+		"car-p":{
 			"pt-br":["Grande","Média","Pequena","Minifundio","Sem CAR"],
 			"en":["Large", "Average", "Small", "Smallholdings", "Without CAR"]
 		}
