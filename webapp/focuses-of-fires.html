@@ -2,7 +2,7 @@
 <html lang="pt-br, en, es">
 
 <head>
-	<title>Focos de Queimada versus Desmatamentos</title>
+	<title>Focos de Queimada versus Supressão da Vegetação Primária</title>
 	<meta charset="UTF-8">
 	<meta http-equiv='cache-control' content='no-cache'>
 	<meta http-equiv='expires' content='0'>
@@ -47,7 +47,7 @@
 				<div class="sidebar-header">
 					<div class="desctxt">
 						<h5><span class="amarelo">Terra</span><span class="verde">Brasilis</span> </h5>
-						<div id="header-menu">Focos de Queimada (Queimadas X Desmatamentos X CAR)</div>
+						<div id="header-menu">Focos de Queimada (Queimadas X Supressão da Vegetação Primária X CAR)</div>
 					</div>
 				</div>
 			</a>
@@ -71,6 +71,18 @@
 					<a href="javascript:graph.setBiome('pan','p');" id="toAggregatedChart-pan" title="Abrir o painel de focos mensais para o Bioma Pantanal." aria-expanded="false">
 						<i class="material-icons">insert_chart</i><span id="nv-aggregated-pan">Focos no Bioma Pantanal</span></a>
 				</li>
+				<li>
+					<a href="javascript:graph.setBiome('caa','ca');" id="toAggregatedChart-caa" title="Abrir o painel de focos mensais para o Bioma Caatinga." aria-expanded="false">
+						<i class="material-icons">insert_chart</i><span id="nv-aggregated-caa">Focos no Bioma Caatinga</span></a>
+				</li>
+				<li>
+					<a href="javascript:graph.setBiome('mat','m');" id="toAggregatedChart-mat" title="Abrir o painel de focos mensais para o Bioma Mata Atlântica." aria-expanded="false">
+						<i class="material-icons">insert_chart</i><span id="nv-aggregated-mat">Focos no Bioma Mata Atlântica</span></a>
+				</li>
+				<li>
+					<a href="javascript:graph.setBiome('pam','pp');" id="toAggregatedChart-pam" title="Abrir o painel de focos mensais para o Bioma Pampa." aria-expanded="false">
+						<i class="material-icons">insert_chart</i><span id="nv-aggregated-pam">Focos no Bioma Pampa</span></a>
+				</li>
 			</ul>
 
 			<ul class="list-unstyled components">
@@ -81,7 +93,7 @@
 						<span id="tools">Ferramentas</span></a>
 				</li>
 				<li>
-					<a href="#modal-container-download" id="downloadBtn" data-toggle="modal" title="Baixar a tabela de focos de queimadas versus desmatamentos.">
+					<a href="#modal-container-download" id="downloadBtn" data-toggle="modal" title="Baixar a tabela de focos de queimadas versus supressão da vegetação primária.">
 						<i class="material-icons">cloud_download</i><span id="txt4">Baixar Dados</span></a>
 				</li>
 
@@ -111,7 +123,7 @@
 	<div id="content">
 		<div class="boxtop">
 			<h5><span class="amarelo">Terra</span><span class="verde">Brasilis</span><span id="tituloprint" class="tituloprint">
-					| Focos diários de Queimadas (Queimadas X Desmatamentos).</span></h5>
+					| Focos diários de Queimadas (Queimadas X Supressão da Vegetação Primária).</span></h5>
 		</div>
 		<nav class="navbar navbar-expand-lg materialnav navbar-header">
 			<button class="btn btn-material navbar-btn " type="button" data-toggle="collapse" id="sidebarCollapse" data-target="#navbar"
@@ -121,7 +133,7 @@
 			<a class="navbar-brand" href="/"><span class="amarelo">Terra</span><span class="verde">Brasilis</span></a>
 			<div class="collapse navbar-collapse justify-content-between">
 				<div class="navbar-nav">
-					<a class="nav-item nav-link" href="#" id="header-panel">| Focos de Queimada (Queimadas X Desmatamentos X CAR)</a>
+					<a class="nav-item nav-link" href="#" id="header-panel">| Focos de Queimada (Queimadas X Supressão da Vegetação Primária X CAR)</a>
 				</div>
 				<ul id="navigationBarUL" class="navbar-nav navbar-right analises">
 					<li class="nav-item dropdown">
@@ -129,7 +141,7 @@
 							<i class="material-icons iconmobile">assignment </i><span id="maps-sup">Mapas</span>
 						</a>
 						<div aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu submenu">
-							<a class="dropdown-item" target="_blank" href="/app/map/deforestation/"><i class="material-icons iconmenu">nature</i><span id="map-des">PRODES (Desmatamento)</span></a>
+							<a class="dropdown-item" target="_blank" href="/app/map/deforestation/"><i class="material-icons iconmenu">nature</i><span id="map-des">PRODES (Supressão da Vegetação Primária)</span></a>
 							<a class="dropdown-item" target="_blank" href="/app/map/alerts/"><i class="material-icons iconmenu">warning</i><span id="map-war">DETER (Avisos)</span></a>
 							<a class="dropdown-item" target="_blank" href="/app/map/vegetation/"><i class="material-icons iconmenu">park</i><span id="map-veg">Vegetação</span></a>
 						</div>
@@ -139,7 +151,7 @@
 							<i class="material-icons iconmobile">assignment </i><span id="analysis-sup">Gráficos</span>
 						</a>
 						<div aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu submenu">
-							<a class="dropdown-item" target="_blank" href="/app/dashboard/deforestation/biomes/amazon/increments"><i class="material-icons iconmenu">nature</i><span id="analysis-des">PRODES (Desmatamento)</span></a>
+							<a class="dropdown-item" target="_blank" href="/app/dashboard/deforestation/biomes/amazon/increments"><i class="material-icons iconmenu">nature</i><span id="analysis-des">PRODES (Supressão da Vegetação Primária)</span></a>
 							<a class="dropdown-item" target="_blank" href="/app/dashboard/alerts/biomes/cerrado-nb/aggregated/"><i class="material-icons iconmenu">warning</i><span id="analysis-war">DETER (Avisos)</span></a>
 							<a class="dropdown-item" href="#"><i class="material-icons iconmenu">local_fire_department</i><span id="analysis-fire">Focos (Queimada)</span></a>
 						</div>
@@ -205,9 +217,9 @@
 
 				<div class="col-md-4">
 					<div class="selectradio selectradio_more">
-						<div class="selectradio-success" id="radio-prodes" title="Ver gráficos com base na contagem do número de focos em desmatamentos.">
+						<div class="selectradio-success" id="radio-prodes" title="Ver gráficos com base na contagem do número de focos em supressão da vegetação primária.">
 							<input checked="checked" type="radio" name="set_dim" id="radioprodes" onclick="graph.setDataDimension('prodes');"/>
-							<label for="radioprodes" id="by_prodes"> Desmatamento</label>
+							<label for="radioprodes" id="by_prodes"> Supressão da Vegetação Primária</label>
 						</div>
 						<div class="selectradio-success" id="radio-car" title="Ver gráficos com base na contagem do número de focos em imóveis CAR.">
 							<input type="radio" name="set_dim" id="radiocar" onclick="graph.setDataDimension('car');" />
@@ -432,7 +444,7 @@
 						</div>
 					</div>
 					<!--
-					<h5 class="modal-title boxtitletable"><span id="txt26b">Baixar arquivos dos imóveis rurais do CAR e agregados de desmatamento em formato matricial.</span></h5>
+					<h5 class="modal-title boxtitletable"><span id="txt26b">Baixar arquivos dos imóveis rurais do CAR e agregados de supressão da vegetação primária em formato matricial.</span></h5>
 					<div class="dwn-tool">
 						<div class="alert alert-success alert-labeled">
 							<div class="alert-labeled-row">
@@ -456,7 +468,7 @@
 								</span>
 								<p class="alert-body alert-body-right alert-labelled-cell">
 									<a href="/download/fires-dashboard/prodes/raster/prodes_agregado_amz_cerrado.zip">
-										<span id="txt28b" class="alerttitle">Agregado de desmatamentos PRODES.</span>
+										<span id="txt28b" class="alerttitle">Agregado de supressão da vegetação primária PRODES.</span>
 									</a>
 								</p>
 							</div>
@@ -471,7 +483,7 @@
 								</span>
 								<p class="alert-body alert-body-right alert-labelled-cell">
 									<a href="/download/fires-dashboard/deter/raster/deter_agregado_amz_cerrado.zip">
-										<span id="txt28c" class="alerttitle">Agregado de desmatamentos DETER.</span>
+										<span id="txt28c" class="alerttitle">Agregado de supressão da vegetação primária DETER.</span>
 									</a>
 								</p>
 							</div>

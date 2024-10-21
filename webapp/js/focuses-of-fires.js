@@ -3,7 +3,7 @@ var graph={
 	data:[],
 	totalRows:0,
 	bydata:"prodes",// default on UI
-	selectedBiome:"a",// a=Amazônia c=Cerrado p=Pantanal
+	selectedBiome:"a",// a=Amazônia c=Cerrado p=Pantanal m=Mata Atlântica ca=Caatinga pp=Pampa
 	config:{},
 	selectedFilters:{},
 	ctlFirstLoading:false,
@@ -14,13 +14,13 @@ var graph={
 	histTopByCLs:undefined,
 	
 	palletBarChartProdes: ["#c7f8e3","#9bf8d0","#49d398","#238b45"],
-	palletBarChartCar: ["#feebe2","#fbb4b9","#f768a1","#c51b8a","#7a0177"],
+	palletBarChartCar: ["#feebe2","#fbb4b9","#f768a1","#c51b8a"],
 	palletPieChartProdes: ["#fbb4ae","#b3cde3","#ccebc5","#decbe4","#fed9a6","#ffffcc","#e5d8bd","#fddaec","#f2f2f2"],
 	palletPieChartCar: ["#fbb4ae","#b3cde3","#ccebc5","#decbe4","#fed9a6","#ffffcc","#e5d8bd","#fddaec","#f2f2f2"],
 
 	getOrdinalColorsClasses: function() {
 		let c=[];
-		let cls=graph.config.dataConfig.legendOriginal[graph.bydata+'-'+graph.selectedBiome];
+		let cls=graph.config.dataConfig.legendOriginal[graph.bydata];
 		let cor=(graph.bydata=='prodes')?(graph.palletBarChartProdes):(graph.palletBarChartCar);
 		for(let i=0;i<cls.length;i++) {
 			c.push({key:cls[i],color:cor[i]});
@@ -143,13 +143,13 @@ var graph={
 
 	utils:{
 		mappingClassNames: function(cl) {
-			if(graph.config.dataConfig.legendOriginal===undefined || !graph.config.dataConfig.legendOriginal[graph.bydata+'-'+graph.selectedBiome]) {
+			if(graph.config.dataConfig.legendOriginal===undefined || !graph.config.dataConfig.legendOriginal[graph.bydata]) {
 				return cl;
 			}
-			var l = graph.config.dataConfig.legendOriginal[graph.bydata+'-'+graph.selectedBiome].length;
+			var l = graph.config.dataConfig.legendOriginal[graph.bydata].length;
 			for (var i = 0; i < l; i++) {
-				if(graph.config.dataConfig.legendOriginal[graph.bydata+'-'+graph.selectedBiome][i]===cl) {
-					cl=graph.config.dataConfig.legendOverlay[graph.bydata+'-'+graph.selectedBiome][Lang.language][i];
+				if(graph.config.dataConfig.legendOriginal[graph.bydata][i].toLowerCase()===cl.toLowerCase()) {
+					cl=graph.config.dataConfig.legendOverlay[graph.bydata][Lang.language][i];
 					break;
 				}
 			}
@@ -324,7 +324,7 @@ var graph={
 			};
 		}
 
-		var cls=graph.config.dataConfig.legendOriginal[graph.bydata+'-'+graph.selectedBiome],clList=[];
+		var cls=graph.config.dataConfig.legendOriginal[graph.bydata],clList=[];
 		cls.forEach(function(d){
 			clList.push(d);
 		});
@@ -493,10 +493,9 @@ var graph={
 			return graph.utils.mappingClassNames(d.key) + ': ' + graph.utils.numberByUnit(d.value,displayPercent);
 		});
 		this.histTopByCLs.colorCalculator(function(d) {
-			let cc=barColors.find((aCor)=>{
-				if(aCor.key==d.key) return aCor.color;
-			});
-			return cc.color;
+			return barColors.find((aCor)=>{
+				if(aCor.key.toLowerCase()==d.key.toLowerCase()) return aCor.color;
+			}).color;
 		});
 
 		// build download data

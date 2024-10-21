@@ -10,8 +10,7 @@ To load data with more efficience we generate this JSON files using automated ta
 To build image for this dockerfile use this command:
 
  > Remember to update the project's version number to avoid overwriting the previous image.
- Use the PROJECT_VERSION file.
-
+ 
 ```bash
 ./docker-build.sh
 ```
@@ -20,13 +19,13 @@ To build image for this dockerfile use this command:
 
 Are two ways for run this service using docker-compose.
 
-### To run in atached mode
+ > To run in atached mode
 
 ```bash
 docker-compose -f environment/docker-compose.yml up
 ```
 
-### To run in detached mode
+ > To run in detached mode
 
 ```bash
 docker-compose -f environment/docker-compose.yml up -d
@@ -36,4 +35,4 @@ docker-compose -f environment/docker-compose.yml up -d
 
 For run as a service into a docker stack go to the [Stack files repository](https://github.com/terrabrasilis/docker-stacks).
 
-The docker stack for this services is the experimental-dashboards-stack.yaml
+The docker stack for this services is the webapps.yaml

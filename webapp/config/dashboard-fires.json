@@ -1,41 +1,21 @@
 {
-	"palletBarChartProdes": ["#edf8e9","#bae4b3","#74c476","#31a354","#006d2c","#e845f0"],
-	"palletBarChartCar": ["#feebe2","#fbb4b9","#f768a1","#c51b8a","#7a0177"],
+	"palletBarChartProdes": ["#edf8e9","#bae4b3","#74c476","#31a354"],
+	"palletBarChartCar": ["#feebe2","#fbb4b9","#f768a1","#c51b8a"],
 	"palletPieChartProdes": ["#fbb4ae","#b3cde3","#ccebc5","#decbe4","#fed9a6","#ffffcc","#e5d8bd","#fddaec","#f2f2f2"],
 	"palletPieChartCar": ["#fbb4ae","#b3cde3","#ccebc5","#decbe4","#fed9a6","#ffffcc","#e5d8bd","#fddaec","#f2f2f2"],
 	"defaultHeight": 400,
 	"legendOriginal":{
-		"prodes-a":["Outros","Desmatamento Consolidado","Desmatamento Recente","Vegetacao Secundaria 2022","Floresta","Nao Floresta"],
-		"prodes-c":["Outros","Desmatamento Consolidado","Desmatamento Recente","Vegetacao Secundaria 2022","Floresta"],
-		"prodes-p":["Outros","Desmatamento Consolidado","Desmatamento Recente","Vegetacao Secundaria 2022","Floresta"],
-		"car-a":["Grande","Media","Pequena","Minifundio","Sem CAR"],
-		"car-c":["Grande","Media","Pequena","Minifundio","Sem CAR"],
-		"car-p":["Grande","Media","Pequena","Minifundio","Sem CAR"]
+		"prodes":["Outros","Desmatamento Consolidado","Desmatamento Recente","Vegetacao Nativa"],
+		"car":["Grande","Media","Pequena","Sem car"]
 	},
 	"legendOverlay":{
-		"prodes-a":{
-			"pt-br":["Outros","Desmatamento consolidado","Desmatamento recente","Vegetação secundária","Vegetação primária","Vegetação primária não florestada"],
-			"en":["Others","Consolidated deforestation","Recent deforestation","Secondary vegetation","Primary vegetation","Non-forested primary vegetation"]
+		"prodes":{
+			"pt-br":["Outros","Supressão consolidada da vegetação primária","Supressão recente da vegetação primária","Vegetação primária"],
+			"en":["Others","Consolidated suppression of primary vegetation","Recent suppression of primary vegetation.","Primary vegetation"]
 		},
-		"prodes-c":{
-			"pt-br":["Outros","Desmatamento consolidado","Desmatamento recente","Vegetação secundária","Vegetação primária"],
-			"en":["Others","Consolidated deforestation","Recent deforestation","Secondary vegetation","Primary vegetation"]
-		},
-		"prodes-p":{
-			"pt-br":["Outros","Desmatamento consolidado","Desmatamento recente","Vegetação secundária","Vegetação primária"],
-			"en":["Others","Consolidated deforestation","Recent deforestation","Secondary vegetation","Primary vegetation"]
-		},
-		"car-a":{
-			"pt-br":["Grande","Média","Pequena","Minifundio","Sem CAR"],
-			"en":["Large", "Average", "Small", "Smallholdings", "Without CAR"]
-		},
-		"car-c":{
-			"pt-br":["Grande","Média","Pequena","Minifundio","Sem CAR"],
-			"en":["Large", "Average", "Small", "Smallholdings", "Without CAR"]
-		},
-		"car-p":{
-			"pt-br":["Grande","Média","Pequena","Minifundio","Sem CAR"],
-			"en":["Large", "Average", "Small", "Smallholdings", "Without CAR"]
+		"car":{
+			"pt-br":["Grande","Média","Pequena","Sem CAR"],
+			"en":["Large", "Average", "Small", "Without CAR"]
 		}
 	}
 }
