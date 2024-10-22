@@ -1,8 +1,8 @@
 {
 	"palletBarChartProdes": ["#edf8e9","#bae4b3","#74c476","#31a354"],
 	"palletBarChartCar": ["#feebe2","#fbb4b9","#f768a1","#c51b8a"],
-	"palletPieChartProdes": ["#fbb4ae","#b3cde3","#ccebc5","#decbe4","#fed9a6","#ffffcc","#e5d8bd","#fddaec","#f2f2f2"],
-	"palletPieChartCar": ["#fbb4ae","#b3cde3","#ccebc5","#decbe4","#fed9a6","#ffffcc","#e5d8bd","#fddaec","#f2f2f2"],
+	"palletPieChartProdes": ["#fbb4ae","#b3cde3","#ccebc5","#decbe4","#fed9a6","#ffffcc","#e5d8bd","#fddaec","#f2f2f2","#fbb5bf","#b3cef4","#ccecd6","#deccf5","#fedab7","#aaaadd","#e5d9ce","#fddbfd","#a2a3a3","#fbb39d","#b3ccd2","#cceab4","#decad3","#fed895","#aaaabb","#e5d7ac","#fdd9db","#f2f1e1"],
+	"palletPieChartCar": ["#fbb4ae","#b3cde3","#ccebc5","#decbe4","#fed9a6","#ffffcc","#e5d8bd","#fddaec","#f2f2f2","#fbb5bf","#b3cef4","#ccecd6","#deccf5","#fedab7","#aaaadd","#e5d9ce","#fddbfd","#a2a3a3","#fbb39d","#b3ccd2","#cceab4","#decad3","#fed895","#aaaabb","#e5d7ac","#fdd9db","#f2f1e1"],
 	"defaultHeight": 400,
 	"legendOriginal":{
 		"prodes":["Outros","Desmatamento Consolidado","Desmatamento Recente","Vegetacao Nativa"],
@@ -10,8 +10,8 @@
 	},
 	"legendOverlay":{
 		"prodes":{
-			"pt-br":["Outros","Supressão consolidada da vegetação primária","Supressão recente da vegetação primária","Vegetação primária"],
-			"en":["Others","Consolidated suppression of primary vegetation","Recent suppression of primary vegetation.","Primary vegetation"]
+			"pt-br":["Outros","Consolidado - supressão da vegetação primária","Recente - supressão da vegetação primária","Vegetação primária"],
+			"en":["Others","Suppression of primary vegetation - consolidated","Suppression of primary vegetation - recent","Primary vegetation"]
 		},
 		"car":{
 			"pt-br":["Grande","Média","Pequena","Sem CAR"],

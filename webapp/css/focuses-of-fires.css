@@ -98,7 +98,9 @@ body{
 }
 .ring-charts {
 	width:100%;
-	height:100%;
+	height: 100%;
+	overflow-y: auto;
+    overflow-x: hidden;
 }
 .timeline-charts{
 	width:100%;

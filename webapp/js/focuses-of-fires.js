@@ -3,7 +3,7 @@ var graph={
 	data:[],
 	totalRows:0,
 	bydata:"prodes",// default on UI
-	selectedBiome:"a",// a=Amazônia c=Cerrado p=Pantanal m=Mata Atlântica ca=Caatinga pp=Pampa
+	selectedBiome:"all",// all=Todos a=Amazônia c=Cerrado p=Pantanal m=Mata Atlântica ca=Caatinga pp=Pampa
 	config:{},
 	selectedFilters:{},
 	ctlFirstLoading:false,
@@ -234,7 +234,7 @@ var graph={
 		var json=[];
 		// normalize/parse data
 		this.data.forEach(function(d) {
-			if(d.properties.b==graph.selectedBiome) {// filter by selected biome
+			if(d.properties.b==graph.selectedBiome || graph.selectedBiome=='all') {// filter by selected biome
 				let mm=(+d.properties.m<10)?("0"+d.properties.m):(d.properties.m);
 				var o={uf:d.properties.e,cl:d.properties.c,my:d.properties.y+"/"+mm,t:d.properties.t};
 				var auxDate = new Date(d.properties.y+'-'+ mm + '-01T04:00:00.000Z');
@@ -429,6 +429,22 @@ var graph={
 				chart.height(graph.defaultHeight);
 				chart.legend().legendWidth(window.innerWidth/2);
 			});
+
+		let postByStateChart=function(chart) {
+			let byState=$('#chart-ring-by-state')[0];
+			let byCls=$('#chart-hist-top-cls')[0];
+			let pieChartSVG=$('#chart-ring-by-state svg')[0];
+			let legHeight=$('#chart-ring-by-state .dc-legend')[0].childElementCount*20;
+
+			if(pieChartSVG.getAttribute('height')<legHeight){
+				pieChartSVG.setAttribute('height', legHeight);
+				let tcs=$('#title-chart-state')[0];
+				if (byCls.clientHeight && byCls.clientHeight>0)
+					byState.setAttribute('style', 'height:'+(byCls.clientHeight+tcs.clientHeight)+'px;');
+			}
+		};
+		this.ringTotalizedByState.on('postRender', postByStateChart);
+		this.ringTotalizedByState.on('postRedraw', postByStateChart);
 		
 		this.ringTotalizedByState.title(function(d) {
 			let displayPercent=!graph.ringTotalizedByState.hasFilter();
@@ -459,7 +475,7 @@ var graph={
 			});
 		}
 		
-		// build top count of focuses by classes
+		// build top of focuses by classes
 		graph.utils.setTitle('cls', Translation[Lang.language].title_top_cls);
 
 		this.histTopByCLs
