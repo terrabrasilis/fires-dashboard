@@ -25,6 +25,7 @@
 		gtag('config', 'UA-77404603-6');
 	</script>
 	<link rel="stylesheet" type="text/css" href="./libs/bootstrap/4.1.3/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="./libs/datepicker/5.39.0/tempusdominus-bootstrap-4.min.css" />
 	<link rel="stylesheet" type="text/css" href="./libs/jquery/plugin/jquery.mCustomScrollbar.min.css" />
 	<!-- Font-awesome -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
@@ -263,19 +264,51 @@
 								<div style="min-width: fit-content;">
 									<span id="title-chart-timeline"></span>
 								</div>
-								<div>
-									<b><span id="txt9" class="filter-info">Intervalo de tempo:</span></b>
-									<span class="filter highlight-time filter-info" style="display: none;"></span>
-									<span class="highlight-time filter-info" id="highlight-time"></span>
-									<a href="javascript:graph.barMonthFiresByClass.filterAll();dc.redrawAll();">
-										<span aria-hidden="true" id="txt9a" title="Limpar este filtro.">
-											<i class="material-icons md-icon-16 icongreen">delete</i>
-										</span>
-									</a>
+
+								<div class="main-chart-bar">
+									<div class="main-chart-bar-p1">
+										<b><span id="txt9" class="filter-info">Intervalo de tempo:</span></b>
+										<span class="filter highlight-time filter-info"></span>
+										<span class="highlight-time filter-info" id="highlight-time"></span>
+										<a href="javascript:graph.barMonthFiresByClass.filterAll();dc.redrawAll();">
+											<span aria-hidden="true" id="txt9a" title="Limpar este filtro.">
+												<i class="material-icons md-icon-16 icongreen">delete</i>
+											</span>
+										</a>
+									</div>
+									<div class="main-chart-bar-p2">
+										<div class="form-group">
+											<b><span id="txt9b" class="filter-info">Alterar o intervalo:</span></b>
+											<div class="input-group date" id="datepickerstart" data-target-input="nearest">
+												<input type="text" class="form-control datetimepicker-input" data-target="#datepickerstart"/>
+												<div class="input-group-append" data-target="#datepickerstart" data-toggle="datetimepicker">
+													<div class="input-group-text">
+														<i class="material-icons md-icon-16 icongreen">today</i>
+													</div>
+												</div>
+											</div>
+											<div class="input-group date" id="datepickerend" data-target-input="nearest">
+												<input type="text" class="form-control datetimepicker-input" data-target="#datepickerend"/>
+												<div class="input-group-append" data-target="#datepickerend" data-toggle="datetimepicker">
+													<div class="input-group-text">
+														<i class="material-icons md-icon-16 icongreen">today</i>
+													</div>
+												</div>
+											</div>
+											<div class="btn btn-primary btn-success btn-dp" id="txt9c"
+												title="Carregar dados para este intervalo."
+												onclick="graph.onDateRangeChange()">
+												<i class="material-icons md-icon-22">published_with_changes</i>
+											</div>
+										</div>
+									</div>
+									<div class="updated">
+										<div class="updated-date">
+											<span id="updated">Atualizado até:</span><span id="updated_date"></span>
+										</div>
+									</div>
 								</div>
-								<div class="updated">
-									<span id="updated">Atualizado até:</span><span class="updated_date" id="updated_date"></span>
-								</div>
+
 							</div>
 
 						</div>
@@ -646,12 +679,15 @@
 	<script type="text/javascript" src="./libs/jquery/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="./libs/jquery/plugin/jquery.mCustomScrollbar.concat.min.js"></script>
 	<script type="text/javascript" src="./libs/popper/popper.min.js"></script>
+	<script type="text/javascript" src="./libs/moment/moment-2.29.0-with-locales.min.js"></script>
+	<script type="text/javascript" src="./libs/datepicker/5.39.0/tempusdominus-bootstrap-4.min.js"></script>
 	<script type="text/javascript" src="./libs/bootstrap/4.1.3/bootstrap.min.js"></script>
 	
 	<script type="text/javascript" src="./js/svg-to-image.min.js"></script>
 	<script type="text/javascript" src="./js/terrabrasilis-start.min.js"></script>
 	<script type="text/javascript" src="./js/focuses-of-fires-translation.min.js"></script>
 	<script type="text/javascript" src="./js/focuses-of-fires-change-lang.min.js"></script>
+	<script type="text/javascript" src="./js/focuses-of-fires-utils.min.js"></script>
 	<script type="text/javascript" src="./js/focuses-of-fires.min.js"></script>
 	<script type="text/javascript" src="./js/easy-cookie.min.js"></script>
 	<script type="text/javascript" src="./js/downloadSHP.min.js"></script>

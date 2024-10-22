@@ -7,6 +7,9 @@ var graph={
 	config:{},
 	selectedFilters:{},
 	ctlFirstLoading:false,
+	focusesCrossFilter:{},
+	dimensions:[],
+	dateFilterRange:[],
 	
 	totalizedFocusesInfoBox:undefined,// totalized focuses info box
 	barMonthFiresByClass: null,
@@ -37,7 +40,7 @@ var graph={
 			graph.palletPieChartProdes=conf.palletPieChartProdes?conf.palletPieChartProdes:graph.palletPieChartProdes;
 			graph.palletBarChartCar=conf.palletBarChartCar?conf.palletBarChartCar:graph.palletBarChartCar;
 			graph.palletPieChartCar=conf.palletPieChartCar?conf.palletPieChartCar:graph.palletPieChartCar;
-			graph.defaultHeight=conf.defaultHeight?conf.defaultHeight:graph.utils.getDefaultHeight();
+			graph.defaultHeight=conf.defaultHeight?conf.defaultHeight:utils.getDefaultHeight();
 		}else{
 			console.log("Didn't load config file. Using default options.");
 		}
@@ -62,7 +65,6 @@ var graph={
 			this.barMonthFiresByClass = dc.barChart("#chart-bar-by-month-class");
 			this.ringTotalizedByState = dc.pieChart("#chart-ring-by-state");
 			this.histTopByCLs = dc.rowChart("#chart-hist-top-cls");
-			
 			graph.build();
 		}
 	},
@@ -141,95 +143,52 @@ var graph={
 		this.restart();
 	},
 
-	utils:{
-		mappingClassNames: function(cl) {
-			if(graph.config.dataConfig.legendOriginal===undefined || !graph.config.dataConfig.legendOriginal[graph.bydata]) {
-				return cl;
-			}
-			var l = graph.config.dataConfig.legendOriginal[graph.bydata].length;
-			for (var i = 0; i < l; i++) {
-				if(graph.config.dataConfig.legendOriginal[graph.bydata][i].toLowerCase()===cl.toLowerCase()) {
-					cl=graph.config.dataConfig.legendOverlay[graph.bydata][Lang.language][i];
-					break;
-				}
-			}
-			return cl;
-		},
-
-		downloadCSV:function(data, suffix /*file name suffix*/){
-			let my_cvs = d3.dsv(";", "text/csv");
-			var blob = new Blob([my_cvs.format(data)], {type: "text/csv;charset=utf-8"});
-			saveAs(blob, ( (suffix)?(suffix):("") )+downloadCtrl.getProject()+'-month-'+downloadCtrl.getDownloadTime()+'.csv');
-		},
-
-		setStateAnimateIcon: function(id, enable, error) {
-			document.getElementById(id).style.display='';
-			if(enable) {
-				document.getElementById(id).className="glyphicon glyphicon-refresh glyphicon-refresh-animate";
-			}else {
-				document.getElementById(id).className="glyphicon " + ( (error)?("glyphicon-warning-sign glyphicon-red"):("glyphicon-ok glyphicon-green") );
-			}
-		},
-		getSelectedFormatFile: function() {
-			var opt=document.getElementById('download-option');
-			if(!opt) {
-				opt="SHAPE-ZIP";
-			}
-			return opt[opt.selectedIndex].value;
-		},
-		/*
-		 * Remove numeric values less than 1e-6
-		 */
-		removeLittlestValues:function(sourceGroup) {
-			return {
-				all:function () {
-					return sourceGroup.all().filter(function(d) {
-						return (Math.abs(d.value)<1e-6) ? 0 : d.value;
-					});
-				},
-				top: function(n) {
-					return sourceGroup.top(Infinity)
-						.filter(function(d){
-							return (Math.abs(d.value)>1e-6);
-							})
-						.slice(0, n);
-				}
-			};
-		},
-
-		/* Insert a title into one chart using a div provided by elementId.
-		   Use %dim% or %Dim% to insert a dimension name or capitalize first letter of the name into your title string.
-		 */
-		setTitle:function(elementId, title) {
-			elementId='title-chart-'+elementId;
-			document.getElementById(elementId).innerHTML=this.wildcardExchange(title);
-		},
-		
-		wildcardExchange:function(str) {
-			var dim=(graph.bydata=='prodes')?(Translation[Lang.language].bydata):(graph.bydata.toUpperCase());
-			str=str.replace( /%dim%/gi,function(x){ return dim; } );
-			return str;
-		},
-		
-		numberByUnit:function(num,displayPercent) {
-			let percent=(num*100/graph.totalFocusesGroup.value().n).toFixed(1)+"%";
-			let nf=localeBR.numberFormat(',')
-			return "\n"+nf(num.toFixed(0)) +" "+ Translation[Lang.language].unit_focus + ((displayPercent)?("\n("+percent+")"):(""));
-		},
-
-		onResize:function(event) {
-			clearTimeout(graph.config.resizeTimeout);
-			graph.config.resizeTimeout = setTimeout(graph.doResize, 100);
-		},
-
-		getDefaultHeight:function() {
-			return ((window.innerHeight*0.4).toFixed(0))*1;
-		}
-	},
 	doResize:function() {
-		graph.defaultHeight = graph.utils.getDefaultHeight();
+		graph.defaultHeight = utils.getDefaultHeight();
 		dc.renderAll();
 	},
+
+	onDateRangeChange: function(){
+		graph.displayWaiting();
+		window.setTimeout(()=>{
+			let dt0=new Date((utils.datePicker.getStartDate())._d);
+			let dt1=new Date((utils.datePicker.getEndDate())._d);
+			if(dt1-dt0<0) {
+				alert(Translation[Lang.language].invalidRange);
+			}else{
+				// apply filter on dataset
+				let isOk=graph.setDateRangeOnDataset(dt0, dt1);
+				// if do not apply filter, abort and add info to user
+				if(!isOk){
+					alert(Translation[Lang.language].noData);
+					// restore the previous interval
+					graph.setDateRangeOnDataset(graph.dateFilterRange[0],graph.dateFilterRange[1]);
+				}else{
+					graph.build();
+				}
+			}
+		
+			graph.displayWaiting(false);
+		},100);
+	},
+
+	setDateRangeOnDataset(dt0, dt1){
+		graph.dimensions["ts"].filterAll();
+		
+		let dt0_=new Date(dt0);
+		dt0_.setDate(dt0_.getDate()-1);
+
+		let dt1_=new Date(dt1);
+		dt1_.setDate(dt1_.getDate()+1);
+		graph.dimensions["ts"].filterRange([Date.parse(dt0_),Date.parse(dt1_)]);
+		// if selected interval do not result in valid data
+		if(graph.dimensions["ts"].top(1).length==0){
+			return false;
+		}
+		graph.dateFilterRange=[dt0,dt1];// to use after reset filter
+		return true;
+	},
+
 	normalizeData:function() {
 		var json=[];
 		// normalize/parse data
@@ -245,10 +204,10 @@ var graph={
 		
 		this.data=json;
 		delete json;
+		graph.initCrossFilter();
 	},
-	
-	build:function() {
-		
+
+	initCrossFilter:function() {
 		let dimensions=[];
 		// set crossfilter
 		let focuses = crossfilter(this.data);
@@ -257,9 +216,29 @@ var graph={
 		dimensions["uf"] = focuses.dimension(function(d) {return d.uf;});
 		dimensions["cl"] = focuses.dimension(function(d) {return d.cl;});
 		
-		graph.utils.dimensions=dimensions;
+		graph.dimensions=dimensions;
+		graph.focusesCrossFilter=focuses;
+
+		let endDate=new Date(dimensions["ts"].top(1)[0].ts),
+		startDate=new Date(endDate),
+		minDate=new Date(dimensions["ts"].bottom(1)[0].ts);
+		minDate.setHours(minDate.getHours()-1);
+		// define initial interval and limits based on dataset date range
+		startDate.setDate(startDate.getDate()-365);
+		startDate.setHours(startDate.getHours()-6);
+		utils.datePicker.setInterval(startDate,endDate);
+		utils.datePicker.setStartMaxDate(endDate);
+		utils.datePicker.setStartMinDate(minDate);
+		utils.datePicker.setEndMaxDate(endDate);
+		utils.datePicker.setEndMinDate(minDate);
+		// apply filter on dataset
+		this.setDateRangeOnDataset(startDate,endDate);
+	},
+	
+	build:function() {
+		
 		let groups=[];
-		groups["clt"] = dimensions["my"].group().reduce(
+		groups["clt"] = graph.dimensions["my"].group().reduce(
 			function(p, v) {
 				p[v.cl] = (p[v.cl] || 0) + v.t;
 				return p;
@@ -268,17 +247,17 @@ var graph={
 				return p;
 			}, function() {
 				if(graph.bydata=="car")
-					return {"Grande": 0, "Media": 0, "Pequena": 0, "Minifundio": 0, "Sem CAR": 0};
+					return {"Grande": 0, "Media": 0, "Pequena": 0, "Sem CAR": 0};
 				else
-					return {"Desmatamento Consolidado": 0, "Desmatamento Recente": 0, "Floresta": 0, "Outros": 0};
+					return {"Desmatamento Consolidado": 0, "Desmatamento Recente": 0, "Vegetacao Nativa": 0, "Outros": 0};
 			}
 		);
-		groups["uf"] = dimensions["uf"].group().reduceSum(function(d) {return +d.t;});
-		groups["cl"] = dimensions["cl"].group().reduceSum(function(d) {return +d.t;});
+		groups["uf"] = graph.dimensions["uf"].group().reduceSum(function(d) {return +d.t;});
+		groups["cl"] = graph.dimensions["cl"].group().reduceSum(function(d) {return +d.t;});
 
 
 		// totalize box 
-		this.totalFocusesGroup = focuses.groupAll().reduce(
+		this.totalFocusesGroup = graph.focusesCrossFilter.groupAll().reduce(
 				function (p, v) {
 					p.n+=v.t;
 					return p;
@@ -291,7 +270,7 @@ var graph={
 		);
 		var htmlBox="<div class='icon-left'><i class='material-icons iconmenu hackicon'>local_fire_department</i></div><span class='number-display'>";
 
-		// build totalized Alerts box
+		// build totalized active fires box
 		this.totalizedFocusesInfoBox.formatNumber(localeBR.numberFormat(','));
 		this.totalizedFocusesInfoBox.valueAccessor(function(d) {return (d.n)?(d.n):(0);})
 		.html({
@@ -301,19 +280,20 @@ var graph={
 		})
 		.group(this.totalFocusesGroup);
 		
-		this.buildCharts(dimensions, groups);
+		this.buildCharts(groups);
 	},
 	
-	buildCharts:function(dimensions,groups) {
+	buildCharts:function(groups) {
 
 		// to adjust title text for current dimention (prodes or car)
-		graph.utils.setTitle('main',Translation[Lang.language].title_chart_main);
+		utils.setTitle('main',Translation[Lang.language].title_chart_main);
+		utils.setTitle('timeline',Translation[Lang.language].timeline_header);
 		
 		/**
 		 * Starting the bar chart of the classes by months.
 		 */
-		let maxDate = new Date(dimensions["ts"].top(1)[0].ts),
-		minDate = new Date(dimensions["ts"].bottom(1)[0].ts);
+		let maxDate = new Date(graph.dimensions["ts"].top(1)[0].ts),
+		minDate = new Date(graph.dimensions["ts"].bottom(1)[0].ts);
 		let dateFormat = localeBR.timeFormat('%Y/%m');
 
 		let	barColors = this.getOrdinalColorsClasses();
@@ -328,18 +308,15 @@ var graph={
 		cls.forEach(function(d){
 			clList.push(d);
 		});
-		
-		var my=dimensions["my"].group().all();
 
 		this.barMonthFiresByClass
 			.height(graph.defaultHeight*0.8)
 			.x(d3.scale.ordinal())
-			.xUnits(dc.units.ordinal)
 			.brushOn(false)
 			.clipPadding(10)
 			.yAxisPadding('10%')
 			.yAxisLabel(Translation[Lang.language].unit_focus)
-			.xAxisLabel(my[0].key + " - " + my[my.length-1].key)
+			.xAxisLabel(dateFormat(minDate) + " - " + dateFormat(maxDate))
 			.barPadding(0.3)
 			.outerPadding(0.1)
 			.renderHorizontalGridLines(true)
@@ -347,7 +324,7 @@ var graph={
 				var t="";
 				for(obj in d.value){
 					if(d.value[obj]>0) {
-						t += graph.utils.mappingClassNames(obj) +
+						t += utils.mappingClassNames(obj) +
 						" - "+localeBR.numberFormat(',1f')( parseFloat( d.value[obj].toFixed(2) ) ) + " " + Translation[Lang.language].unit_focus + "\n";
 					}
 				}
@@ -359,15 +336,16 @@ var graph={
 				return t;
 			})
 			.elasticY(true)
-			.dimension(dimensions["my"])
-			.group(groups["clt"], clList[0], sel_stack(clList[0]))
+			.elasticX(true)
+			.dimension(graph.dimensions["my"])
+			.group(utils.removeEmptyBins(groups["clt"]), clList[0], sel_stack(clList[0]))
 			.renderLabel(true)
 			.ordinalColors((graph.bydata=='prodes')?(graph.palletBarChartProdes):(graph.palletBarChartCar))
 			.margins({top: 30, right: 30, bottom: 65, left: 65})
 			.legend(dc.legend().x(50).y(1).itemHeight(13).gap(7).horizontal(1).legendWidth(480).autoItemWidth(true)
 				.legendText(
 					function(d) {
-						var t=graph.utils.mappingClassNames(d.name);
+						var t=utils.mappingClassNames(d.name);
 						return (d.name!='empty')?(t):(Translation[Lang.language].without);
 					}
 				)
@@ -375,13 +353,13 @@ var graph={
 
 		delete clList[0];
 		clList.forEach(function(clsName){
-			graph.barMonthFiresByClass.stack(groups["clt"], ''+clsName, sel_stack(clsName));
+			graph.barMonthFiresByClass.stack(utils.removeEmptyBins(groups["clt"]), ''+clsName, sel_stack(clsName));
 		});
 
-		this.barMonthFiresByClass.xAxis().ticks(groups["clt"].all().length);
-		this.barMonthFiresByClass.xAxis().tickFormat(function(d) {
-			return d+"";
-		});
+		// this.barMonthFiresByClass.xAxis().ticks(groups["clt"].all().length);
+		// this.barMonthFiresByClass.xAxis().tickFormat(function(d) {
+		// 	return d+"";
+		// });
 		this.barMonthFiresByClass.yAxis().ticks(5).tickFormat(function(d) {
 			return localeBR.numberFormat(',1f')(d);
 		});
@@ -390,6 +368,15 @@ var graph={
 			.on('preRender', function(chart) {
 				chart.height(graph.defaultHeight*0.8);
 				chart.legend().legendWidth(window.innerWidth/2);
+				chart.xUnits(dc.units.ordinal)
+					.xAxis(d3.svg.axis()
+						.scale(d3.scale.ordinal())
+						.orient("bottom")
+						.ticks(d3.time.months)
+						.tickFormat( function(d) {
+							return d;
+						})
+					);
 			});
 		
 		this.barMonthFiresByClass
@@ -412,14 +399,14 @@ var graph={
 		// end of bar chart by classes
 
 		// build graph areas or focuses by state
-		graph.utils.setTitle('state',Translation[Lang.language].title_tot_state);
+		utils.setTitle('state',Translation[Lang.language].title_tot_state);
 		
 		this.ringTotalizedByState
 			.height(graph.defaultHeight)
 			.innerRadius(10)
 			.externalRadiusPadding(10)
-			.dimension(dimensions["uf"])
-			.group(this.utils.removeLittlestValues(groups["uf"]))
+			.dimension(graph.dimensions["uf"])
+			.group(utils.removeLittlestValues(groups["uf"]))
 			.ordering(dc.pluck('value'))
 			.ordinalColors((graph.bydata=='prodes')?(graph.palletPieChartProdes):(graph.palletPieChartCar))
 			.legend(dc.legend().x(20).y(10).itemHeight(13).gap(7).horizontal(0).legendWidth(50).itemWidth(35));
@@ -429,7 +416,11 @@ var graph={
 				chart.height(graph.defaultHeight);
 				chart.legend().legendWidth(window.innerWidth/2);
 			});
-
+		
+		/**
+		 * Used to adjust the chart box based on height of legend
+		 * @param {*} chart 
+		 */
 		let postByStateChart=function(chart) {
 			let byState=$('#chart-ring-by-state')[0];
 			let byCls=$('#chart-hist-top-cls')[0];
@@ -448,7 +439,7 @@ var graph={
 		
 		this.ringTotalizedByState.title(function(d) {
 			let displayPercent=!graph.ringTotalizedByState.hasFilter();
-			return (d.key!='empty')?(d.key + ': ' + graph.utils.numberByUnit(d.value,displayPercent)):(Translation[Lang.language].without);
+			return (d.key!='empty')?(d.key + ': ' + utils.numberByUnit(d.value,displayPercent)):(Translation[Lang.language].without);
 		});
 
 		this.ringTotalizedByState
@@ -457,7 +448,7 @@ var graph={
 
 		this.ringTotalizedByState.label(function(d) {
 			let displayPercent=!graph.ringTotalizedByState.hasFilter();
-			var txtLabel=(d.key!='empty')?(graph.utils.numberByUnit(d.value,displayPercent)):(Translation[Lang.language].without);
+			var txtLabel=(d.key!='empty')?(utils.numberByUnit(d.value,displayPercent)):(Translation[Lang.language].without);
 			if(graph.ringTotalizedByState.hasFilter()) {
 				var f=graph.ringTotalizedByState.filters();
 				return (f.indexOf(d.key)>=0)?(txtLabel):('');
@@ -476,12 +467,12 @@ var graph={
 		}
 		
 		// build top of focuses by classes
-		graph.utils.setTitle('cls', Translation[Lang.language].title_top_cls);
+		utils.setTitle('cls', Translation[Lang.language].title_top_cls);
 
 		this.histTopByCLs
 			.height(graph.defaultHeight)
-			.dimension(dimensions["cl"])
-			.group(this.utils.removeLittlestValues(groups["cl"]))
+			.dimension(graph.dimensions["cl"])
+			.group(utils.removeLittlestValues(groups["cl"]))
 			.elasticX(true)
 			.ordering(function(d) {return -d.value;})
 			.controlsUseVisibility(true)
@@ -502,17 +493,30 @@ var graph={
 		});
 		this.histTopByCLs.title(function(d) {
 			let displayPercent=!graph.histTopByCLs.hasFilter();
-			return graph.utils.mappingClassNames(d.key) + ': ' + graph.utils.numberByUnit(d.value,displayPercent);
+			return utils.mappingClassNames(d.key) + ': ' + utils.numberByUnit(d.value,displayPercent);
 		});
 		this.histTopByCLs.label(function(d) {
 			let displayPercent=!graph.histTopByCLs.hasFilter();
-			return graph.utils.mappingClassNames(d.key) + ': ' + graph.utils.numberByUnit(d.value,displayPercent);
+			return utils.mappingClassNames(d.key) + ': ' + utils.numberByUnit(d.value,displayPercent);
 		});
 		this.histTopByCLs.colorCalculator(function(d) {
 			return barColors.find((aCor)=>{
 				if(aCor.key.toLowerCase()==d.key.toLowerCase()) return aCor.color;
 			}).color;
 		});
+
+		// to adjust all legends
+		window.setTimeout(function() {
+			let allLegItens=$('.dc-legend-item');
+			for (let i=0;i<allLegItens.length;i++){
+				(allLegItens[i].getElementsByTagName('text')[0]).setAttribute('y',10);
+			}
+			// let allCharts=$('.all-charts');
+			// for (let i=0;i<allCharts.length;i++){
+			// 	let cw=allCharts[i].clientWidth;
+			// 	(allCharts[i].getElementsByTagName('svg')[0]).setAttribute('width',cw);
+			// }
+		}, 200);
 
 		// build download data
 		d3.select('#download-csv-daily-all')
@@ -527,7 +531,7 @@ var graph={
 				    o.uf = d.uf;
 				    data.push(o);
 				});
-		    	graph.utils.downloadCSV(data,'all_');
+		    	utils.downloadCSV(data,'all_');
 	    	}, 200);
 		});
 		
@@ -535,7 +539,7 @@ var graph={
 	    .on('click', function() {
 	    	window.setTimeout(function() {
 	    		var data=[];
-	    		var filteredData=graph.utils.dimensions["uf"].top(Infinity);
+	    		var filteredData=graph.dimensions["uf"].top(Infinity);
 	    		filteredData.forEach(function(d) {
 		    		var o={};
 		    		o.date = d.my;
@@ -544,7 +548,7 @@ var graph={
 				    o.uf = d.uf;
 				    data.push(o);
 				});
-		    	graph.utils.downloadCSV(data);
+		    	utils.downloadCSV(data);
 	    	}, 200);
 	    });
 		
@@ -554,7 +558,7 @@ var graph={
 	    });
 		
 		graph.doResize();
-		window.onresize=this.utils.onResize;
+		window.onresize=utils.onResize;
 		this.ctlFirstLoading=true;// to config for exec only once
 	},
 	preparePrint: function() {
@@ -579,10 +583,10 @@ var graph={
 	},
 	resetFilters: function() {
 		if(!graph.data) return;
-		graph.utils.dimensions["my"].filterAll();
-		graph.utils.dimensions["ts"].filterAll();
-		graph.utils.dimensions["uf"].filterAll();
-		graph.utils.dimensions["cl"].filterAll();
+		graph.dimensions["my"].filterAll();
+		graph.dimensions["ts"].filterAll();
+		graph.dimensions["uf"].filterAll();
+		graph.dimensions["cl"].filterAll();
 	},
 	
 };
@@ -590,6 +594,7 @@ var graph={
 window.onload=function(){
 	if(typeof Authentication=="undefined") Authentication=false;
 	graph.configurePrintKeys();
+	utils.datePicker.initComponent();//For enable datepicker with bootstrap and jquery
 	Lang.init();
 	graph.startLoadData();
 	if(Authentication){
