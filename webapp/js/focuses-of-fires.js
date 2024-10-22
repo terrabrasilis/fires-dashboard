@@ -146,6 +146,12 @@ var graph={
 	doResize:function() {
 		graph.defaultHeight = utils.getDefaultHeight();
 		dc.renderAll();
+
+		// to adjust all legends
+		let allLegItens=$('.dc-legend-item');
+		for (let i=0;i<allLegItens.length;i++){
+			(allLegItens[i].getElementsByTagName('text')[0]).setAttribute('y',10);
+		}
 	},
 
 	onDateRangeChange: function(){
@@ -505,19 +511,6 @@ var graph={
 			}).color;
 		});
 
-		// to adjust all legends
-		window.setTimeout(function() {
-			let allLegItens=$('.dc-legend-item');
-			for (let i=0;i<allLegItens.length;i++){
-				(allLegItens[i].getElementsByTagName('text')[0]).setAttribute('y',10);
-			}
-			// let allCharts=$('.all-charts');
-			// for (let i=0;i<allCharts.length;i++){
-			// 	let cw=allCharts[i].clientWidth;
-			// 	(allCharts[i].getElementsByTagName('svg')[0]).setAttribute('width',cw);
-			// }
-		}, 200);
-
 		// build download data
 		d3.select('#download-csv-daily-all')
 	    .on('click', function() {
@@ -557,7 +550,11 @@ var graph={
 	    	graph.preparePrint();
 	    });
 		
-		graph.doResize();
+		// to adjusts
+		window.setTimeout(function() {
+			graph.doResize();	
+		}, 200);
+
 		window.onresize=utils.onResize;
 		this.ctlFirstLoading=true;// to config for exec only once
 	},
