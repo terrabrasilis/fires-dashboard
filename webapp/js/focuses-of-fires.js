@@ -331,25 +331,27 @@ var graph={
 			.outerPadding(0.1)
 			.renderHorizontalGridLines(true)
 			.title(function(d) {
-				var t="";
+				let t="",vtotal=0;
 				for(obj in d.value){
 					if(d.value[obj]>0) {
+						vtotal+=d.value[obj];
 						t += utils.mappingClassNames(obj) +
-						" - "+localeBR.numberFormat(',1f')( parseFloat( d.value[obj].toFixed(2) ) ) + " " + Translation[Lang.language].unit_focus + "\n";
+						": "+localeBR.numberFormat(',1f')( parseFloat( d.value[obj].toFixed(2) ) ) + " " + Translation[Lang.language].unit_focus + "\n";
 					}
 				}
-				return Translation[Lang.language].yyyymm +": "+ d.key + "\n" + t;
+				vtotal = localeBR.numberFormat(',1f')( parseFloat( vtotal.toFixed(2) ) ) + " " + Translation[Lang.language].unit_focus;
+				return Translation[Lang.language].yyyymm +": "+ d.key + "\n" + t + "-------------------------------------------- \n " + "Total: " + vtotal;
 			})
-			.label(function(d) {
-				var t=parseFloat(((d.y+d.y0)/1000).toFixed(1));
-				t=(t<1?localeBR.numberFormat(',1f')(parseFloat((d.y+d.y0).toFixed(1))):localeBR.numberFormat(',1f')(t)+"k");
-				return t;
-			})
+			// .label(function(d) {
+			// 	var t=parseFloat(((d.y+d.y0)/1000).toFixed(1));
+			// 	t=(t<1?localeBR.numberFormat(',1f')(parseFloat((d.y+d.y0).toFixed(1))):localeBR.numberFormat(',1f')(t)+"k");
+			// 	return t;
+			// })
 			.elasticY(true)
 			.elasticX(true)
 			.dimension(graph.dimensions["my"])
 			.group(utils.removeEmptyBins(groups["clt"]), clList[0], sel_stack(clList[0]))
-			.renderLabel(true)
+			//.renderLabel(true)
 			.ordinalColors((graph.bydata=='prodes')?(graph.palletBarChartProdes):(graph.palletBarChartCar))
 			.margins({top: 30, right: 30, bottom: 35, left: 65})
 			.legend(dc.legend().x(50).y(1).itemHeight(13).gap(7).horizontal(1).legendWidth(480).autoItemWidth(true)
