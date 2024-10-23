@@ -289,6 +289,7 @@ var graph={
 		.group(this.totalFocusesGroup);
 		
 		this.buildCharts(groups);
+		// call this because the rebuild charts is called on change lang and the updated date need change too
 		graph.setUpdatedDate();
 	},
 	
@@ -325,7 +326,7 @@ var graph={
 			.clipPadding(10)
 			.yAxisPadding('10%')
 			.yAxisLabel(Translation[Lang.language].unit_focus)
-			.xAxisLabel(dateFormat(minDate) + " - " + dateFormat(maxDate))
+			//.xAxisLabel(dateFormat(minDate) + " - " + dateFormat(maxDate))
 			.barPadding(0.3)
 			.outerPadding(0.1)
 			.renderHorizontalGridLines(true)
@@ -350,7 +351,7 @@ var graph={
 			.group(utils.removeEmptyBins(groups["clt"]), clList[0], sel_stack(clList[0]))
 			.renderLabel(true)
 			.ordinalColors((graph.bydata=='prodes')?(graph.palletBarChartProdes):(graph.palletBarChartCar))
-			.margins({top: 30, right: 30, bottom: 65, left: 65})
+			.margins({top: 30, right: 30, bottom: 35, left: 65})
 			.legend(dc.legend().x(50).y(1).itemHeight(13).gap(7).horizontal(1).legendWidth(480).autoItemWidth(true)
 				.legendText(
 					function(d) {
@@ -393,7 +394,13 @@ var graph={
 				// rotate x-axis labels
 				chart.selectAll('g.x text').attr('transform', 'translate(-20,12) rotate(315)');
 
+				// Display selected filters of this chart "barMonthFiresByClass"
 				if(!chart.hasFilter()){
+					let cbbmc=$('#chart-bar-by-month-class')[0];
+					let mcbp1=cbbmc.getElementsByClassName('main-chart-bar-p1')[0];
+					mcbp1.remove();
+					cbbmc.appendChild(mcbp1);
+					$('#chart-bar-by-month-class .main-chart-bar-p1');
 					$('#txt9a').css('display','none');
 					$('#highlight-time').css('display','');
 					$('#txt9').html(Translation[Lang.language].allTime);

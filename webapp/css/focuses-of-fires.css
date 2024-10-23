@@ -260,9 +260,9 @@ p span{
 }
 
 .main-chart-bar-p1 {
-    width: 0px;
-    text-align: initial;
-    display: none;
+    width: 100%;
+    text-align: center;
+    /*display: none;*/
 }
 
 .main-chart-bar-p2 {
