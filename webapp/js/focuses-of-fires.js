@@ -10,6 +10,7 @@ var graph={
 	focusesCrossFilter:{},
 	dimensions:[],
 	dateFilterRange:[],
+	updatedDate:'',
 	
 	totalizedFocusesInfoBox:undefined,// totalized focuses info box
 	barMonthFiresByClass: null,
@@ -127,8 +128,9 @@ var graph={
 	},
 
 	setUpdatedDate: function(updated_date) {
-		var dt=new Date(updated_date+'T21:00:00.000Z');
-		d3.select("#updated_date").html(' '+dt.toLocaleDateString());
+		graph.updatedDate=updated_date===undefined?graph.updatedDate:updated_date;
+		var dt=new Date(graph.updatedDate+'T21:00:00.000Z');
+		d3.select("#updated_date").html(' '+dt.toLocaleDateString(Lang.language));
 	},
 	
 	setDataDimension: function(d) {
@@ -287,6 +289,7 @@ var graph={
 		.group(this.totalFocusesGroup);
 		
 		this.buildCharts(groups);
+		graph.setUpdatedDate();
 	},
 	
 	buildCharts:function(groups) {
