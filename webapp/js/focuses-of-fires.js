@@ -531,7 +531,7 @@ var graph={
 		    	graph.data.forEach(function(d) {
 		    		var o={};
 		    		o.date = d.my;
-				    o.class = d.cl;
+				    o.class = utils.mappingClassNames(d.cl);
 			    	o.focuses = d.t;
 				    o.uf = d.uf;
 				    data.push(o);
@@ -548,7 +548,7 @@ var graph={
 	    		filteredData.forEach(function(d) {
 		    		var o={};
 		    		o.date = d.my;
-				    o.class = d.cl;
+				    o.class = utils.mappingClassNames(d.cl);
 			    	o.focuses = d.t;
 				    o.uf = d.uf;
 				    data.push(o);
