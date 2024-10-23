@@ -93,6 +93,14 @@ atributos duplicados, remoção de geometrias inválidas e dos registros cancela
   As características do satélite referência utilizado na detecção de focos de queimada em vegetação,
   indicam uma imprecisão na localização espacial das coordenadas geográficas de aproximadamente 1 km
   (<a class="general-info-links" href="https://terrabrasilis.dpi.inpe.br/queimadas/portal/faq/index.html">FAQ Queimadas (15.)</a>).
+
+  Para compensar essa possível imprecisão, para cada polígono das base de dados dos itens 1.2 e 1.3, foi
+  considerada uma área de influência (buffer externo) de 500 metros.
+  Ou seja, um foco contabilizado como sendo em supressão recente ou consolidada pode ter sido detectado
+  no interior da área de supressão ou até 500 metros do seu entorno.
+
+  Para a base de imóveis rurais do CAR, também foi considerada uma área de influência (buffer externo) de 500 metros,
+  visando compensar possíveis imprecisões na localização dos focos.
   </p>
   
 </div>
