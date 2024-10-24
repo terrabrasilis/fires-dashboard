@@ -129,10 +129,13 @@ body{
 }
 .dc-chart .pie-slice, .dc-chart g.row text{
 	fill: black;
-	font-size: 11px;
+	font-size: 1em;
 }
 div .dc-chart {
     float: none;
+}
+.dc-legend{
+	font-size: 13px;
 }
 .filter, .reset {
 	color: black;

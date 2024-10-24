@@ -148,11 +148,14 @@ var graph={
 	doResize:function() {
 		graph.defaultHeight = utils.getDefaultHeight();
 		dc.renderAll();
+		graph.adjustLegendText();
+	},
 
-		// to adjust all legends
+	adjustLegendText:function() {
+		// to adjust all legend texts
 		let allLegItens=$('.dc-legend-item');
 		for (let i=0;i<allLegItens.length;i++){
-			(allLegItens[i].getElementsByTagName('text')[0]).setAttribute('y',10);
+			(allLegItens[i].getElementsByTagName('text')[0]).setAttribute('y',12);
 		}
 	},
 
@@ -354,7 +357,7 @@ var graph={
 			//.renderLabel(true)
 			.ordinalColors((graph.bydata=='prodes')?(graph.palletBarChartProdes):(graph.palletBarChartCar))
 			.margins({top: 30, right: 30, bottom: 35, left: 65})
-			.legend(dc.legend().x(50).y(1).itemHeight(13).gap(7).horizontal(1).legendWidth(480).autoItemWidth(true)
+			.legend(dc.legend().x(50).y(5).itemHeight(15).gap(10).horizontal(1).legendWidth(480).autoItemWidth(true)
 				.legendText(
 					function(d) {
 						var t=utils.mappingClassNames(d.name);
@@ -368,10 +371,6 @@ var graph={
 			graph.barMonthFiresByClass.stack(utils.removeEmptyBins(groups["clt"]), ''+clsName, sel_stack(clsName));
 		});
 
-		// this.barMonthFiresByClass.xAxis().ticks(groups["clt"].all().length);
-		// this.barMonthFiresByClass.xAxis().tickFormat(function(d) {
-		// 	return d+"";
-		// });
 		this.barMonthFiresByClass.yAxis().ticks(5).tickFormat(function(d) {
 			return localeBR.numberFormat(',1f')(d);
 		});
@@ -402,16 +401,17 @@ var graph={
 					let mcbp1=cbbmc.getElementsByClassName('main-chart-bar-p1')[0];
 					mcbp1.remove();
 					cbbmc.appendChild(mcbp1);
-					$('#chart-bar-by-month-class .main-chart-bar-p1');
+
 					$('#txt9a').css('display','none');
 					$('#highlight-time').css('display','');
-					$('#txt9').html(Translation[Lang.language].allTime);
+					$('#txt9').html('');
 					$('#highlight-time').html(" " + dateFormat(minDate) + " - " + dateFormat(maxDate) );
 				}else{
 					$('#txt9a').css('display','');
 					$('#highlight-time').css('display','none');
 					$('#txt9').html(Translation[Lang.language].txt9);
 				}
+				graph.adjustLegendText();
 			});
 
 		// end of bar chart by classes
@@ -427,7 +427,7 @@ var graph={
 			.group(utils.removeLittlestValues(groups["uf"]))
 			.ordering(dc.pluck('value'))
 			.ordinalColors((graph.bydata=='prodes')?(graph.palletPieChartProdes):(graph.palletPieChartCar))
-			.legend(dc.legend().x(20).y(10).itemHeight(13).gap(7).horizontal(0).legendWidth(50).itemWidth(35));
+			.legend(dc.legend().x(20).y(10).itemHeight(15).gap(7).horizontal(0).legendWidth(50).itemWidth(35));
 		
 		this.ringTotalizedByState
 			.on('preRender', function(chart) {
