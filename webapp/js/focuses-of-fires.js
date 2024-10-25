@@ -334,16 +334,23 @@ var graph={
 			.outerPadding(0.1)
 			.renderHorizontalGridLines(true)
 			.title(function(d) {
-				let t="",vtotal=0;
+				let t=[],res="",vtotal=0;
 				for(obj in d.value){
 					if(d.value[obj]>0) {
 						vtotal+=d.value[obj];
-						t += utils.mappingClassNames(obj) +
-						": "+localeBR.numberFormat(',1f')( parseFloat( d.value[obj].toFixed(2) ) ) + " " + Translation[Lang.language].unit_focus + "\n";
+						t.push({cls:utils.mappingClassNames(obj),
+							v:d.value[obj]});
 					}
 				}
+				t.sort((a,b)=>{return b.v - a.v});
+				t.forEach((e)=>{
+					let p=e.v*100/vtotal;
+					res += e.cls +
+					": "+localeBR.numberFormat(',1f')( parseFloat( e.v.toFixed(2) ) )
+					+ " " + Translation[Lang.language].unit_focus + " ("+localeBR.numberFormat(',1f')( parseFloat( p.toFixed(1) ) )+"%) \n";
+				});
 				vtotal = localeBR.numberFormat(',1f')( parseFloat( vtotal.toFixed(2) ) ) + " " + Translation[Lang.language].unit_focus;
-				return Translation[Lang.language].yyyymm +": "+ d.key + "\n" + t + "-------------------------------------------- \n " + "Total: " + vtotal;
+				return Translation[Lang.language].yyyymm +": "+ d.key + "\n" + res + "-------------------------------------------- \n " + "Total: " + vtotal;
 			})
 			// .label(function(d) {
 			// 	var t=parseFloat(((d.y+d.y0)/1000).toFixed(1));
