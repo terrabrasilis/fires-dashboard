@@ -18,7 +18,7 @@ disponibilizados antes desse reprocessamento.
 O objetivo deste painel é analisar os focos de queimada em vegetação,
 detectados por satélite, pelo projeto Queimadas, sobre dois aspectos:
 <br/>
-<b>1)</b>&nbsp;&nbsp;Queimadas x Supressão da Vegetação Primária;
+<b>1)</b>&nbsp;&nbsp;Queimadas x Supressão da Vegetação Nativa;
 <br/>
 <b>2)</b> Queimadas x CAR;
 <br>
@@ -30,8 +30,8 @@ utilizando dados PRODES, onde dados DETER eram utilizados, causando variações 
 
 <div class="alert alert-success">
 <p>
-<b>1)</b> Em relação à supressão da vegetação primária, são usados os dados gerados pelos projetos PRODES e DETER,
-para associar os focos de queimada às áreas de supressão recente, supressão consolidada ou áreas de vegetação primária,
+<b>1)</b> Em relação à supressão da vegetação nativa, são usados os dados gerados pelos projetos PRODES e DETER,
+para associar os focos de queimada às áreas de supressão recente, supressão consolidada ou áreas de vegetação nativa,
 conforme descrito a seguir:
 </p>
 
@@ -40,17 +40,17 @@ conforme descrito a seguir:
 referência - AQUA/MODIS passagem da tarde - obtidos mensalmente no
 <a class="general-info-links" href="https://terrabrasilis.dpi.inpe.br/queimadas/">Portal Queimadas-INPE</a>;
   </p><p>
-  <b>1.2)</b> <span>Supressão consolidada da vegetação primária</span>: compreende agregação de toda base de supressão da
-  vegetação primária PRODES com idade superior a 3 anos. A este conjunto foi aplicado um buffer de 500 metros.
+  <b>1.2)</b> <span>Supressão consolidada da vegetação nativa</span>: compreende agregação de toda base de supressão da
+  vegetação nativa PRODES com idade superior a 3 anos. A este conjunto foi aplicado um buffer de 500 metros.
   Ex: para o ano de 2019 o supressão consolidada é composta da junção das supressões até 2016;
   </p><p>
-  <b>1.3)</b> <span>Supressão recente da vegetação primária</span>: compreende agregação da base de supressão da
-  vegetação primária PRODES com idade inferior a 3 anos, somados aos dados do DETER ao período, enquanto não há disponibilidade
-da supressão da vegetação primária PRODES do ano corrente. A este conjunto foi aplicado um buffer de 500 metros.
+  <b>1.3)</b> <span>Supressão recente da vegetação nativa</span>: compreende agregação da base de supressão da
+  vegetação nativa PRODES com idade inferior a 3 anos, somados aos dados do DETER ao período, enquanto não há disponibilidade
+da supressão da vegetação nativa PRODES do ano corrente. A este conjunto foi aplicado um buffer de 500 metros.
 Exemplo: Para ano de 2024, a supressão recente é composta das supressões PRODES de 2023,
 2022 e 2021 mais dados do DETER entre 01 de agosto de 2023 e o último mês processado;
   </p><p>
-  <b>1.4)</b> <span>Vegetação primária</span>: máscara de vegetação primária do PRODES referente ao ano PRODES corrente;
+  <b>1.4)</b> <span>Vegetação nativa</span>: máscara de vegetação nativa do PRODES referente ao ano PRODES corrente;
   </p>
 </div>
 

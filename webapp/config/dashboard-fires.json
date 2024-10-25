@@ -10,7 +10,7 @@
 	},
 	"legendOverlay":{
 		"prodes":{
-			"pt-br":["Outros","Consolidado - supressão da vegetação primária","Recente - supressão da vegetação primária","Vegetação primária"],
+			"pt-br":["Outros","Consolidado - supressão da vegetação Nativa","Recente - supressão da vegetação Nativa","Vegetação Nativa"],
 			"en":["Others","Suppression of primary vegetation - consolidated","Suppression of primary vegetation - recent","Primary vegetation"]
 		},
 		"car":{
