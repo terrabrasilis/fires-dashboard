@@ -24,7 +24,10 @@ detectados por satélite, pelo projeto Queimadas, sobre dois aspectos:
 <br>
 <small>As informações são atualizadas diariamente, e podem sofrer pequenas alterações nos últimos dois meses.<br />
 A cada ano, após a publicação dos dados PRODES Brasil, os dados do ano anterior serão reprocessados,
-utilizando dados PRODES, onde dados DETER eram utilizados, causando variações nas classificações do último ano.</small>
+utilizando dados PRODES, onde dados DETER eram utilizados, causando variações nas classificações do último ano.<br />
+O termo <b>"Desmatamento"</b> e <b>"Supressão da Vegetação Nativa"</b>, neste painel, tem o mesmo significado, e são usados para simplificar os nomes
+das classes.
+</small>
 </p>
 
 

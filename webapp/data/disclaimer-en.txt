@@ -20,7 +20,10 @@ detected by satellite, by the Queimadas project, in two aspects:
 <b>2)</b> Burns x CAR; <br>
 <small>The information is updated daily and may undergo minor changes in the last two months.<br />
 Each year, after the publication of the PRODES Brazil data, the data from the previous year will be reprocessed,
-using PRODES data, where DETER data was used, causing variations in the classifications of the last year.</small>
+using PRODES data, where DETER data was used, causing variations in the classifications of the last year.<br />
+The terms <b>"Deforestation"</b> and <b>"Suppression of Native Vegetation"</b> in this panel have the same meaning,
+and are used to simplify the names of the classes.
+</small>
 </p>
 
 <div class="alert alert-success">

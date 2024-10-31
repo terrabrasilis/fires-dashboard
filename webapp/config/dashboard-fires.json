@@ -10,12 +10,12 @@
 	},
 	"legendOverlay":{
 		"prodes":{
-			"pt-br":["Outros","Supressão da vegetação nativa - consolidado","Supressão da vegetação nativa - recente","Vegetação nativa"],
-			"en":["Others","Suppression of primary vegetation - consolidated","Suppression of primary vegetation - recent","Primary vegetation"]
+			"pt-br":["Fogo em outras áreas","Fogo em áreas de desmatamento consolidado","Fogo em áreas de desmatamento recente","Fogo em áreas de vegetação nativa"],
+			"en":["Fire in other areas","Fire in areas of consolidated deforestation","Fire in areas of recent deforestation","Fire in areas of native vegetation"]
 		},
 		"car":{
-			"pt-br":["Grande","Média","Pequena","Sem CAR"],
-			"en":["Large", "Average", "Small", "Without CAR"]
+			"pt-br":["Fogo em grandes propriedades","Fogo em médias propriedades","Fogo em pequenas propriedades","Fogo em áreas sem CAR"],
+			"en":["Fire on large properties","Fire on medium properties","Fire on small properties","Fire in areas without CAR"]
 		}
 	}
 }
